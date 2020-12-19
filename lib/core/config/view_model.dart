@@ -1,6 +1,6 @@
-import 'package:amadis_delivery/core/config/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:amadis_delivery/core/config/colors.dart';
 
 class AmadisViewModel extends ChangeNotifier {
   final _scaffoldKey = GlobalKey<ScaffoldState>();

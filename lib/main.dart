@@ -1,3 +1,4 @@
+import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/config/router.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -24,9 +25,9 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [const Locale('es')],
       theme: ThemeData.light().copyWith(
-        // primaryColor: kPrimaryColor,
+        primaryColor: AmadisColors.primaryColor,
         colorScheme: ColorScheme.light().copyWith(
-          // primary: kPrimaryColor,
+          primary: AmadisColors.primaryColor,
           onSecondary: Colors.white,
         ),
         textTheme: GoogleFonts.oxygenTextTheme(),
