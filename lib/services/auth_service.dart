@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:amadis_delivery/core/utils/constants.dart';
 import 'package:amadis_delivery/core/utils/shared_prefs.dart';
 import 'package:amadis_delivery/models/user.dart';
-import 'package:rxdart/rxdart.dart';
 
 class AuthService {
   AuthService();

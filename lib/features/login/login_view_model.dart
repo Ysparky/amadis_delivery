@@ -1,6 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+import 'package:auto_route/auto_route.dart';
 
+import 'package:amadis_delivery/core/config/router.gr.dart';
 import 'package:amadis_delivery/core/config/view_model.dart';
 import 'package:amadis_delivery/core/utils/constants.dart';
 import 'package:amadis_delivery/core/utils/service_injector.dart';
@@ -61,7 +62,7 @@ class LoginViewModel extends AmadisViewModel {
     if (user != null) {
       showMessageSnackBar('¡Logueo existoso!');
       await Future.delayed(const Duration(seconds: 2)).then(
-          (value) => ExtendedNavigator.root.popAndPush('/dashboard-page'));
+          (value) => ExtendedNavigator.root.popAndPush(Routes.dashboardPage));
     } else {
       showErrorSnackBar('Correo y/o contraseña incorrectos');
     }

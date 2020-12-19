@@ -24,6 +24,7 @@ class SharedPrefs {
   }
 
   bool get isLoggedIn {
+    print(_preferences.getBool('isLoggedIn'));
     return _preferences.getBool('isLoggedIn') ?? false;
   }
 

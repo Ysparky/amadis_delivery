@@ -17,14 +17,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final _prefs = SharedPrefs();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      builder: ExtendedNavigator<CustomRouter>(
-        router: CustomRouter(),
-        initialRoute: _prefs.isLoggedIn ? '/dashboard-page' : '/',
-      ),
+      builder: ExtendedNavigator<CustomRouter>(router: CustomRouter()),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 
 import 'package:amadis_delivery/core/config/assets.dart';
 import 'package:amadis_delivery/core/config/colors.dart';
+import 'package:amadis_delivery/core/config/router.gr.dart';
 import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:amadis_delivery/core/utils/shared_prefs.dart';
 import 'package:amadis_delivery/core/widgets/custom_appbar.dart';
@@ -20,7 +21,7 @@ class ProfilePage extends StatelessWidget {
             icon: Icon(Icons.exit_to_app),
             onPressed: () {
               _prefs.removeAll();
-              ExtendedNavigator.root.popAndPush('/');
+              ExtendedNavigator.root.popAndPush(Routes.loginPage);
             },
           )
         ],
