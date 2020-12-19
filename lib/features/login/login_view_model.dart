@@ -60,8 +60,8 @@ class LoginViewModel extends AmadisViewModel {
   void _handleLoginResponse(dynamic user) async {
     if (user != null) {
       showMessageSnackBar('¡Logueo existoso!');
-      await Future.delayed(const Duration(seconds: 2))
-          .then((value) => ExtendedNavigator.root.popAndPush('/home-page'));
+      await Future.delayed(const Duration(seconds: 2)).then(
+          (value) => ExtendedNavigator.root.popAndPush('/dashboard-page'));
     } else {
       showErrorSnackBar('Correo y/o contraseña incorrectos');
     }

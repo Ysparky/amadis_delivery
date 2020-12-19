@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       builder: ExtendedNavigator<CustomRouter>(
         router: CustomRouter(),
-        initialRoute: _prefs.isLoggedIn ? '/home-page' : '/',
+        initialRoute: _prefs.isLoggedIn ? '/dashboard-page' : '/',
       ),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
