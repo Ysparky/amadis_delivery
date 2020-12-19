@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:amadis_delivery/core/config/loading_overlay.dart';
+import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/features/take_order/take_order_view_model.dart';
 
 class TakeOrderPage extends StatelessWidget {

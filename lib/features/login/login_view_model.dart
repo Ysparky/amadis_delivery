@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 
-import 'package:amadis_delivery/core/config/router.gr.dart';
-import 'package:amadis_delivery/core/config/view_model.dart';
-import 'package:amadis_delivery/core/utils/constants.dart';
-import 'package:amadis_delivery/core/utils/service_injector.dart';
+import 'package:amadis_delivery/core/config/config.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/services/auth_service.dart';
 
 class LoginViewModel extends AmadisViewModel {

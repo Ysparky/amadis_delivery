@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-import 'package:amadis_delivery/core/config/assets.dart';
-import 'package:amadis_delivery/core/config/colors.dart';
-import 'package:amadis_delivery/core/config/router.gr.dart';
-import 'package:amadis_delivery/core/utils/service_injector.dart';
-import 'package:amadis_delivery/core/utils/shared_prefs.dart';
+import 'package:amadis_delivery/core/config/config.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
 
 class WelcomePage extends StatelessWidget {
   final _prefs = SharedPrefs();
