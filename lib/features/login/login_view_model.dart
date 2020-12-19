@@ -1,15 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:amadis_delivery/core/config/view_model.dart';
 import 'package:amadis_delivery/core/utils/constants.dart';
+import 'package:amadis_delivery/core/utils/service_injector.dart';
+import 'package:amadis_delivery/services/auth_service.dart';
 
 class LoginViewModel extends AmadisViewModel {
   LoginViewModel();
 
-  final TextEditingController _emailController =
-      TextEditingController(text: '');
-  final TextEditingController _passwordController =
-      TextEditingController(text: '');
+  final _authService = injector<AuthService>();
+
+  final _emailController = TextEditingController(text: '');
+  final _passwordController = TextEditingController(text: '');
 
   TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
@@ -40,12 +43,27 @@ class LoginViewModel extends AmadisViewModel {
     return password.isEmpty ? 'La contraseña no puede estar vacía' : null;
   }
 
-  void login() {
+  void login() async {
     var isFormValid = _loginKey.currentState.validate();
     if (isFormValid) {
-      print('valid');
+      setLoading(true);
+      final email = _emailController.value.text;
+      final password = _passwordController.value.text;
+      final user = await _authService.requestLogin(email, password);
+      setLoading(false);
+      await _handleLoginResponse(user);
     } else {
-      print('not valid');
+      showErrorSnackBar('¡Verifique que no tenga errores!');
+    }
+  }
+
+  void _handleLoginResponse(dynamic user) async {
+    if (user != null) {
+      showMessageSnackBar('¡Logueo existoso!');
+      await Future.delayed(const Duration(seconds: 2))
+          .then((value) => ExtendedNavigator.root.popAndPush('/home-page'));
+    } else {
+      showErrorSnackBar('Correo y/o contraseña incorrectos');
     }
   }
 }

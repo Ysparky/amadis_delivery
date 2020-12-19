@@ -1,3 +1,4 @@
+import 'package:amadis_delivery/features/take_order/take_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
@@ -55,7 +56,10 @@ class _HomeScreenState extends State<HomePage> {
           children: [
             // DashboardPage(),
             // ListOrdersPage(),
-            // TakeOrderPage(),
+            TakeOrderPage(),
+            TakeOrderPage(),
+            TakeOrderPage(),
+            TakeOrderPage(),
             // ProfilePage(),
           ],
         ),

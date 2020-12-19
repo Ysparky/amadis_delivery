@@ -32,6 +32,7 @@ dependencies:
   animate_do: ^1.7.3
   auto_route: ^0.6.9
   bubbled_navigation_bar: ^0.0.4
+  dio: ^3.0.10
   flutter_localizations:
     sdk: flutter
   flutter_phone_direct_caller: ^1.0.1
@@ -44,6 +45,7 @@ dependencies:
   intl: ^0.16.1
   progress_dialog: ^1.2.4
   provider: ^4.3.2+3
+  rxdart: ^0.25.0
   shared_preferences: ^0.5.12+4
   permission_handler: ^5.0.1+1
   polyline: ^1.0.2
