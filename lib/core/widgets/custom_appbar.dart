@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:amadis_delivery/core/utils/responsive.dart';
+
 class CustomAppBar extends AppBar {
   CustomAppBar({
     this.headerActions,
@@ -8,7 +10,7 @@ class CustomAppBar extends AppBar {
           backgroundColor: Colors.transparent,
           centerTitle: true,
           elevation: 0,
-          toolbarHeight: kToolbarHeight * 1.25,
+          toolbarHeight: hp(8),
           title: Text(headerTitle),
           actions: headerActions,
         );

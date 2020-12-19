@@ -2,22 +2,27 @@ import 'package:dio/dio.dart';
 
 import 'package:amadis_delivery/core/utils/constants.dart';
 import 'package:amadis_delivery/models/order.dart';
+import 'package:rxdart/rxdart.dart';
 
 class OrderService {
-  OrderService();
+  OrderService() {
+    orders = BehaviorSubject<List<Order>>.seeded(null);
+  }
+
+  BehaviorSubject<List<Order>> orders;
 
   final _dio = Dio();
   final _endpoint = '$BASE_URL/orders/';
 
-  Future<List<Order>> getOrders() async {
+  Future<void> getOrders() async {
     try {
       final response = await _dio.get(_endpoint, options: dioOptions);
-      return List<Order>.from(
+      final _orders = List<Order>.from(
         response.data['data'].map((x) => Order.fromJson(x)),
       );
+      orders.add([..._orders]);
     } catch (e) {
       print(e);
-      return null;
     }
   }
 

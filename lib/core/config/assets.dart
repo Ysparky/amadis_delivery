@@ -6,4 +6,5 @@ class AmadisAssets {
   AmadisAssets._internal();
 
   static const logo = 'assets/img/amadis_logo_transp.png';
+  static const emptyBox = 'assets/icon/empty-box.png';
 }

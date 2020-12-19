@@ -4,7 +4,7 @@ import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 
 import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/features/home/home_page.dart';
-import 'package:amadis_delivery/features/list_orders/list_orders.dart';
+import 'package:amadis_delivery/features/list_orders/list_orders_page.dart';
 import 'package:amadis_delivery/features/profile/profile_page.dart';
 import 'package:amadis_delivery/features/take_order/take_order_page.dart';
 

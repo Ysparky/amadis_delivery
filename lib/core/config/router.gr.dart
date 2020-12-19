@@ -9,7 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 
 import '../../features/dashboard/dashboard_page.dart';
-import '../../features/list_orders/list_orders.dart';
+import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';
 import '../../features/take_order/take_order_page.dart';
 import '../../features/welcome/welcome_page.dart';

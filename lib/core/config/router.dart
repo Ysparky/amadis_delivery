@@ -1,5 +1,5 @@
 import 'package:amadis_delivery/features/dashboard/dashboard_page.dart';
-import 'package:amadis_delivery/features/list_orders/list_orders.dart';
+import 'package:amadis_delivery/features/list_orders/list_orders_page.dart';
 import 'package:amadis_delivery/features/login/login_page.dart';
 import 'package:amadis_delivery/features/take_order/take_order_page.dart';
 import 'package:amadis_delivery/features/welcome/welcome_page.dart';
