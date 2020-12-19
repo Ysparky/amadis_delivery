@@ -7,12 +7,15 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../features/dashboard/dashboard_page.dart';
 import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';
+import '../../features/order_detail/order_detail_page.dart';
 import '../../features/take_order/take_order_page.dart';
 import '../../features/welcome/welcome_page.dart';
+import '../../models/models.dart';
 
 class Routes {
   static const String welcomePage = '/';
@@ -20,12 +23,14 @@ class Routes {
   static const String dashboardPage = '/dashboard-page';
   static const String takeOrderPage = '/take-order-page';
   static const String listOrdersPage = '/list-orders-page';
+  static const String orderDetailPage = '/order-detail-page';
   static const all = <String>{
     welcomePage,
     loginPage,
     dashboardPage,
     takeOrderPage,
     listOrdersPage,
+    orderDetailPage,
   };
 }
 
@@ -38,6 +43,7 @@ class CustomRouter extends RouterBase {
     RouteDef(Routes.dashboardPage, page: DashboardPage),
     RouteDef(Routes.takeOrderPage, page: TakeOrderPage),
     RouteDef(Routes.listOrdersPage, page: ListOrdersPage),
+    RouteDef(Routes.orderDetailPage, page: OrderDetailPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -72,5 +78,28 @@ class CustomRouter extends RouterBase {
         settings: data,
       );
     },
+    OrderDetailPage: (data) {
+      final args = data.getArgs<OrderDetailPageArguments>(
+        orElse: () => OrderDetailPageArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => OrderDetailPage(
+          key: args.key,
+          order: args.order,
+        ),
+        settings: data,
+      );
+    },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// OrderDetailPage arguments holder class
+class OrderDetailPageArguments {
+  final Key key;
+  final Order order;
+  OrderDetailPageArguments({this.key, this.order});
 }
