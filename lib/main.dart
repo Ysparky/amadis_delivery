@@ -12,7 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      builder: ExtendedNavigator<CustomRouter>(router: CustomRouter()),
+      builder: ExtendedNavigator<CustomRouter>(
+        router: CustomRouter(),
+        initialRoute: '/',
+      ),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
