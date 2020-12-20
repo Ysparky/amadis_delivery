@@ -46,8 +46,7 @@ class CustomerDataCard extends StatelessWidget {
             ElasticIn(
               delay: Duration(milliseconds: 400),
               child: IconButton(
-                // onPressed: () async => _viewModel.makePhoneCall(),\
-                onPressed: () {},
+                onPressed: () async => _viewModel.makePhoneCall(),
                 icon: Icon(Icons.call,
                     color: AmadisColors.primaryColor, size: 30),
               ),

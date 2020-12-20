@@ -22,8 +22,8 @@ class BuildOrderDetail extends StatelessWidget {
           child: GoogleMap(
             initialCameraPosition: CameraPosition(
               target: LatLng(
-                _viewModel.order?.location?.coordinates?.latitude,
-                _viewModel.order?.location?.coordinates?.longitude,
+                _viewModel.fullOrder?.location?.coordinates?.latitude,
+                _viewModel.fullOrder?.location?.coordinates?.longitude,
               ),
               zoom: 15,
             ),
@@ -50,11 +50,11 @@ class BuildOrderDetail extends StatelessWidget {
                     EdgeInsets.symmetric(horizontal: wp(5), vertical: hp(2)),
                 child: Column(
                   children: [
-                    OrderDataCard(order: _viewModel.order),
+                    OrderDataCard(order: _viewModel.fullOrder),
                     SizedBox(height: hp(2)),
                     CustomerDataCard(),
                     SizedBox(height: hp(2)),
-                    OrderDetailCard(order: _viewModel.order),
+                    OrderDetailCard(),
                   ],
                 ),
               ),
