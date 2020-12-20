@@ -9,6 +9,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../features/additional_charges/cash_order_page.dart';
+import '../../features/additional_charges/consignment_order_page.dart';
 import '../../features/dashboard/dashboard_page.dart';
 import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';
@@ -24,6 +26,8 @@ class Routes {
   static const String takeOrderPage = '/take-order-page';
   static const String listOrdersPage = '/list-orders-page';
   static const String orderDetailPage = '/order-detail-page';
+  static const String cashOrderPage = '/cash-order-page';
+  static const String consignmentOrderPage = '/consignment-order-page';
   static const all = <String>{
     welcomePage,
     loginPage,
@@ -31,6 +35,8 @@ class Routes {
     takeOrderPage,
     listOrdersPage,
     orderDetailPage,
+    cashOrderPage,
+    consignmentOrderPage,
   };
 }
 
@@ -44,6 +50,8 @@ class CustomRouter extends RouterBase {
     RouteDef(Routes.takeOrderPage, page: TakeOrderPage),
     RouteDef(Routes.listOrdersPage, page: ListOrdersPage),
     RouteDef(Routes.orderDetailPage, page: OrderDetailPage),
+    RouteDef(Routes.cashOrderPage, page: CashOrderPage),
+    RouteDef(Routes.consignmentOrderPage, page: ConsignmentOrderPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -90,6 +98,30 @@ class CustomRouter extends RouterBase {
         settings: data,
       );
     },
+    CashOrderPage: (data) {
+      final args = data.getArgs<CashOrderPageArguments>(
+        orElse: () => CashOrderPageArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => CashOrderPage(
+          key: args.key,
+          order: args.order,
+        ),
+        settings: data,
+      );
+    },
+    ConsignmentOrderPage: (data) {
+      final args = data.getArgs<ConsignmentOrderPageArguments>(
+        orElse: () => ConsignmentOrderPageArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ConsignmentOrderPage(
+          key: args.key,
+          order: args.order,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -102,4 +134,18 @@ class OrderDetailPageArguments {
   final Key key;
   final Order order;
   OrderDetailPageArguments({this.key, this.order});
+}
+
+/// CashOrderPage arguments holder class
+class CashOrderPageArguments {
+  final Key key;
+  final Order order;
+  CashOrderPageArguments({this.key, this.order});
+}
+
+/// ConsignmentOrderPage arguments holder class
+class ConsignmentOrderPageArguments {
+  final Key key;
+  final Order order;
+  ConsignmentOrderPageArguments({this.key, this.order});
 }
