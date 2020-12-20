@@ -18,8 +18,16 @@ class CashOrderViewModel extends AmadisViewModel {
   double get subtotalPrice => _subtotalPrice;
 
   void goToQuoteOrder() {
-    ExtendedNavigator.root.push(Routes.quoteOrderPage,
-        arguments: QuoteOrderPageArguments(order: order, orderDetail: null));
+    ExtendedNavigator.root.push(
+      Routes.quoteOrderPage,
+      arguments: QuoteOrderPageArguments(
+        order: order,
+        orderDetail: null,
+        bottleCharges: bottlesCharges,
+        boxCharges: boxCharges,
+        subtotalPrice: subtotalPrice,
+      ),
+    );
   }
 
   void _calculateOrderSubtotalPrice() {

@@ -131,7 +131,7 @@ class ConsignmentOrderPageBase extends StatelessWidget {
             ),
             SizedBox(height: hp(2)),
             CustomButton(
-              onPressed: () => _viewModel.goToQuoteOrder,
+              onPressed: _viewModel.goToQuoteOrder,
               text: 'COTIZAR',
             ),
           ],

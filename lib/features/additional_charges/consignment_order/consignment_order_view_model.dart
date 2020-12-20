@@ -18,9 +18,16 @@ class ConsignmentOrderViewModel extends AmadisViewModel {
   List<OrderDetail> consumedList = [];
 
   void goToQuoteOrder() {
-    ExtendedNavigator.root.push(Routes.quoteOrderPage,
-        arguments:
-            QuoteOrderPageArguments(order: order, orderDetail: consumedList));
+    ExtendedNavigator.root.push(
+      Routes.quoteOrderPage,
+      arguments: QuoteOrderPageArguments(
+        order: order,
+        orderDetail: consumedList,
+        bottleCharges: bottlesCharges,
+        boxCharges: boxCharges,
+        subtotalPrice: subtotalPrice,
+      ),
+    );
   }
 
   void editConsumedBoxes(int qty, int index) {

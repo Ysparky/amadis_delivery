@@ -135,6 +135,9 @@ class CustomRouter extends RouterBase {
           key: args.key,
           order: args.order,
           orderDetail: args.orderDetail,
+          subtotalPrice: args.subtotalPrice,
+          boxCharges: args.boxCharges,
+          bottleCharges: args.bottleCharges,
         ),
         settings: data,
       );
@@ -172,5 +175,14 @@ class QuoteOrderPageArguments {
   final Key key;
   final Order order;
   final List<OrderDetail> orderDetail;
-  QuoteOrderPageArguments({this.key, this.order, this.orderDetail});
+  final double subtotalPrice;
+  final double boxCharges;
+  final double bottleCharges;
+  QuoteOrderPageArguments(
+      {this.key,
+      this.order,
+      this.orderDetail,
+      this.subtotalPrice,
+      this.boxCharges,
+      this.bottleCharges});
 }
