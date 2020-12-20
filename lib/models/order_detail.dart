@@ -36,6 +36,7 @@ class OrderDetail {
       );
 
   factory OrderDetail.fromJson(Map<String, dynamic> json) => OrderDetail(
+        id: json['id'],
         product: Product(
           name: json['product'],
           price: double.parse(json['unitPrice']),
@@ -47,5 +48,10 @@ class OrderDetail {
   Map<String, dynamic> toJson() => {
         'quantity': quantity,
         'productId': product.id,
+      };
+
+  Map<String, dynamic> toReamingJson() => {
+        'orderDetailId': id,
+        'quantityRemaining': quantity,
       };
 }

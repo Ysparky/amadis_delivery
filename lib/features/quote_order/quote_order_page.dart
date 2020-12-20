@@ -151,7 +151,8 @@ class QuoteOrderPageBase extends StatelessWidget {
                         ),
                         SizedBox(height: hp(5)),
                         CustomButton(
-                          onPressed: () {},
+                          onPressed: () async =>
+                              _viewModel.postAdditionalCharges(),
                           text: 'COTIZAR',
                         ),
                       ],
