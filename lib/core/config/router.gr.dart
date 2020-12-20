@@ -16,6 +16,8 @@ import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';
 import '../../features/order_detail/order_detail_page.dart';
 import '../../features/quote_order/quote_order_page.dart';
+import '../../features/take_order/select_customer/select_customer_page.dart';
+import '../../features/take_order/select_location/select_location_page.dart';
 import '../../features/take_order/take_order_page.dart';
 import '../../features/welcome/welcome_page.dart';
 import '../../models/models.dart';
@@ -30,6 +32,8 @@ class Routes {
   static const String cashOrderPage = '/cash-order-page';
   static const String consignmentOrderPage = '/consignment-order-page';
   static const String quoteOrderPage = '/quote-order-page';
+  static const String selectCustomerPage = '/select-customer-page';
+  static const String selectLocationPage = '/select-location-page';
   static const all = <String>{
     welcomePage,
     loginPage,
@@ -40,6 +44,8 @@ class Routes {
     cashOrderPage,
     consignmentOrderPage,
     quoteOrderPage,
+    selectCustomerPage,
+    selectLocationPage,
   };
 }
 
@@ -56,6 +62,8 @@ class CustomRouter extends RouterBase {
     RouteDef(Routes.cashOrderPage, page: CashOrderPage),
     RouteDef(Routes.consignmentOrderPage, page: ConsignmentOrderPage),
     RouteDef(Routes.quoteOrderPage, page: QuoteOrderPage),
+    RouteDef(Routes.selectCustomerPage, page: SelectCustomerPage),
+    RouteDef(Routes.selectLocationPage, page: SelectLocationPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -139,6 +147,18 @@ class CustomRouter extends RouterBase {
           boxCharges: args.boxCharges,
           bottleCharges: args.bottleCharges,
         ),
+        settings: data,
+      );
+    },
+    SelectCustomerPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SelectCustomerPage(),
+        settings: data,
+      );
+    },
+    SelectLocationPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SelectLocationPage(),
         settings: data,
       );
     },

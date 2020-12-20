@@ -18,6 +18,7 @@ class ListOrdersViewModel extends AmadisViewModel {
   Future<void> getOrders() async {
     // setLoading(true);
     // _orders = await _orderService.getOrders();
+    // orders.
     notifyListeners();
     // setLoading(false);
   }

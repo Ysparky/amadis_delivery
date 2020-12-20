@@ -1,4 +1,5 @@
 export 'category.dart';
+export 'customer.dart';
 export 'location.dart';
 export 'order_detail.dart';
 export 'order_state.dart';
