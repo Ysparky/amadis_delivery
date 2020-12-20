@@ -1,5 +1,6 @@
 import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/models/models.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
 class ConsignmentOrderViewModel extends AmadisViewModel {
@@ -15,6 +16,12 @@ class ConsignmentOrderViewModel extends AmadisViewModel {
   final Order orignalOrder;
   Order order;
   List<OrderDetail> consumedList = [];
+
+  void goToQuoteOrder() {
+    ExtendedNavigator.root.push(Routes.quoteOrderPage,
+        arguments:
+            QuoteOrderPageArguments(order: order, orderDetail: consumedList));
+  }
 
   void editConsumedBoxes(int qty, int index) {
     var maxBoxesQty = 0.0;

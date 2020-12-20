@@ -1,5 +1,6 @@
 import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/models/models.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
 class CashOrderViewModel extends AmadisViewModel {
@@ -15,6 +16,11 @@ class CashOrderViewModel extends AmadisViewModel {
 
   double _subtotalPrice = 0.00;
   double get subtotalPrice => _subtotalPrice;
+
+  void goToQuoteOrder() {
+    ExtendedNavigator.root.push(Routes.quoteOrderPage,
+        arguments: QuoteOrderPageArguments(order: order, orderDetail: null));
+  }
 
   void _calculateOrderSubtotalPrice() {
     order.ordersDetail.forEach((detail) {

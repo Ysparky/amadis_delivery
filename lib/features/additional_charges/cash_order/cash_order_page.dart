@@ -136,7 +136,7 @@ class CashOrderPageBase extends StatelessWidget {
             ),
             SizedBox(height: hp(5)),
             CustomButton(
-              onPressed: () {},
+              onPressed: () => _viewModel.goToQuoteOrder,
               text: 'COTIZAR',
             ),
           ],

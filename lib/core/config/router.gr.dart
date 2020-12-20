@@ -15,6 +15,7 @@ import '../../features/dashboard/dashboard_page.dart';
 import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';
 import '../../features/order_detail/order_detail_page.dart';
+import '../../features/quote_order/quote_order_page.dart';
 import '../../features/take_order/take_order_page.dart';
 import '../../features/welcome/welcome_page.dart';
 import '../../models/models.dart';
@@ -28,6 +29,7 @@ class Routes {
   static const String orderDetailPage = '/order-detail-page';
   static const String cashOrderPage = '/cash-order-page';
   static const String consignmentOrderPage = '/consignment-order-page';
+  static const String quoteOrderPage = '/quote-order-page';
   static const all = <String>{
     welcomePage,
     loginPage,
@@ -37,6 +39,7 @@ class Routes {
     orderDetailPage,
     cashOrderPage,
     consignmentOrderPage,
+    quoteOrderPage,
   };
 }
 
@@ -52,6 +55,7 @@ class CustomRouter extends RouterBase {
     RouteDef(Routes.orderDetailPage, page: OrderDetailPage),
     RouteDef(Routes.cashOrderPage, page: CashOrderPage),
     RouteDef(Routes.consignmentOrderPage, page: ConsignmentOrderPage),
+    RouteDef(Routes.quoteOrderPage, page: QuoteOrderPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -122,6 +126,19 @@ class CustomRouter extends RouterBase {
         settings: data,
       );
     },
+    QuoteOrderPage: (data) {
+      final args = data.getArgs<QuoteOrderPageArguments>(
+        orElse: () => QuoteOrderPageArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => QuoteOrderPage(
+          key: args.key,
+          order: args.order,
+          orderDetail: args.orderDetail,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -148,4 +165,12 @@ class ConsignmentOrderPageArguments {
   final Key key;
   final Order order;
   ConsignmentOrderPageArguments({this.key, this.order});
+}
+
+/// QuoteOrderPage arguments holder class
+class QuoteOrderPageArguments {
+  final Key key;
+  final Order order;
+  final List<OrderDetail> orderDetail;
+  QuoteOrderPageArguments({this.key, this.order, this.orderDetail});
 }
