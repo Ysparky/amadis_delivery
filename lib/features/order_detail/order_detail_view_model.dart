@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -11,7 +12,7 @@ import 'package:amadis_delivery/services/order_service.dart';
 
 class OrderDetailViewModel extends AmadisViewModel {
   OrderDetailViewModel({this.order}) {
-    _getOrderDetailById();
+    getOrderDetailById();
   }
 
   final _orderService = injector<OrderService>();
@@ -21,10 +22,20 @@ class OrderDetailViewModel extends AmadisViewModel {
   Order _fullOrder;
   Order get fullOrder => _fullOrder;
 
-  Future<void> _getOrderDetailById() async {
-    setLoading(true);
+  void goBack() {
+    ExtendedNavigator.root.pop();
+  }
+
+  void goToMap() {
+    if (_fullOrder != null) {
+      print('go to next page');
+    } else {
+      print('do nothing');
+    }
+  }
+
+  Future<void> getOrderDetailById() async {
     _fullOrder = await _orderService.getOrderById(order.id);
-    setLoading(false);
   }
 
   void makePhoneCall() async {

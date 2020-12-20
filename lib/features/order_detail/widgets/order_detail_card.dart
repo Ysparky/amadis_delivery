@@ -1,17 +1,17 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:animate_do/animate_do.dart';
 
 import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/utils/utils.dart';
-import 'package:amadis_delivery/features/order_detail/order_detail_view_model.dart';
+import 'package:amadis_delivery/models/models.dart';
 
 class OrderDetailCard extends StatelessWidget {
-  OrderDetailCard({Key key}) : super(key: key);
+  OrderDetailCard({Key key, this.order}) : super(key: key);
+
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
-    final order = Provider.of<OrderDetailViewModel>(context).fullOrder;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -29,13 +29,18 @@ class OrderDetailCard extends StatelessWidget {
                   children: [
                     Text(
                       'Detalle',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: hp(1.0)),
-                    Text(orderTypes
-                        .singleWhere((oT) => oT.id == order.orderStateId)
-                        .name),
+                    Text(
+                      orderTypes
+                          .singleWhere((oT) => oT.id == order.orderStateId)
+                          .name,
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
                   ],
                 ),
                 ElasticIn(
