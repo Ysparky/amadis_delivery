@@ -153,7 +153,7 @@ class QuoteOrderPageBase extends StatelessWidget {
                         CustomButton(
                           onPressed: () async =>
                               _viewModel.postAdditionalCharges(),
-                          text: 'COTIZAR',
+                          text: 'ENVIAR PEDIDO',
                         ),
                       ],
                     ),

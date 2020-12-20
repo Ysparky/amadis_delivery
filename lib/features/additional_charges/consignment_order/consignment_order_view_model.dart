@@ -69,7 +69,9 @@ class ConsignmentOrderViewModel extends AmadisViewModel {
   void editMissingBottlesQuantity(int qty) {
     var totalBoxQty = _getTotalBoxQty();
     var maxBottlesQty = 12 * totalBoxQty;
-    if (qty <= maxBottlesQty && qty >= 0) {
+    if (totalBoxQty == 0) {
+      showErrorSnackBar('¡Primero necesitas agregar las cajas consumidas!');
+    } else if (qty <= maxBottlesQty && qty >= 0) {
       order = order.copyWith(missingBottlesQuantity: qty);
       _updateBottlesCharges();
       notifyListeners();
@@ -78,7 +80,9 @@ class ConsignmentOrderViewModel extends AmadisViewModel {
 
   void editMissingBoxQuantity(int qty) {
     var totalBoxQty = _getTotalBoxQty();
-    if (qty <= totalBoxQty && qty >= 0) {
+    if (totalBoxQty == 0) {
+      showErrorSnackBar('¡Primero necesitas agregar las cajas consumidas!');
+    } else if (qty <= totalBoxQty && qty >= 0) {
       order = order.copyWith(missingBoxQuantity: qty);
       _updateBoxCharges();
       notifyListeners();
