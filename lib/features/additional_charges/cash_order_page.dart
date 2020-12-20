@@ -1,5 +1,5 @@
 import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/features/additional_charges/additional_chages_view_model.dart';
+import 'package:amadis_delivery/features/additional_charges/consignment_order_view_model.dart';
 import 'package:amadis_delivery/models/order.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +14,10 @@ class CashOrderPage extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => AdditionalChargesViewModel(),
+          create: (_) => ConsignmentOrderViewModel(),
         )
       ],
-      child: LoadingOverlay<AdditionalChargesViewModel>(
+      child: LoadingOverlay<ConsignmentOrderViewModel>(
         child: CashOrderPageBase(),
       ),
     );

@@ -28,9 +28,26 @@ class OrderDetailViewModel extends AmadisViewModel {
 
   void goToMap() {
     if (_fullOrder != null) {
-      print('go to next page');
+      print('xd');
     } else {
-      print('do nothing');
+      showErrorSnackBar(
+        'Recibiendo información de la orden, inténtenlo más tarde.',
+      );
+    }
+  }
+
+  void goToAdditionalCharges() {
+    switch (_fullOrder.orderTypeId) {
+      case 1:
+        ExtendedNavigator.root.push(Routes.cashOrderPage,
+            arguments: CashOrderPageArguments(order: _fullOrder));
+        break;
+      case 2:
+        ExtendedNavigator.root.push(Routes.consignmentOrderPage,
+            arguments: ConsignmentOrderPageArguments(order: _fullOrder));
+        break;
+      default:
+        showErrorSnackBar('Ocurrió un error');
     }
   }
 

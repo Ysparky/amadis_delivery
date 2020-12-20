@@ -38,8 +38,8 @@ class OrderDetailCard extends StatelessWidget {
                     SizedBox(height: hp(1.0)),
                     Text(
                       orderTypes
-                          .singleWhere((oT) =>
-                              oT.id == _viewModel.fullOrder.orderStateId)
+                          .singleWhere(
+                              (oT) => oT.id == _viewModel.fullOrder.orderTypeId)
                           .name,
                       style: Theme.of(context).textTheme.subtitle2,
                     ),
@@ -48,7 +48,7 @@ class OrderDetailCard extends StatelessWidget {
                 ElasticIn(
                   delay: Duration(milliseconds: 400),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: _viewModel.goToAdditionalCharges,
                     icon: Icon(
                       Icons.request_quote_rounded,
                       color: AmadisColors.primaryColor,
