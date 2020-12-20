@@ -1,5 +1,5 @@
-import 'package:amadis_delivery/features/additional_charges/cash_order_page.dart';
-import 'package:amadis_delivery/features/additional_charges/consignment_order_page.dart';
+import 'package:amadis_delivery/features/additional_charges/cash_order/cash_order_page.dart';
+import 'package:amadis_delivery/features/additional_charges/consignment_order/consignment_order_page.dart';
 import 'package:amadis_delivery/features/order_detail/order_detail_page.dart';
 import 'package:flutter/widgets.dart';
 

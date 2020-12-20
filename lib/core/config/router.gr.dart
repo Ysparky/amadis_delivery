@@ -9,8 +9,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../features/additional_charges/cash_order_page.dart';
-import '../../features/additional_charges/consignment_order_page.dart';
+import '../../features/additional_charges/cash_order/cash_order_page.dart';
+import '../../features/additional_charges/consignment_order/consignment_order_page.dart';
 import '../../features/dashboard/dashboard_page.dart';
 import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';

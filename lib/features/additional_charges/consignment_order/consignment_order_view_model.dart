@@ -1,5 +1,6 @@
 import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/models/models.dart';
+import 'package:flutter/widgets.dart';
 
 class ConsignmentOrderViewModel extends AmadisViewModel {
   ConsignmentOrderViewModel({this.orignalOrder}) {
@@ -8,6 +9,8 @@ class ConsignmentOrderViewModel extends AmadisViewModel {
       consumedList.add(detail.copyWith(quantity: 0, totalPrice: 0.00));
     });
   }
+
+  final ScrollController scrollController = ScrollController();
 
   final Order orignalOrder;
   Order order;

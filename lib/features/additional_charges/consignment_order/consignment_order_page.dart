@@ -60,7 +60,11 @@ class ConsignmentOrderPageBase extends StatelessWidget {
             ),
             Expanded(
               child: Scrollbar(
+                controller: _viewModel.scrollController,
+                radius: Radius.circular(5.0),
+                thickness: 5.0,
                 child: ListView.separated(
+                  controller: _viewModel.scrollController,
                   padding: EdgeInsets.only(top: hp(1)),
                   itemCount: _viewModel.order.ordersDetail.length,
                   separatorBuilder: (context, index) => Divider(),
@@ -72,7 +76,6 @@ class ConsignmentOrderPageBase extends StatelessWidget {
               text: 'Subtotal',
               value: 'S/. ' + _viewModel.subtotalPrice.toStringAsFixed(2),
             ),
-            // SizedBox(height: hp(2)),
             Divider(height: hp(4)),
             Text(
               'ENVASES FALTANTES',
