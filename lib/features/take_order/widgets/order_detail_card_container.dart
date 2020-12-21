@@ -1,4 +1,3 @@
-import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
 import 'package:amadis_delivery/features/take_order/take_order_view_model.dart';
@@ -6,10 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class OrderDetailCardContainer extends StatelessWidget {
-  final outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10.0),
-    borderSide: BorderSide(color: AmadisColors.primaryColor),
-  );
   @override
   Widget build(BuildContext context) {
     final _viewModel = Provider.of<TakeOrderViewModel>(context);
@@ -37,8 +32,7 @@ class OrderDetailCardContainer extends StatelessWidget {
                     onChanged: _viewModel.onChangedProduct,
                     isExpanded: true,
                     decoration: InputDecoration(
-                      border: outlineInputBorder,
-                      enabledBorder: outlineInputBorder,
+                      border: OutlineInputBorder(),
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(
                         horizontal: 10.0,
@@ -63,9 +57,7 @@ class OrderDetailCardContainer extends StatelessWidget {
                       contentPadding: EdgeInsets.symmetric(vertical: hp(1)),
                       isCollapsed: true,
                       isDense: true,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1),
-                      ),
+                      border: OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,

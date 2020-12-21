@@ -26,12 +26,8 @@ class LocationFormFieldBase extends StatelessWidget {
   Widget build(BuildContext context) {
     final _viewModel = Provider.of<LocationFormFieldViewModel>(context);
     final _errorBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: BorderRadius.circular(4.0),
       borderSide: BorderSide(color: AmadisColors.errorColor),
-    );
-    final _normalBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10.0),
-      borderSide: BorderSide(color: AmadisColors.primaryColor),
     );
     return TextFormField(
       autofocus: false,
@@ -49,17 +45,16 @@ class LocationFormFieldBase extends StatelessWidget {
             decoration: BoxDecoration(
               color: AmadisColors.primaryColor,
               borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(12),
-                topRight: Radius.circular(12),
+                bottomRight: Radius.circular(4),
+                topRight: Radius.circular(4),
               ),
             ),
             child: Icon(Icons.location_on, color: Colors.white),
           ),
           onTap: () => _viewModel.openLocationModal(context),
         ),
-        border: _normalBorder,
-        enabledBorder: _normalBorder,
-        focusedBorder: _normalBorder,
+        border: OutlineInputBorder(),
+        focusedBorder: OutlineInputBorder(),
         errorBorder: _errorBorder,
         focusedErrorBorder: _errorBorder,
       ),
