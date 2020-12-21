@@ -28,7 +28,7 @@ class LocationSelectorViewModel extends AmadisViewModel {
       address: _selectedAddress,
       coordinates: _selectedPosition,
     );
-    // _locationService.selectedLocation.add(location);
+    _locationService.selectedLocation.add(location);
     ExtendedNavigator.root.pop(location);
   }
 

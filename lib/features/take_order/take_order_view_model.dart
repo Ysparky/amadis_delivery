@@ -4,6 +4,8 @@ import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/core/utils/data.dart';
 import 'package:amadis_delivery/services/customer_service.dart';
+import 'package:amadis_delivery/services/location_service.dart';
+import 'package:amadis_delivery/services/order_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -21,6 +23,8 @@ class TakeOrderViewModel extends AmadisViewModel {
   TextEditingController get editQtyController => _editQtyController;
 
   final customerService = injector<CustomerService>();
+  final locationService = injector<LocationService>();
+  final orderService = injector<OrderService>();
 
   List<Product> get productsList => products;
 
@@ -165,6 +169,28 @@ class TakeOrderViewModel extends AmadisViewModel {
       );
     } else {
       return TextEditingController(text: 'Seleccione un cliente');
+    }
+  }
+
+  void createOrder() async {
+    setLoading(true);
+    final order = Order(
+      customerId: customerService.selectedCustomer.value.customerId,
+      location: locationService.selectedLocation.value,
+      ordersDetail: orderDetail,
+      orderTypeId: orderTypeId,
+      orderStateId: 1,
+    );
+    final response = await orderService.createOrder(order);
+    setLoading(false);
+    if (response != null) {
+      if (response) {
+        showMessageSnackBar('¡Hemos recibido el pedido!');
+      } else {
+        showErrorSnackBar('Ocurrió un error');
+      }
+    } else {
+      showErrorSnackBar('Ocurrió un error');
     }
   }
 

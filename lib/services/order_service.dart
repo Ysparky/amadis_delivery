@@ -38,6 +38,7 @@ class OrderService {
 
   Future<bool> createOrder(Order order) async {
     try {
+      print(order.toJson());
       final response =
           await _dio.post(_endpoint, data: order.toJson(), options: dioOptions);
       final success = (response.statusCode == 200) ? true : false;
