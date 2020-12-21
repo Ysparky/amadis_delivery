@@ -10,9 +10,11 @@ class TakeOrderViewModel extends AmadisViewModel {
   TakeOrderViewModel();
 
   final _shippingDateController = TextEditingController(text: 'dd/mm/yyyy');
+  final _addressController = TextEditingController(text: 'Indica tu dirección');
 
   TextEditingController get shippingDateController => _shippingDateController;
   TextEditingController get selectedCustomerController => _onSelectedCustomer();
+  TextEditingController get addressController => _addressController;
 
   var orderTypeId = 1;
   final customerService = injector<CustomerService>();
