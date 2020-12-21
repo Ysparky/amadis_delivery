@@ -65,9 +65,6 @@ class TakeOrderPageBase extends StatelessWidget {
                     onTap: _viewModel.goToSelectCustomer,
                   ),
                   SizedBox(height: hp(2)),
-                  DropDownCardFormField(
-                    text: 'Dirección de Envío',
-                  ),
                 ],
               ),
             ),
