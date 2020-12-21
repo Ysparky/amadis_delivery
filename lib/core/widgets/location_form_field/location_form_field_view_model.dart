@@ -18,6 +18,7 @@ class LocationFormFieldViewModel extends AmadisViewModel {
       textController.text = location.address;
       notifyListeners();
     }
+    FocusScope.of(context).requestFocus(FocusNode());
   }
 
   String validator(String direccionValidator) {

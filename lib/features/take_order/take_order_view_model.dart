@@ -52,7 +52,8 @@ class TakeOrderViewModel extends AmadisViewModel {
     node.nextFocus();
   }
 
-  void goToSelectCustomer() {
+  void goToSelectCustomer(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode());
     ExtendedNavigator.root.push(Routes.selectCustomerPage);
   }
 

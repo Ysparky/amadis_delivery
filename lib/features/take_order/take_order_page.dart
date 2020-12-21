@@ -1,6 +1,5 @@
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/custom_appbar.dart';
-import 'package:amadis_delivery/core/widgets/location_form_field/location_form_field.dart';
 import 'package:amadis_delivery/features/take_order/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,10 +62,11 @@ class TakeOrderPageBase extends StatelessWidget {
                     iconData: Icons.search,
                     text: 'Cliente',
                     controller: _viewModel.selectedCustomerController,
-                    onTap: _viewModel.goToSelectCustomer,
+                    onTap: () => _viewModel.goToSelectCustomer(context),
                   ),
                   SizedBox(height: hp(2)),
-                  LocationFormField(controller: _viewModel.addressController),
+                  LocationCardFormField(
+                      controller: _viewModel.addressController),
                 ],
               ),
             ),

@@ -39,6 +39,7 @@ class LocationFormFieldBase extends StatelessWidget {
       enableInteractiveSelection: true,
       validator: _viewModel.validator,
       readOnly: true,
+      onTap: () => _viewModel.openLocationModal(context),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(12),
         hintText: 'Dirección',

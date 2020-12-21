@@ -1,8 +1,9 @@
+import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class TextCardFormField extends StatelessWidget {
-  const TextCardFormField({
+  TextCardFormField({
     Key key,
     @required this.text,
     @required this.iconData,
@@ -13,6 +14,12 @@ class TextCardFormField extends StatelessWidget {
   final IconData iconData;
   final String text;
   final TextEditingController controller;
+
+  final outlineInputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.0),
+    borderSide: BorderSide(color: AmadisColors.primaryColor),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -34,7 +41,8 @@ class TextCardFormField extends StatelessWidget {
               onTap: onTap,
               readOnly: true,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: outlineInputBorder,
+                enabledBorder: outlineInputBorder,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
                 suffixIcon: Icon(iconData, color: Colors.black),
               ),

@@ -1,8 +1,9 @@
+import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class DropDownCardFormField extends StatelessWidget {
-  const DropDownCardFormField({
+  DropDownCardFormField({
     Key key,
     @required this.text,
     this.items,
@@ -14,6 +15,11 @@ class DropDownCardFormField extends StatelessWidget {
   final List<DropdownMenuItem> items;
   final Function onChanged;
   final dynamic value;
+
+  final outlineInputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10.0),
+    borderSide: BorderSide(color: AmadisColors.primaryColor),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +43,8 @@ class DropDownCardFormField extends StatelessWidget {
               onChanged: onChanged,
               value: value,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: outlineInputBorder,
+                enabledBorder: outlineInputBorder,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
               ),
             ),
