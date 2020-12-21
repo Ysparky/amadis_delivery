@@ -66,7 +66,10 @@ class TakeOrderPageBase extends StatelessWidget {
                   ),
                   SizedBox(height: hp(2)),
                   LocationCardFormField(
-                      controller: _viewModel.addressController),
+                    controller: _viewModel.addressController,
+                  ),
+                  SizedBox(height: hp(2)),
+                  OrderDetailCardContainer(),
                 ],
               ),
             ),

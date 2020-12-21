@@ -3,7 +3,6 @@ import 'package:amadis_delivery/features/additional_charges/consignment_order/co
 import 'package:amadis_delivery/features/order_detail/order_detail_page.dart';
 import 'package:amadis_delivery/features/quote_order/quote_order_page.dart';
 import 'package:amadis_delivery/features/take_order/select_customer/select_customer_page.dart';
-import 'package:amadis_delivery/features/take_order/select_location/select_location_page.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:amadis_delivery/features/dashboard/dashboard_page.dart';
@@ -26,7 +25,6 @@ import 'package:auto_route/auto_route_annotations.dart';
     AdaptiveRoute(page: ConsignmentOrderPage),
     AdaptiveRoute(page: QuoteOrderPage),
     AdaptiveRoute(page: SelectCustomerPage),
-    AdaptiveRoute(page: SelectLocationPage),
   ],
 )
 class $CustomRouter {}
