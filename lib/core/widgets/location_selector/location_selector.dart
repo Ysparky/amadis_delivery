@@ -30,7 +30,7 @@ class LocationSelectorBase extends StatelessWidget {
         backgroundColor: AmadisColors.primaryColor,
         centerTitle: true,
         title: Text(_viewModel.selectedAddress ?? 'Dirección no encontrada'),
-        toolbarHeight: hp(8),
+        toolbarHeight: hp(7),
       ),
       body: Stack(
         children: [

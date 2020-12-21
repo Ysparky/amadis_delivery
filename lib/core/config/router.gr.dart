@@ -77,8 +77,14 @@ class CustomRouter extends RouterBase {
       );
     },
     DashboardPage: (data) {
+      final args = data.getArgs<DashboardPageArguments>(
+        orElse: () => DashboardPageArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => DashboardPage(),
+        builder: (context) => DashboardPage(
+          key: args.key,
+          initialPage: args.initialPage,
+        ),
         settings: data,
       );
     },
@@ -158,6 +164,13 @@ class CustomRouter extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// DashboardPage arguments holder class
+class DashboardPageArguments {
+  final Key key;
+  final int initialPage;
+  DashboardPageArguments({this.key, this.initialPage});
+}
 
 /// OrderDetailPage arguments holder class
 class OrderDetailPageArguments {

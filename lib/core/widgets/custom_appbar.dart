@@ -10,7 +10,7 @@ class CustomAppBar extends AppBar {
           backgroundColor: Colors.transparent,
           centerTitle: true,
           elevation: 0,
-          toolbarHeight: hp(8),
+          toolbarHeight: hp(7),
           title: Text(headerTitle),
           actions: headerActions,
         );

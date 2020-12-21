@@ -41,7 +41,7 @@ class OrderDataCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 10.0),
                 Text(
-                  order.shippingDate,
+                  order.shippingDate ?? 'No registra fecha de envio',
                   textAlign: TextAlign.right,
                   style: Theme.of(context).textTheme.subtitle2,
                 ),

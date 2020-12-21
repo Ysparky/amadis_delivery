@@ -33,6 +33,8 @@ class TakeOrderViewModel extends AmadisViewModel {
   var activeProduct = products.first;
   List<OrderDetail> orderDetail = [];
 
+  DateTime datePicked;
+
   int _getIndexByActiveProduct() {
     return orderDetail.indexWhere((d) => d.product.id == activeProduct.id);
   }
@@ -99,12 +101,6 @@ class TakeOrderViewModel extends AmadisViewModel {
     }
   }
 
-  void calculateSubtotal(int index) {
-    final detail = orderDetail[index];
-    orderDetail[index] =
-        detail.copyWith(totalPrice: detail.quantity * detail.product.price);
-  }
-
   void onChangedProduct(Product product) {
     activeProduct = product;
     final index = _getIndexByActiveProduct();
@@ -121,7 +117,7 @@ class TakeOrderViewModel extends AmadisViewModel {
     final firstDate = DateTime.now().add(Duration(days: 7));
     final lastDate = DateTime.now().add(Duration(days: 30));
     // show datePicker
-    final datePicked = await showDatePicker(
+    datePicked = await showDatePicker(
       context: context,
       initialDate: firstDate,
       firstDate: firstDate,
@@ -172,9 +168,34 @@ class TakeOrderViewModel extends AmadisViewModel {
     }
   }
 
+  bool _validateOrder() {
+    if (_shippingDateController.value.text == 'dd/mm/yyyy') {
+      showErrorSnackBar('Selecciona la fecha de envío');
+      return false;
+    } else if (customerService.selectedCustomer.value == null) {
+      showErrorSnackBar('No ha seleccionado un cliente');
+      return false;
+    } else if (locationService.selectedLocation.value == null) {
+      showErrorSnackBar('Defina la dirección a realizar el envío');
+      return false;
+    } else if (orderDetail.isEmpty) {
+      showErrorSnackBar('¡No hay productos agregados al pedido!');
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   void createOrder() async {
+    if (_validateOrder()) {
+      await _createOrder();
+    }
+  }
+
+  void _createOrder() async {
     setLoading(true);
     final order = Order(
+      shippingDate: DateFormat.yMd('en_US').format(datePicked),
       customerId: customerService.selectedCustomer.value.customerId,
       location: locationService.selectedLocation.value,
       ordersDetail: orderDetail,
@@ -185,13 +206,21 @@ class TakeOrderViewModel extends AmadisViewModel {
     setLoading(false);
     if (response != null) {
       if (response) {
-        showMessageSnackBar('¡Hemos recibido el pedido!');
+        showMessageSnackBar('¡Hemos recibido el pedido!',
+            duration: Duration(seconds: 1));
+        await Future.delayed(Duration(milliseconds: 1100));
+        await ExtendedNavigator.root.popAndPush(Routes.dashboardPage,
+            arguments: DashboardPageArguments(initialPage: 2));
       } else {
         showErrorSnackBar('Ocurrió un error');
       }
     } else {
       showErrorSnackBar('Ocurrió un error');
     }
+  }
+
+  void cleanOrder() {
+    _shippingDateController.text = 'dd/mm/yyyy';
   }
 
   @override

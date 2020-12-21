@@ -41,7 +41,7 @@ class AmadisViewModel extends ChangeNotifier {
     if (scaffoldKey.currentState != null) {
       scaffoldKey.currentState.showSnackBar(
         SnackBar(
-          duration: duration ?? Duration(seconds: 5),
+          duration: duration ?? Duration(seconds: 3),
           content: Text(message),
           backgroundColor: AmadisColors.errorColor,
           action: action,

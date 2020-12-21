@@ -31,7 +31,7 @@ dependencies:
   # added packages
   animate_do: ^1.7.3
   auto_route: ^0.6.9
-  bubbled_navigation_bar: ^0.0.4
+  bottom_navy_bar: ^5.6.0
   dio: ^3.0.10
   flutter_localizations:
     sdk: flutter
