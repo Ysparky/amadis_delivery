@@ -17,6 +17,7 @@ class WelcomePage extends StatelessWidget {
                 child: SplashScreen(
                   loaderColor: AmadisColors.primaryColor,
                   image: Image.asset(AmadisAssets.logo),
+                  photoSize: wp(40),
                   navigateAfterSeconds: _prefs.isLoggedIn
                       ? Routes.dashboardPage
                       : Routes.loginPage,

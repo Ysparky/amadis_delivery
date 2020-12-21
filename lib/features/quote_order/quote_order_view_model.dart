@@ -24,6 +24,18 @@ class QuoteOrderViewModel extends AmadisViewModel {
 
   final _orderService = injector<OrderService>();
 
+  int getQtyByDetail(OrderDetail detail) {
+    var index =
+        consumedList.indexWhere((d) => d.product.name == detail.product.name);
+    return index != -1 ? consumedList[index].quantity : 0;
+  }
+
+  double getSubtotalByDetail(OrderDetail detail) {
+    var index =
+        consumedList.indexWhere((d) => d.product.name == detail.product.name);
+    return index != -1 ? consumedList[index].totalPrice : 0.00;
+  }
+
   Future<void> postAdditionalCharges() async {
     setLoading(true);
     final response = await _orderService.additionalCharges(order, consumedList);

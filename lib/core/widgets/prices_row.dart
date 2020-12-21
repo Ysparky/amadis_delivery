@@ -17,16 +17,22 @@ class PricesRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          '$text :',
-          style: Theme.of(context).textTheme.subtitle1,
+        Expanded(
+          flex: 4,
+          child: Text(
+            '$text :',
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
         ),
-        Text(
-          value,
-          style: Theme.of(context).textTheme.subtitle1.copyWith(
-                color: AmadisColors.primaryColor,
-                fontWeight: FontWeight.bold,
-              ),
+        Expanded(
+          child: Text(
+            value,
+            textAlign: TextAlign.right,
+            style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  color: AmadisColors.primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
       ],
     );
