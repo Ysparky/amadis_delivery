@@ -47,7 +47,6 @@ class ConsignmentOrderPageBase extends StatelessWidget {
           children: [
             Ink(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 color: Colors.indigo[50],
               ),
               child: Row(
@@ -76,7 +75,7 @@ class ConsignmentOrderPageBase extends StatelessWidget {
               text: 'Subtotal',
               value: 'S/. ' + _viewModel.subtotalPrice.toStringAsFixed(2),
             ),
-            Divider(height: hp(4)),
+            Divider(height: hp(5)),
             Text(
               'ENVASES FALTANTES',
               style: Theme.of(context).textTheme.headline6,
@@ -97,6 +96,10 @@ class ConsignmentOrderPageBase extends StatelessWidget {
               onRemoveQuantity: () => _viewModel.editMissingBottlesQuantity(
                 _viewModel.order.missingBottlesQuantity - 1,
               ),
+            ),
+            PricesRow(
+              text: '',
+              value: 'S/. ' + _viewModel.bottlesCharges.toStringAsFixed(2),
             ),
             SizedBox(height: hp(2)),
             Text(
@@ -120,16 +123,11 @@ class ConsignmentOrderPageBase extends StatelessWidget {
                 _viewModel.order.missingBoxQuantity - 1,
               ),
             ),
-            SizedBox(height: hp(2)),
             PricesRow(
-              text: 'Cargos adicionales por botellas faltantes',
-              value: 'S/. ' + _viewModel.bottlesCharges.toStringAsFixed(2),
-            ),
-            PricesRow(
-              text: 'Cargos adicionales por cajas faltantes',
+              text: '',
               value: 'S/. ' + _viewModel.boxCharges.toStringAsFixed(2),
             ),
-            SizedBox(height: hp(2)),
+            SizedBox(height: hp(5)),
             CustomButton(
               onPressed: _viewModel.goToQuoteOrder,
               text: 'COTIZAR',

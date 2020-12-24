@@ -47,10 +47,7 @@ class CashOrderPageBase extends StatelessWidget {
         child: Column(
           children: [
             Ink(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: Colors.indigo[50],
-              ),
+              decoration: BoxDecoration(color: Colors.indigo[50]),
               child: Row(
                 children: [
                   TableHeaderItem(text: 'Producto'),
@@ -67,9 +64,9 @@ class CashOrderPageBase extends StatelessWidget {
                 thickness: 5.0,
                 child: ListView.separated(
                   controller: _viewModel.scrollController,
-                  padding: EdgeInsets.only(top: hp(1)),
+                  padding: EdgeInsets.only(top: hp(1.5)),
                   itemCount: _viewModel.order.ordersDetail.length,
-                  separatorBuilder: (context, index) => Divider(),
+                  separatorBuilder: (context, index) => Divider(thickness: 1),
                   itemBuilder: (_, index) {
                     final detail = _viewModel.order.ordersDetail[index];
                     return TableBody(detail: detail);
@@ -103,6 +100,10 @@ class CashOrderPageBase extends StatelessWidget {
                 _viewModel.order.missingBottlesQuantity - 1,
               ),
             ),
+            PricesRow(
+              text: '',
+              value: 'S/. ' + _viewModel.bottlesCharges.toStringAsFixed(2),
+            ),
             SizedBox(height: hp(2)),
             Text(
               'CAJAS FALTANTES',
@@ -125,13 +126,8 @@ class CashOrderPageBase extends StatelessWidget {
                 _viewModel.order.missingBoxQuantity - 1,
               ),
             ),
-            SizedBox(height: hp(4)),
             PricesRow(
-              text: 'Cargos adicionales por botellas faltantes',
-              value: 'S/. ' + _viewModel.bottlesCharges.toStringAsFixed(2),
-            ),
-            PricesRow(
-              text: 'Cargos adicionales por cajas faltantes',
+              text: '',
               value: 'S/. ' + _viewModel.boxCharges.toStringAsFixed(2),
             ),
             SizedBox(height: hp(5)),

@@ -56,7 +56,8 @@ class QuoteOrderPageBase extends StatelessWidget {
       body: ClipRRect(
         borderRadius: BorderRadius.vertical(top: Radius.circular(50.0)),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: wp(5), vertical: hp(2)),
+          padding: EdgeInsets.symmetric(horizontal: wp(2), vertical: hp(2)),
+          color: AmadisColors.backgroundColor,
           child: Column(
             children: [
               Expanded(
@@ -95,11 +96,7 @@ class QuoteOrderPageBase extends StatelessWidget {
                         ),
                         SizedBox(height: hp(2)),
                         Ink(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            color: Colors.indigo[50],
-                          ),
+                          decoration: BoxDecoration(color: Colors.indigo[50]),
                           child: Row(
                             children: [
                               general.TableHeaderItem(text: 'Producto'),
@@ -117,9 +114,10 @@ class QuoteOrderPageBase extends StatelessWidget {
                             thickness: 5.0,
                             child: ListView.separated(
                               controller: _viewModel.scrollController,
-                              padding: EdgeInsets.only(top: hp(1)),
+                              padding: EdgeInsets.only(top: hp(1.5)),
                               itemCount: _viewModel.order.ordersDetail.length,
-                              separatorBuilder: (context, index) => Divider(),
+                              separatorBuilder: (context, index) =>
+                                  Divider(thickness: 1),
                               itemBuilder: (_, index) {
                                 final detail =
                                     _viewModel.order.ordersDetail[index];
@@ -143,13 +141,13 @@ class QuoteOrderPageBase extends StatelessWidget {
                         ),
                         general.PricesRow(
                           text:
-                              'Cargos adicionales por ${_viewModel.order.missingBottlesQuantity} botellas faltantes',
+                              '${_viewModel.order.missingBottlesQuantity} botellas faltantes',
                           value: 'S/. ' +
                               _viewModel.bottleCharges.toStringAsFixed(2),
                         ),
                         general.PricesRow(
                           text:
-                              'Cargos adicionales por ${_viewModel.order.missingBoxQuantity} cajas faltantes',
+                              '${_viewModel.order.missingBoxQuantity} cajas faltantes',
                           value:
                               'S/. ' + _viewModel.boxCharges.toStringAsFixed(2),
                         ),

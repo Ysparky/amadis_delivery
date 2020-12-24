@@ -30,9 +30,9 @@ class LoginViewModel extends AmadisViewModel {
   String emailValidator(String email) {
     final isValid = RegExp(emailRegex).hasMatch(email);
     if (email.isEmpty) {
-      return 'El correo no puee estar vacío';
+      return 'El correo no puede estar vacío';
     } else if (!isValid) {
-      return 'Asegúrese de haber ingresado un correo';
+      return 'Asegúrese de haber ingresado un correo válido';
     } else {
       return null;
     }
@@ -58,9 +58,7 @@ class LoginViewModel extends AmadisViewModel {
 
   void _handleLoginResponse(dynamic user) async {
     if (user != null) {
-      showMessageSnackBar('¡Logueo existoso!');
-      await Future.delayed(const Duration(seconds: 2)).then(
-          (value) => ExtendedNavigator.root.popAndPush(Routes.dashboardPage));
+      await ExtendedNavigator.root.popAndPush(Routes.dashboardPage);
     } else {
       showErrorSnackBar('Correo y/o contraseña incorrectos');
     }

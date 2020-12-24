@@ -60,31 +60,38 @@ class OrderDetailCard extends StatelessWidget {
             ),
             SizedBox(height: hp(1.0)),
             Ink(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: Colors.indigo[50],
-              ),
+              decoration: BoxDecoration(color: Colors.indigo[50]),
               child: Row(
                 children: [
                   TableHeaderItem(text: 'Producto'),
+                  TableHeaderItem(text: 'Presentación'),
                   TableHeaderItem(text: 'Cantidad\n(cajas)'),
-                  TableHeaderItem(text: 'Precio Unit.'),
-                  TableHeaderItem(text: 'Subtotal'),
                 ],
               ),
             ),
             SizedBox(height: hp(1.0)),
             ..._viewModel.fullOrder.ordersDetail
-                .map((detail) => TableBody(detail: detail))
+                .map(
+                  (detail) => CustomTableBody(
+                    showDivider:
+                        _viewModel.fullOrder.ordersDetail.last != detail,
+                    children: [
+                      Expanded(
+                        child: Text(detail.product.name,
+                            textAlign: TextAlign.center),
+                      ),
+                      Expanded(
+                        child: Text(detail.product.name,
+                            textAlign: TextAlign.center),
+                      ),
+                      Expanded(
+                        child: Text('${detail.quantity}',
+                            textAlign: TextAlign.center),
+                      ),
+                    ],
+                  ),
+                )
                 .toList(),
-            Divider(thickness: 1.0, color: AmadisColors.secondaryColor),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: PricesRow(
-                text: 'Subtotal',
-                value: 'S/. ${_viewModel.getTotalAmount().toStringAsFixed(2)}',
-              ),
-            ),
           ],
         ),
       ),

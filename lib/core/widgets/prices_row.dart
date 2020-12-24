@@ -18,7 +18,7 @@ class PricesRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          flex: 4,
+          flex: 3,
           child: Text(
             '$text :',
             style: Theme.of(context).textTheme.subtitle1,
