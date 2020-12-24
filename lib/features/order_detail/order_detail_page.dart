@@ -48,7 +48,7 @@ class OrderDetailPageBase extends StatelessWidget {
             ),
             CustomFloatingButton(
               icon: Icon(Icons.near_me_rounded),
-              onPressed: _viewModel.goToMap,
+              onPressed: () => _viewModel.goToMap(context),
             ),
           ],
         ),
