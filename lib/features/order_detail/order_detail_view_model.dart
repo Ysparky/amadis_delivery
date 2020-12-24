@@ -92,6 +92,17 @@ class OrderDetailViewModel extends AmadisViewModel {
     final _coords = _fullOrder.location.coordinates;
     final destination = Coords(_coords.latitude, _coords.longitude);
 
+    if (availableMaps.length > 1) {
+      await _showModalBottomSheet(context, availableMaps, destination);
+    } else if (availableMaps.length == 1) {
+      await availableMaps.first.showDirections(destination: destination);
+    } else {
+      showErrorSnackBar('No hay aplicaciones soportadas instaladas');
+    }
+  }
+
+  void _showModalBottomSheet(
+      BuildContext context, List availableMaps, Coords destination) async {
     await showModalBottomSheet(
       context: context,
       builder: (context) {
