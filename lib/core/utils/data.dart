@@ -20,15 +20,47 @@ const orderTypes = <OrderType>[
 ];
 
 const orderStates = <OrderState>[
-  OrderState(id: 1, name: 'Confirmada', description: 'Orden confirmada.'),
-  OrderState(id: 2, name: 'Cancelada', description: 'Orden cancelada.'),
   OrderState(
-      id: 3, name: 'Preparada', description: 'Orden preparada para su envío.'),
-  OrderState(id: 4, name: 'En ruta', description: 'Orden en ruta.'),
+      id: 1,
+      name: 'Confirmada',
+      description: 'Orden confirmada.',
+      selected: true),
   OrderState(
-      id: 5, name: 'Arribada', description: 'Orden arribada al destino.'),
-  OrderState(id: 6, name: 'Cotizada', description: 'Orden cotizada.'),
-  OrderState(id: 7, name: 'Completada', description: 'Orden completada.'),
+    id: 2,
+    name: 'Cancelada',
+    description: 'Orden cancelada.',
+    selected: false,
+  ),
+  OrderState(
+    id: 3,
+    name: 'Preparada',
+    description: 'Orden preparada para su envío.',
+    selected: false,
+  ),
+  OrderState(
+    id: 4,
+    name: 'En ruta',
+    description: 'Orden en ruta.',
+    selected: false,
+  ),
+  OrderState(
+    id: 5,
+    name: 'Arribada',
+    description: 'Orden arribada al destino.',
+    selected: false,
+  ),
+  OrderState(
+    id: 6,
+    name: 'Cotizada',
+    description: 'Orden cotizada.',
+    selected: false,
+  ),
+  OrderState(
+    id: 7,
+    name: 'Completada',
+    description: 'Orden completada.',
+    selected: false,
+  ),
 ];
 
 const categories = <Category>[

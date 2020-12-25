@@ -34,7 +34,7 @@ class EmptyOrdersList extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
-                'No hay pedidos confirmados',
+                'No hay pedidos encontrados',
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             ],

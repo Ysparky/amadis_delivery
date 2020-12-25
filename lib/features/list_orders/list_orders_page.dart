@@ -37,33 +37,96 @@ class ListOrdersPageBase extends StatelessWidget {
           height: hp(100),
           width: wp(100),
           color: AmadisColors.backgroundColor,
-          child: RefreshIndicator(
-            onRefresh: _viewModel.orderService.getOrders,
-            color: AmadisColors.secondaryColor,
-            child: StreamBuilder(
-              stream: _viewModel.orders,
-              builder: (_, AsyncSnapshot<List<Order>> snapshot) {
-                if (snapshot.hasData) {
-                  final orders = snapshot.data;
-                  return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    child: snapshot.data.isEmpty
-                        ? EmptyOrdersList()
-                        : ListView.builder(
-                            padding:
-                                EdgeInsets.only(top: hp(2.5), bottom: hp(5)),
-                            physics: AlwaysScrollableScrollPhysics(
-                                parent: BouncingScrollPhysics()),
-                            itemCount: orders.length,
-                            itemBuilder: (_, index) =>
-                                OrderCardItem(order: orders[index]),
-                          ),
-                  );
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
+          child: Column(
+            children: [
+              Container(
+                height: hp(7),
+                width: double.infinity,
+                margin: EdgeInsets.only(top: hp(2)),
+                child: ListView.builder(
+                  padding: EdgeInsets.only(left: wp(2), right: wp(2)),
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: _viewModel.ordersState.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final state = _viewModel.ordersState[index];
+                    return OrderStateItem(state: state);
+                  },
+                ),
+              ),
+              Expanded(
+                child: RefreshIndicator(
+                  onRefresh: _viewModel.orderService.getOrders,
+                  color: AmadisColors.secondaryColor,
+                  child: StreamBuilder(
+                    stream: _viewModel.orders,
+                    builder: (_, AsyncSnapshot<List<Order>> snapshot) {
+                      if (snapshot.hasData) {
+                        final orders = snapshot.data;
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          child: snapshot.data.isEmpty
+                              ? EmptyOrdersList()
+                              : ListView.builder(
+                                  padding: EdgeInsets.only(
+                                      top: hp(2.5), bottom: hp(5)),
+                                  physics: AlwaysScrollableScrollPhysics(
+                                      parent: BouncingScrollPhysics()),
+                                  itemCount: orders.length,
+                                  itemBuilder: (_, index) =>
+                                      OrderCardItem(order: orders[index]),
+                                ),
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class OrderStateItem extends StatelessWidget {
+  const OrderStateItem({
+    Key key,
+    @required this.state,
+  }) : super(key: key);
+
+  final OrderState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final _viewModel = Provider.of<ListOrdersViewModel>(context);
+    return Container(
+      margin: EdgeInsets.symmetric(
+        vertical: hp(1),
+        horizontal: wp(2),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: wp(2.5)),
+      decoration: BoxDecoration(
+        color: state.selected ? AmadisColors.primaryColor : Colors.white,
+        border: Border.all(
+          color: !state.selected ? AmadisColors.primaryColor : Colors.white,
+        ),
+        borderRadius: BorderRadius.horizontal(
+          left: Radius.circular(60.0),
+          right: Radius.circular(60.0),
+        ),
+      ),
+      child: MaterialButton(
+        onPressed: () => _viewModel.handleTap(state),
+        child: Center(
+          child: Text(
+            state.name,
+            style: Theme.of(context).textTheme.subtitle1.copyWith(
+                color:
+                    !state.selected ? AmadisColors.primaryColor : Colors.white),
           ),
         ),
       ),

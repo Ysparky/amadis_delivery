@@ -14,9 +14,14 @@ class OrderService {
   final _dio = Dio();
   final _endpoint = '$BASE_URL/orders/';
 
-  Future<void> getOrders() async {
+  Future<void> getOrders({int stateId = 1}) async {
     try {
-      final response = await _dio.get(_endpoint, options: dioOptions);
+      final params = {'orderStateId': stateId};
+      final response = await _dio.get(
+        _endpoint,
+        options: dioOptions,
+        queryParameters: params,
+      );
       final _orders = List<Order>.from(
         response.data['data'].map((x) => Order.fromJson(x)),
       );
