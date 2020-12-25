@@ -42,7 +42,7 @@ class ListOrdersPageBase extends StatelessWidget {
               Container(
                 height: hp(7),
                 width: double.infinity,
-                margin: EdgeInsets.only(top: hp(2)),
+                margin: EdgeInsets.only(top: hp(1)),
                 child: ListView.builder(
                   padding: EdgeInsets.only(left: wp(2), right: wp(2)),
                   scrollDirection: Axis.horizontal,
@@ -56,7 +56,8 @@ class ListOrdersPageBase extends StatelessWidget {
               ),
               Expanded(
                 child: RefreshIndicator(
-                  onRefresh: _viewModel.orderService.getOrders,
+                  onRefresh: () => _viewModel.orderService
+                      .getOrders(stateId: _viewModel.activeState.id),
                   color: AmadisColors.secondaryColor,
                   child: StreamBuilder(
                     stream: _viewModel.orders,
@@ -68,8 +69,7 @@ class ListOrdersPageBase extends StatelessWidget {
                           child: snapshot.data.isEmpty
                               ? EmptyOrdersList()
                               : ListView.builder(
-                                  padding: EdgeInsets.only(
-                                      top: hp(2.5), bottom: hp(5)),
+                                  padding: EdgeInsets.only(bottom: hp(5)),
                                   physics: AlwaysScrollableScrollPhysics(
                                       parent: BouncingScrollPhysics()),
                                   itemCount: orders.length,
@@ -108,7 +108,6 @@ class OrderStateItem extends StatelessWidget {
         vertical: hp(1),
         horizontal: wp(2),
       ),
-      padding: EdgeInsets.symmetric(horizontal: wp(2.5)),
       decoration: BoxDecoration(
         color: state.selected ? AmadisColors.primaryColor : Colors.white,
         border: Border.all(
@@ -121,12 +120,17 @@ class OrderStateItem extends StatelessWidget {
       ),
       child: MaterialButton(
         onPressed: () => _viewModel.handleTap(state),
-        child: Center(
-          child: Text(
-            state.name,
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
-                color:
-                    !state.selected ? AmadisColors.primaryColor : Colors.white),
+        shape: StadiumBorder(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: wp(1)),
+          child: Center(
+            child: Text(
+              state.name,
+              style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  color: !state.selected
+                      ? AmadisColors.primaryColor
+                      : Colors.white),
+            ),
           ),
         ),
       ),

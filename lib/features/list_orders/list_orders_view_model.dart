@@ -9,6 +9,7 @@ class ListOrdersViewModel extends AmadisViewModel {
   ListOrdersViewModel() {
     orderService.getOrders();
     _statesList = orderStates.toList();
+    _activeState = _statesList.first;
   }
 
   final orderService = injector<OrderService>();
@@ -18,11 +19,14 @@ class ListOrdersViewModel extends AmadisViewModel {
   List<OrderState> _statesList = [];
   List<OrderState> get ordersState => _statesList;
 
+  OrderState _activeState;
+  OrderState get activeState => _activeState;
+
   Future<void> getOrders(int stateId) async {
     setLoading(true);
     await orderService.getOrders(stateId: stateId);
-    notifyListeners();
     setLoading(false);
+    notifyListeners();
   }
 
   void handleTap(OrderState orderState) {
@@ -31,6 +35,7 @@ class ListOrdersViewModel extends AmadisViewModel {
     if (index != idx) {
       _statesList[index] = _statesList[index].copyWith(selected: false);
       _statesList[idx] = _statesList[idx].copyWith(selected: true);
+      _activeState = _statesList[idx];
       getOrders(orderState.id);
       notifyListeners();
     }
