@@ -35,7 +35,6 @@ class OrderService {
     try {
       final responde = await _dio.get('$_endpoint$id', options: dioOptions);
       final order = Order.fromJson(responde.data['data']);
-      print(order);
       return order;
     } catch (e) {
       print(e.toString());

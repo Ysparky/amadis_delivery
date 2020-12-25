@@ -1,8 +1,10 @@
+import 'package:amadis_delivery/features/list_orders/list_orders_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:amadis_delivery/core/config/assets.dart';
 import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/utils/responsive.dart';
+import 'package:provider/provider.dart';
 
 class EmptyOrdersList extends StatelessWidget {
   const EmptyOrdersList({
@@ -11,6 +13,7 @@ class EmptyOrdersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _viewModel = Provider.of<ListOrdersViewModel>(context);
     return CustomScrollView(
       physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       slivers: [
@@ -34,7 +37,7 @@ class EmptyOrdersList extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
-                'No hay pedidos encontrados',
+                'No hay pedidos ${_viewModel.activeState.name.toLowerCase()}',
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             ],

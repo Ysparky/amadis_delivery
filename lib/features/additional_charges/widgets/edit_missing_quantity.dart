@@ -21,7 +21,6 @@ class EditMissingBoxQuantity extends StatelessWidget {
       child: Ink(
         padding: EdgeInsets.symmetric(horizontal: wp(3)),
         decoration: BoxDecoration(
-          color: Colors.indigo[50],
           borderRadius: BorderRadius.horizontal(
             left: Radius.circular(20.0),
             right: Radius.circular(20.0),

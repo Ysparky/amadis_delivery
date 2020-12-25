@@ -22,18 +22,18 @@ const orderTypes = <OrderType>[
 const orderStates = <OrderState>[
   OrderState(
       id: 1,
-      name: 'Confirmada',
+      name: 'Confirmados',
       description: 'Orden confirmada.',
       selected: true),
   OrderState(
     id: 2,
-    name: 'Cancelada',
+    name: 'Cancelados',
     description: 'Orden cancelada.',
     selected: false,
   ),
   OrderState(
     id: 3,
-    name: 'Preparada',
+    name: 'Preparados',
     description: 'Orden preparada para su envío.',
     selected: false,
   ),
@@ -45,19 +45,19 @@ const orderStates = <OrderState>[
   ),
   OrderState(
     id: 5,
-    name: 'Arribada',
+    name: 'Arribados',
     description: 'Orden arribada al destino.',
     selected: false,
   ),
   OrderState(
     id: 6,
-    name: 'Cotizada',
+    name: 'Cotizados',
     description: 'Orden cotizada.',
     selected: false,
   ),
   OrderState(
     id: 7,
-    name: 'Completada',
+    name: 'Completados',
     description: 'Orden completada.',
     selected: false,
   ),
