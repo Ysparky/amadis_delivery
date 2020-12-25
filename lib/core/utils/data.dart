@@ -2,7 +2,9 @@
 import 'package:amadis_delivery/models/category.dart';
 import 'package:amadis_delivery/models/order_state.dart';
 import 'package:amadis_delivery/models/order_type.dart';
+import 'package:amadis_delivery/models/presentation.dart';
 import 'package:amadis_delivery/models/product.dart';
+import 'package:amadis_delivery/models/product_presentation.dart';
 
 const orderTypes = <OrderType>[
   OrderType(
@@ -47,26 +49,68 @@ const categories = <Category>[
   ),
 ];
 
+final productsPresentation = <ProductPresentation>[
+  ProductPresentation(
+    id: 1,
+    price: 50.00,
+    product: products.first,
+    presentation: Presentation(
+      id: 1,
+      name: '650 ml',
+      description: 'Presentación de 650 ml',
+    ),
+  ),
+  ProductPresentation(
+    id: 2,
+    price: 60.00,
+    product: products[1],
+    presentation: presentations.first,
+  ),
+  ProductPresentation(
+    id: 3,
+    price: 55.00,
+    product: products[2],
+    presentation: presentations.first,
+  ),
+  ProductPresentation(
+    id: 4,
+    price: 62.00,
+    product: products[3],
+    presentation: presentations.first,
+  ),
+];
+
+final presentations = <Presentation>[
+  Presentation(
+    id: 1,
+    name: '650 ml',
+    description: 'Presentación de 650 ml',
+  ),
+];
+
 final products = <Product>[
   Product(
     id: 1,
     name: 'Cristal',
-    price: 52.53,
     description: 'Cerveza Cristal',
-    category: categories.singleWhere((c) => c.id == 1),
+    category: categories.first,
   ),
   Product(
     id: 2,
     name: 'Pilsen Callao',
-    price: 57.95,
     description: 'Cerveza Pilsen Callao',
-    category: categories.singleWhere((c) => c.id == 1),
+    category: categories.first,
   ),
   Product(
     id: 3,
-    name: 'Cusqueña',
-    price: 62.94,
-    description: 'Cerveza Cuzqueña',
-    category: categories.singleWhere((c) => c.id == 1),
+    name: 'Cusqueña Dorada',
+    description: 'Cerveza Cusqueña Blanca',
+    category: categories.first,
+  ),
+  Product(
+    id: 4,
+    name: 'Cusqueña Negra',
+    description: 'Cerveza Cuzqueña Negra',
+    category: categories.first,
   ),
 ];

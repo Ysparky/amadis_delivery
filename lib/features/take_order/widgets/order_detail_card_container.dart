@@ -28,7 +28,7 @@ class OrderDetailCardContainer extends StatelessWidget {
                   flex: 8,
                   child: DropdownButtonFormField(
                     items: _viewModel.productsDropdown,
-                    value: _viewModel.productsList.first,
+                    value: _viewModel.productsPresentationList.first,
                     onChanged: _viewModel.onChangedProduct,
                     isExpanded: true,
                     decoration: InputDecoration(

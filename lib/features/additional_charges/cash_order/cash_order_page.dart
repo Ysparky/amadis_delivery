@@ -50,7 +50,7 @@ class CashOrderPageBase extends StatelessWidget {
               decoration: BoxDecoration(color: Colors.indigo[50]),
               child: Row(
                 children: [
-                  TableHeaderItem(text: 'Producto'),
+                  TableHeaderItem(text: 'Presentación'),
                   TableHeaderItem(text: 'Cantidad\n(cajas)'),
                   TableHeaderItem(text: 'Precio Unit.'),
                   TableHeaderItem(text: 'Subtotal'),
@@ -157,13 +157,18 @@ class TableBody extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(detail.product.name, textAlign: TextAlign.center),
+            child: Text(
+              detail.productPresentation.product.name +
+                  ' ' +
+                  detail.productPresentation.presentation.name,
+              textAlign: TextAlign.center,
+            ),
           ),
           Expanded(
             child: Text('${detail.quantity}', textAlign: TextAlign.center),
           ),
           Expanded(
-            child: Text(detail.product.price.toStringAsFixed(2),
+            child: Text(detail.productPresentation.price.toStringAsFixed(2),
                 textAlign: TextAlign.center),
           ),
           Expanded(

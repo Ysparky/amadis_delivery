@@ -22,7 +22,7 @@ class TableHeaderItem extends StatelessWidget {
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
+            style: Theme.of(context).textTheme.subtitle2.copyWith(
                   letterSpacing: 1.5,
                   fontWeight: FontWeight.w900,
                 ),

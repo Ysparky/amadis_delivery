@@ -18,14 +18,21 @@ class TableBody extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(detail.product.name, textAlign: TextAlign.center),
+            child: Text(
+              detail.productPresentation.product.name +
+                  ' ' +
+                  detail.productPresentation.presentation.name,
+              textAlign: TextAlign.center,
+            ),
           ),
           Expanded(
             child: Text('${detail.quantity}', textAlign: TextAlign.center),
           ),
           Expanded(
-            child: Text(detail.product.price.toStringAsFixed(2),
-                textAlign: TextAlign.center),
+            child: Text(
+              detail.productPresentation.price.toStringAsFixed(2),
+              textAlign: TextAlign.center,
+            ),
           ),
           Expanded(
             child: Text(detail.totalPrice.toStringAsFixed(2),

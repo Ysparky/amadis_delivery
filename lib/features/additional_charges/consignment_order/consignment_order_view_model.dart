@@ -50,7 +50,7 @@ class ConsignmentOrderViewModel extends AmadisViewModel {
   }
 
   void _calculateProductSubtotalPrice(int index) {
-    var unitPrice = order.ordersDetail[index].product.price;
+    var unitPrice = order.ordersDetail[index].productPresentation.price;
     consumedList[index] = consumedList[index].copyWith(
       totalPrice: unitPrice * consumedList[index].quantity,
     );

@@ -3,6 +3,7 @@ import 'package:amadis_delivery/core/config/view_model.dart';
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/core/utils/data.dart';
+import 'package:amadis_delivery/models/product_presentation.dart';
 import 'package:amadis_delivery/services/customer_service.dart';
 import 'package:amadis_delivery/services/location_service.dart';
 import 'package:amadis_delivery/services/order_service.dart';
@@ -26,17 +27,19 @@ class TakeOrderViewModel extends AmadisViewModel {
   final locationService = injector<LocationService>();
   final orderService = injector<OrderService>();
 
-  List<Product> get productsList => products;
+  List<ProductPresentation> get productsPresentationList =>
+      productsPresentation;
 
   var orderTypeId = 1;
 
-  var activeProduct = products.first;
+  var activeProductPresentation = productsPresentation.first;
   List<OrderDetail> orderDetail = [];
 
   DateTime datePicked;
 
   int _getIndexByActiveProduct() {
-    return orderDetail.indexWhere((d) => d.product.id == activeProduct.id);
+    return orderDetail.indexWhere(
+        (d) => d.productPresentation.id == activeProductPresentation.id);
   }
 
   void editDetailQuantity(int qty) {
@@ -48,14 +51,14 @@ class TakeOrderViewModel extends AmadisViewModel {
       } else {
         orderDetail[index] = orderDetail[index].copyWith(
           quantity: qty,
-          totalPrice: qty * activeProduct.price,
+          totalPrice: qty * activeProductPresentation.price,
         );
       }
     } else if (qty != 0) {
       final detail = OrderDetail(
-        product: activeProduct,
+        productPresentation: activeProductPresentation,
         quantity: qty,
-        totalPrice: qty * activeProduct.price,
+        totalPrice: qty * activeProductPresentation.price,
       );
       orderDetail.add(detail);
     }
@@ -68,14 +71,14 @@ class TakeOrderViewModel extends AmadisViewModel {
       final qty = orderDetail[index].quantity;
       orderDetail[index] = orderDetail[index].copyWith(
         quantity: qty + 1,
-        totalPrice: (qty + 1) * activeProduct.price,
+        totalPrice: (qty + 1) * activeProductPresentation.price,
       );
       _editQtyController.text = orderDetail[index].quantity.toString();
     } else {
       final detail = OrderDetail(
-        product: activeProduct,
+        productPresentation: activeProductPresentation,
         quantity: 1,
-        totalPrice: activeProduct.price,
+        totalPrice: activeProductPresentation.price,
       );
       _editQtyController.text = '1';
       orderDetail.add(detail);
@@ -90,7 +93,7 @@ class TakeOrderViewModel extends AmadisViewModel {
       if (qty > 1) {
         orderDetail[index] = orderDetail[index].copyWith(
           quantity: qty - 1,
-          totalPrice: (qty - 1) * activeProduct.price,
+          totalPrice: (qty - 1) * activeProductPresentation.price,
         );
         _editQtyController.text = orderDetail[index].quantity.toString();
       } else if (qty <= 1) {
@@ -101,8 +104,8 @@ class TakeOrderViewModel extends AmadisViewModel {
     }
   }
 
-  void onChangedProduct(Product product) {
-    activeProduct = product;
+  void onChangedProduct(ProductPresentation productPresentation) {
+    activeProductPresentation = productPresentation;
     final index = _getIndexByActiveProduct();
     if (index != -1) {
       _editQtyController.text = orderDetail[index].quantity.toString();
@@ -140,12 +143,13 @@ class TakeOrderViewModel extends AmadisViewModel {
       )
       .toList();
 
-  List<DropdownMenuItem<Product>> get productsDropdown => products
-      .map((p) => DropdownMenuItem(
-            child: Text(p.name),
-            value: p,
-          ))
-      .toList();
+  List<DropdownMenuItem<ProductPresentation>> get productsDropdown =>
+      productsPresentation
+          .map((p) => DropdownMenuItem(
+                child: Text(p.product.name + ' ' + p.presentation.name),
+                value: p,
+              ))
+          .toList();
 
   void orderTypeChanged(dynamic value, FocusNode node) {
     orderTypeId = value;

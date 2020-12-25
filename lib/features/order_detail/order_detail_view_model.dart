@@ -81,7 +81,7 @@ class OrderDetailViewModel extends AmadisViewModel {
   double getTotalAmount() {
     var totalAmount = 0.0;
     _fullOrder.ordersDetail.forEach((detail) {
-      final productPrice = detail.quantity * detail.product.price;
+      final productPrice = detail.quantity * detail.productPresentation.price;
       totalAmount += productPrice;
     });
     return totalAmount;

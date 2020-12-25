@@ -77,12 +77,16 @@ class OrderDetailCard extends StatelessWidget {
                         _viewModel.fullOrder.ordersDetail.last != detail,
                     children: [
                       Expanded(
-                        child: Text(detail.product.name,
-                            textAlign: TextAlign.center),
+                        child: Text(
+                          detail.productPresentation.product.name,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                       Expanded(
-                        child: Text(detail.product.name,
-                            textAlign: TextAlign.center),
+                        child: Text(
+                          detail.productPresentation.presentation.name,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                       Expanded(
                         child: Text('${detail.quantity}',

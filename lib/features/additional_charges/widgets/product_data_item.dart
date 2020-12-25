@@ -18,7 +18,7 @@ class ProductDataItem extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            orderDetail.product.name,
+            orderDetail.productPresentation.product.name,
             style: Theme.of(context)
                 .textTheme
                 .subtitle1
@@ -34,7 +34,8 @@ class ProductDataItem extends StatelessWidget {
               )),
               Expanded(
                   child: Text(
-                'S/.' + orderDetail.product.price.toStringAsFixed(2),
+                'S/.' +
+                    orderDetail.productPresentation.price.toStringAsFixed(2),
                 style: _textStyle,
                 textAlign: TextAlign.right,
               )),

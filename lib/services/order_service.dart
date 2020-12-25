@@ -29,7 +29,9 @@ class OrderService {
   Future<Order> getOrderById(int id) async {
     try {
       final responde = await _dio.get('$_endpoint$id', options: dioOptions);
-      return Order.fromJson(responde.data['data']);
+      final order = Order.fromJson(responde.data['data']);
+      print(order);
+      return order;
     } catch (e) {
       print(e.toString());
       return null;

@@ -99,7 +99,7 @@ class QuoteOrderPageBase extends StatelessWidget {
                           decoration: BoxDecoration(color: Colors.indigo[50]),
                           child: Row(
                             children: [
-                              general.TableHeaderItem(text: 'Producto'),
+                              general.TableHeaderItem(text: 'Presentación'),
                               general.TableHeaderItem(
                                   text: 'Cantidad\n(cajas)'),
                               general.TableHeaderItem(text: 'Precio Unit.'),
@@ -195,7 +195,10 @@ class TableBody extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(detail.product.name, textAlign: TextAlign.center),
+            child: Text(
+              detail.productPresentation.product.name,
+              textAlign: TextAlign.center,
+            ),
           ),
           Expanded(
             child: Text(
@@ -204,8 +207,10 @@ class TableBody extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Text(detail.product.price.toStringAsFixed(2),
-                textAlign: TextAlign.center),
+            child: Text(
+              detail.productPresentation.price.toStringAsFixed(2),
+              textAlign: TextAlign.center,
+            ),
           ),
           Expanded(
             child:
