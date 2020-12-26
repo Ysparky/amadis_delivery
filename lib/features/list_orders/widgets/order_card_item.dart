@@ -1,6 +1,5 @@
 import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/core/utils/data.dart';
-import 'package:amadis_delivery/core/utils/responsive.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/models/order.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';

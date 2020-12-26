@@ -1,5 +1,4 @@
-import 'package:amadis_delivery/models/location.dart';
-import 'package:amadis_delivery/models/order_detail.dart';
+import 'package:amadis_delivery/models/models.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Order {

@@ -1,6 +1,4 @@
-import 'package:amadis_delivery/models/presentation.dart';
-import 'package:amadis_delivery/models/product.dart';
-import 'package:amadis_delivery/models/product_presentation.dart';
+import 'package:amadis_delivery/models/models.dart';
 
 class OrderDetail {
   OrderDetail({

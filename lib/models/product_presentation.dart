@@ -1,5 +1,4 @@
 import 'package:amadis_delivery/models/models.dart';
-import 'package:amadis_delivery/models/presentation.dart';
 
 class ProductPresentation {
   ProductPresentation({
@@ -30,7 +29,7 @@ class ProductPresentation {
   factory ProductPresentation.fromJson(Map<String, dynamic> json) =>
       ProductPresentation(
         id: json['id'],
-        price: json['price'],
+        price: double.parse(json['price']),
         product: Product.fromJson(json['product']),
         presentation: Presentation.fromJson(json['presentation']),
       );

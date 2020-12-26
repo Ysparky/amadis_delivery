@@ -5,8 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/config/router.gr.dart';
-import 'package:amadis_delivery/core/utils/service_injector.dart';
-import 'package:amadis_delivery/core/utils/shared_prefs.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,10 +1,5 @@
 // MODELS
-import 'package:amadis_delivery/models/category.dart';
-import 'package:amadis_delivery/models/order_state.dart';
-import 'package:amadis_delivery/models/order_type.dart';
-import 'package:amadis_delivery/models/presentation.dart';
-import 'package:amadis_delivery/models/product.dart';
-import 'package:amadis_delivery/models/product_presentation.dart';
+import 'package:amadis_delivery/models/models.dart';
 
 const orderTypes = <OrderType>[
   OrderType(
