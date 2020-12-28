@@ -7,6 +7,7 @@ import 'package:amadis_delivery/models/product_presentation.dart';
 import 'package:amadis_delivery/services/customer_service.dart';
 import 'package:amadis_delivery/services/location_service.dart';
 import 'package:amadis_delivery/services/order_service.dart';
+import 'package:amadis_delivery/services/product_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -19,13 +20,14 @@ class TakeOrderViewModel extends AmadisViewModel {
   final _editQtyController = TextEditingController(text: '0');
 
   TextEditingController get shippingDateController => _shippingDateController;
-  TextEditingController get selectedCustomerController => _onSelectedCustomer();
+  // TextEditingController get selectedCustomerController => _onSelectedCustomer();
   TextEditingController get addressController => _addressController;
   TextEditingController get editQtyController => _editQtyController;
 
   final customerService = injector<CustomerService>();
   final locationService = injector<LocationService>();
   final orderService = injector<OrderService>();
+  final productService = injector<ProductService>();
 
   List<ProductPresentation> get productsPresentationList =>
       productsPresentation;
@@ -33,87 +35,96 @@ class TakeOrderViewModel extends AmadisViewModel {
   var orderTypeId = 1;
 
   var activeProductPresentation = productsPresentation.first;
-  List<OrderDetail> orderDetail = [];
+  // List<OrderDetail> get orderDetail => orderService.orderDetail.value;
+  Stream<List<OrderDetail>> get orderDetail => orderService.orderDetail;
+  Stream<Customer> get selectedCustomer => customerService.selectedCustomer;
 
   DateTime datePicked;
 
-  int _getIndexByActiveProduct() {
-    return orderDetail.indexWhere(
-        (d) => d.productPresentation.id == activeProductPresentation.id);
+  void goToShoppingBag() {
+    ExtendedNavigator.root.push(Routes.shoppingBagPage);
   }
 
-  void editDetailQuantity(int qty) {
-    final index = _getIndexByActiveProduct();
-    // product exists
-    if (index != -1) {
-      if (qty == 0) {
-        orderDetail.removeAt(index);
-      } else {
-        orderDetail[index] = orderDetail[index].copyWith(
-          quantity: qty,
-          totalPrice: qty * activeProductPresentation.price,
-        );
-      }
-    } else if (qty != 0) {
-      final detail = OrderDetail(
-        productPresentation: activeProductPresentation,
-        quantity: qty,
-        totalPrice: qty * activeProductPresentation.price,
-      );
-      orderDetail.add(detail);
-    }
-    notifyListeners();
-  }
+  // int _getIndexByActiveProduct() {
+  //   return orderDetail.indexWhere(
+  //       (d) => d.productPresentation.id == activeProductPresentation.id);
+  // }
 
-  void addDetailQuantity() {
-    final index = _getIndexByActiveProduct();
-    if (index != -1) {
-      final qty = orderDetail[index].quantity;
-      orderDetail[index] = orderDetail[index].copyWith(
-        quantity: qty + 1,
-        totalPrice: (qty + 1) * activeProductPresentation.price,
-      );
-      _editQtyController.text = orderDetail[index].quantity.toString();
-    } else {
-      final detail = OrderDetail(
-        productPresentation: activeProductPresentation,
-        quantity: 1,
-        totalPrice: activeProductPresentation.price,
-      );
-      _editQtyController.text = '1';
-      orderDetail.add(detail);
-    }
-    notifyListeners();
-  }
+  // void editDetailQuantity(int qty) {
+  //   final index = _getIndexByActiveProduct();
+  //   // product exists
+  //   if (index != -1) {
+  //     if (qty == 0) {
+  //       orderDetail.removeAt(index);
+  //     } else {
+  //       orderDetail[index] = orderDetail[index].copyWith(
+  //         quantity: qty,
+  //         totalPrice: qty * activeProductPresentation.price,
+  //       );
+  //     }
+  //   } else if (qty != 0) {
+  //     final detail = OrderDetail(
+  //       productPresentation: activeProductPresentation,
+  //       quantity: qty,
+  //       totalPrice: qty * activeProductPresentation.price,
+  //     );
+  //     orderDetail.add(detail);
+  //   }
+  //   notifyListeners();
+  // }
 
-  void removeDetailQuantity() {
-    final index = _getIndexByActiveProduct();
-    if (index != -1) {
-      final qty = orderDetail[index].quantity;
-      if (qty > 1) {
-        orderDetail[index] = orderDetail[index].copyWith(
-          quantity: qty - 1,
-          totalPrice: (qty - 1) * activeProductPresentation.price,
-        );
-        _editQtyController.text = orderDetail[index].quantity.toString();
-      } else if (qty <= 1) {
-        orderDetail.removeAt(index);
-        _editQtyController.text = '0';
-      }
-      notifyListeners();
-    }
-  }
+  // void addDetailQuantity() {
+  //   final index = _getIndexByActiveProduct();
+  //   if (index != -1) {
+  //     final qty = orderDetail[index].quantity;
+  //     orderDetail[index] = orderDetail[index].copyWith(
+  //       quantity: qty + 1,
+  //       totalPrice: (qty + 1) * activeProductPresentation.price,
+  //     );
+  //     _editQtyController.text = orderDetail[index].quantity.toString();
+  //   } else {
+  //     final detail = OrderDetail(
+  //       productPresentation: activeProductPresentation,
+  //       quantity: 1,
+  //       totalPrice: activeProductPresentation.price,
+  //     );
+  //     _editQtyController.text = '1';
+  //     orderDetail.add(detail);
+  //   }
+  //   notifyListeners();
+  // }
 
-  void onChangedProduct(ProductPresentation productPresentation) {
-    activeProductPresentation = productPresentation;
-    final index = _getIndexByActiveProduct();
-    if (index != -1) {
-      _editQtyController.text = orderDetail[index].quantity.toString();
-    } else {
-      _editQtyController.text = '0';
-    }
-    notifyListeners();
-  }
+  // void removeDetailQuantity() {
+  //   final index = _getIndexByActiveProduct();
+  //   if (index != -1) {
+  //     final qty = orderDetail[index].quantity;
+  //     if (qty > 1) {
+  //       orderDetail[index] = orderDetail[index].copyWith(
+  //         quantity: qty - 1,
+  //         totalPrice: (qty - 1) * activeProductPresentation.price,
+  //       );
+  //       _editQtyController.text = orderDetail[index].quantity.toString();
+  //     } else if (qty <= 1) {
+  //       orderDetail.removeAt(index);
+  //       _editQtyController.text = '0';
+  //     }
+  //     notifyListeners();
+  //   }
+  // }
+
+  // void onChangedProduct(ProductPresentation productPresentation) {
+  //   activeProductPresentation = productPresentation;
+  //   final index = _getIndexByActiveProduct();
+  //   if (index != -1) {
+  //     _editQtyController.text = orderDetail[index].quantity.toString();
+  //   } else {
+  //     _editQtyController.text = '0';
+  //   }
+  //   notifyListeners();
+  // }
+
+  Stream<List<ProductPresentation>> get productPresentationList =>
+      productService.productPresentationList;
 
   void selectDate(BuildContext context, FocusNode node) async {
     // date validation
@@ -161,16 +172,14 @@ class TakeOrderViewModel extends AmadisViewModel {
     ExtendedNavigator.root.push(Routes.selectCustomerPage);
   }
 
-  TextEditingController _onSelectedCustomer() {
-    final customer = customerService.selectedCustomer.value;
-    if (customer != null) {
-      return TextEditingController(
-        text: '${customer.name} ${customer.lastName}',
-      );
-    } else {
-      return TextEditingController(text: 'Seleccione un cliente');
-    }
-  }
+  // TextEditingController _onSelectedCustomer() {
+  //   final customer = customerService.selectedCustomer.value;
+  //   var text = 'Seleccione un cliente';
+  //   if (customer != null) {
+  //     text = '${customer.name} ${customer.lastName}';
+  //   }
+  //   return TextEditingController(text: 'Seleccione un cliente');
+  // }
 
   bool _validateOrder() {
     if (_shippingDateController.value.text == 'dd/mm/yyyy') {
@@ -182,7 +191,7 @@ class TakeOrderViewModel extends AmadisViewModel {
     } else if (locationService.selectedLocation.value == null) {
       showErrorSnackBar('Defina la dirección a realizar el envío');
       return false;
-    } else if (orderDetail.isEmpty) {
+    } else if (orderService.orderDetail.value?.isEmpty ?? true) {
       showErrorSnackBar('¡No hay productos agregados al pedido!');
       return false;
     } else {
@@ -202,7 +211,7 @@ class TakeOrderViewModel extends AmadisViewModel {
       shippingDate: DateFormat.yMd('en_US').format(datePicked),
       customerId: customerService.selectedCustomer.value.customerId,
       location: locationService.selectedLocation.value,
-      ordersDetail: orderDetail,
+      ordersDetail: orderService.orderDetail.value,
       orderTypeId: orderTypeId,
       orderStateId: 1,
     );
@@ -223,13 +232,10 @@ class TakeOrderViewModel extends AmadisViewModel {
     }
   }
 
-  void cleanOrder() {
-    _shippingDateController.text = 'dd/mm/yyyy';
-  }
-
   @override
   void dispose() {
     customerService.selectedCustomer.add(null);
+    orderService.orderDetail.add(null);
     super.dispose();
   }
 }

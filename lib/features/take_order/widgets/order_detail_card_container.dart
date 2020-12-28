@@ -1,6 +1,9 @@
+import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
 import 'package:amadis_delivery/features/take_order/take_order_view_model.dart';
+import 'package:amadis_delivery/models/models.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,104 +17,103 @@ class OrderDetailCardContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Detalle de Pedido',
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle1
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10.0),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  flex: 8,
-                  child: DropdownButtonFormField(
-                    items: _viewModel.productsDropdown,
-                    value: _viewModel.productsPresentationList.first,
-                    onChanged: _viewModel.onChangedProduct,
-                    isExpanded: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                        vertical: hp(1.2),
-                      ),
+                Text(
+                  'Detalle de Pedido',
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                ElasticIn(
+                  delay: Duration(milliseconds: 400),
+                  child: FloatingActionButton(
+                    mini: true,
+                    elevation: 0,
+                    backgroundColor: AmadisColors.primaryColor,
+                    child: Icon(
+                      Icons.add_shopping_cart_outlined,
+                      color: Colors.white,
                     ),
+                    onPressed: _viewModel.goToShoppingBag,
                   ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  padding: EdgeInsets.all(0),
-                  onPressed: _viewModel.removeDetailQuantity,
-                ),
-                Expanded(
-                  flex: 2,
-                  child: TextFormField(
-                    controller: _viewModel.editQtyController
-                      ..selection = TextSelection.collapsed(
-                        offset: _viewModel.editQtyController.text.length,
-                      ),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: hp(1)),
-                      isCollapsed: true,
-                      isDense: true,
-                      border: OutlineInputBorder(),
-                    ),
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    textAlignVertical: TextAlignVertical.center,
-                    maxLines: null,
-                    style: Theme.of(context).textTheme.headline6,
-                    onChanged: (value) {
-                      if (value.isNotEmpty) {
-                        _viewModel.editDetailQuantity(int.parse(value).abs());
-                      }
-                    },
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  padding: EdgeInsets.all(0),
-                  onPressed: _viewModel.addDetailQuantity,
                 ),
               ],
             ),
-            const Divider(thickness: 2.0),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: _viewModel.orderDetail.isNotEmpty
-                  ? Column(
-                      children: [
-                        Ink(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                            color: Colors.indigo[50],
-                          ),
-                          child: Row(
+            StreamBuilder(
+              stream: _viewModel.orderDetail,
+              builder: (_, AsyncSnapshot<List<OrderDetail>> snapshot) {
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: snapshot.hasData
+                      ? Padding(
+                          padding: EdgeInsets.only(top: hp(1)),
+                          child: Column(
                             children: [
-                              TableHeaderItem(text: 'Producto'),
-                              TableHeaderItem(text: 'Cantidad\n(cajas)'),
-                              TableHeaderItem(text: 'Precio Unit.'),
-                              TableHeaderItem(text: 'Subtotal'),
+                              Ink(
+                                decoration:
+                                    BoxDecoration(color: Colors.indigo[50]),
+                                child: Row(
+                                  children: [
+                                    TableHeaderItem(text: 'Producto'),
+                                    TableHeaderItem(text: 'Cantidad\n(cajas)'),
+                                    TableHeaderItem(text: 'Precio Unit.'),
+                                    TableHeaderItem(text: 'Subtotal'),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: hp(1.0)),
+                              ...snapshot.data
+                                  .map((detail) => TableBody(detail: detail))
+                                  .toList(),
                             ],
                           ),
+                        )
+                      : ConstrainedBox(
+                          constraints: BoxConstraints(minHeight: hp(6.2)),
+                          child: Center(
+                            child: Text('No hay productos seleccionados'),
+                          ),
                         ),
-                        SizedBox(height: hp(1.0)),
-                        ..._viewModel.orderDetail
-                            .map((detail) => TableBody(detail: detail))
-                            .toList(),
-                      ],
-                    )
-                  : ConstrainedBox(
-                      constraints: BoxConstraints(minHeight: hp(9.2)),
-                      child: Center(
-                        child: Text('No hay productos seleccionados'),
-                      ),
-                    ),
+                );
+              },
             ),
+            // AnimatedSwitcher(
+            //   duration: const Duration(milliseconds: 200),
+            //   child: _viewModel.orderDetail != null
+            //       // _viewModel.orderDetail.isNotEmpty
+            //       ? Column(
+            //           children: [
+            //             Ink(
+            //               decoration: BoxDecoration(
+            //                 borderRadius:
+            //                     BorderRadius.all(Radius.circular(20.0)),
+            //                 color: Colors.indigo[50],
+            //               ),
+            //               child: Row(
+            //                 children: [
+            //                   TableHeaderItem(text: 'Producto'),
+            //                   TableHeaderItem(text: 'Cantidad\n(cajas)'),
+            //                   TableHeaderItem(text: 'Precio Unit.'),
+            //                   TableHeaderItem(text: 'Subtotal'),
+            //                 ],
+            //               ),
+            //             ),
+            //             SizedBox(height: hp(1.0)),
+            //             // ..._viewModel.orderDetail
+            //             //     .map((detail) => TableBody(detail: detail))
+            //             //     .toList(),
+            //           ],
+            //         )
+            //       : ConstrainedBox(
+            //           constraints: BoxConstraints(minHeight: hp(9.2)),
+            //           child: Center(
+            //             child: Text('No hay productos seleccionados'),
+            //           ),
+            //         ),
+            // ),
           ],
         ),
       ),

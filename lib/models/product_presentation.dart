@@ -4,12 +4,15 @@ class ProductPresentation {
   ProductPresentation({
     this.id,
     this.price,
+    this.imageUrl =
+        'https://www.laparadavirtual.com/public/uploads/products/thumbnail/FGVyLNocJ24bdrfqHbAtipBnRGCwtTxzIFkTfioq.jpeg',
     this.product,
     this.presentation,
   });
 
   final int id;
   final double price;
+  final String imageUrl;
   final Product product;
   final Presentation presentation;
 
@@ -30,6 +33,7 @@ class ProductPresentation {
       ProductPresentation(
         id: json['id'],
         price: double.parse(json['price']),
+        imageUrl: json['pathImage'],
         product: Product.fromJson(json['product']),
         presentation: Presentation.fromJson(json['presentation']),
       );

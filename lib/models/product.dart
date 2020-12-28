@@ -29,7 +29,7 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json['id'],
-        name: json['product'],
+        name: json['name'],
         description: json['description'],
         category: categories.singleWhere((c) => c.id == json['categoryId']),
       );

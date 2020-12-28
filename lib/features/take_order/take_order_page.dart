@@ -2,6 +2,7 @@ import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/custom_appbar.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
 import 'package:amadis_delivery/features/take_order/widgets/widgets.dart';
+import 'package:amadis_delivery/models/customer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -59,11 +60,19 @@ class TakeOrderPageBase extends StatelessWidget {
                         _viewModel.orderTypeChanged(value, _node),
                   ),
                   SizedBox(height: hp(2)),
-                  TextCardFormField(
-                    iconData: Icons.search,
-                    text: 'Cliente',
-                    controller: _viewModel.selectedCustomerController,
-                    onTap: () => _viewModel.goToSelectCustomer(context),
+                  StreamBuilder(
+                    stream: _viewModel.selectedCustomer,
+                    builder: (_, AsyncSnapshot<Customer> snapshot) {
+                      return TextCardFormField(
+                        iconData: Icons.search,
+                        text: 'Cliente',
+                        controller: TextEditingController(
+                            text: snapshot.hasData
+                                ? '${snapshot.data.name} ${snapshot.data.lastName}'
+                                : 'Seleccione un cliente'),
+                        onTap: () => _viewModel.goToSelectCustomer(context),
+                      );
+                    },
                   ),
                   SizedBox(height: hp(2)),
                   LocationCardFormField(

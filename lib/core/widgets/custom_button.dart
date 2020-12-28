@@ -22,11 +22,12 @@ class CustomButton extends StatelessWidget {
       minWidth: double.infinity,
       color: AmadisColors.secondaryColor,
       onPressed: onPressed,
+      disabledColor: Colors.indigo[50],
       padding: EdgeInsets.symmetric(vertical: hp(1.5)),
       child: Text(
         text,
         style: TextStyle(
-          color: Colors.white,
+          color: onPressed == null ? Colors.grey : Colors.white,
           fontSize: 16.0,
           fontWeight: FontWeight.w600,
         ),
