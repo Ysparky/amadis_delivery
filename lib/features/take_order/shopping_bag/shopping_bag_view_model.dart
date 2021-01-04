@@ -4,12 +4,9 @@ import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/services/order_service.dart';
 import 'package:amadis_delivery/services/product_service.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class ShoppingBagViewModel extends AmadisViewModel {
   ShoppingBagViewModel() {
-    // getProductPresentationList();
     _productService.getProducts();
     if (orderService.orderDetail.value != null) {
       orderDetail = orderService.orderDetail.value.toList();
@@ -19,9 +16,6 @@ class ShoppingBagViewModel extends AmadisViewModel {
   final _productService = injector<ProductService>();
   final orderService = injector<OrderService>();
 
-  // Stream<List<ProductPresentation>> product
-
-  // List<ProductPresentation> _productPresentationList = [];
   Stream<List<ProductPresentation>> get productPresentationList =>
       _productService.productPresentationList;
 
@@ -34,9 +28,7 @@ class ShoppingBagViewModel extends AmadisViewModel {
     ExtendedNavigator.root.pop();
   }
 
-  // bool enableButt
-
-  void handleEditQuantity(
+  void handleEditDetailQuantity(
       ProductPresentation productPresentation, String value) {
     if (value.isNotEmpty) {
       final qty = int.tryParse(value);
@@ -92,24 +84,20 @@ class ShoppingBagViewModel extends AmadisViewModel {
     notifyListeners();
   }
 
-  void handleRemoveQuantity(ProductPresentation productPresentation) {
+  void handleRemoveDetailQuantity(ProductPresentation productPresentation) {
     final index = orderDetail.indexWhere(
         (detail) => detail.productPresentation.id == productPresentation.id);
     if (index != -1) {
       final currentDetail = orderDetail[index];
       if (currentDetail.quantity > 1) {
-        print('removing qty from the product');
         final newQty = currentDetail.quantity - 1;
         orderDetail[index] = currentDetail.copyWith(
           quantity: newQty,
           totalPrice: productPresentation.price * newQty,
         );
       } else {
-        print('removing an item');
         orderDetail.removeAt(index);
       }
-    } else {
-      print('the button should be disabled');
     }
     notifyListeners();
   }
@@ -119,13 +107,4 @@ class ShoppingBagViewModel extends AmadisViewModel {
         (detail) => detail.productPresentation.id == productPresentation.id);
     return index != -1 ? orderDetail[index].quantity : 0;
   }
-
-  void getProductPresentationList() async {
-    setLoading(true);
-    await _productService.getProducts();
-    setLoading(false);
-  }
-
-  final _quantityController = TextEditingController(text: '0');
-  TextEditingController get quantityController => _quantityController;
 }

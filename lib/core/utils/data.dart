@@ -16,45 +16,44 @@ const orderTypes = <OrderType>[
 
 const orderStates = <OrderState>[
   OrderState(
-      id: 1,
-      name: 'Confirmados',
-      description: 'Orden confirmada.',
-      selected: true),
+    id: 1,
+    name: 'Creados',
+    description: 'Orden creada.',
+  ),
   OrderState(
     id: 2,
-    name: 'Cancelados',
-    description: 'Orden cancelada.',
-    selected: false,
+    name: 'Confirmados',
+    description: 'Orden confirmada.',
   ),
   OrderState(
     id: 3,
-    name: 'Preparados',
-    description: 'Orden preparada para su envío.',
-    selected: false,
+    name: 'Cancelados',
+    description: 'Orden cancelada.',
   ),
   OrderState(
     id: 4,
-    name: 'En ruta',
-    description: 'Orden en ruta.',
-    selected: false,
+    name: 'Preparados',
+    description: 'Orden preparada para su envío.',
   ),
   OrderState(
     id: 5,
-    name: 'Arribados',
-    description: 'Orden arribada al destino.',
-    selected: false,
+    name: 'En ruta',
+    description: 'Orden en ruta.',
   ),
   OrderState(
     id: 6,
-    name: 'Cotizados',
-    description: 'Orden cotizada.',
-    selected: false,
+    name: 'Arribados',
+    description: 'Orden arribada al destino.',
   ),
   OrderState(
     id: 7,
+    name: 'Cotizados',
+    description: 'Orden cotizada.',
+  ),
+  OrderState(
+    id: 8,
     name: 'Completados',
     description: 'Orden completada.',
-    selected: false,
   ),
 ];
 

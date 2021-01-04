@@ -47,7 +47,6 @@ class ShoppingBagPageBase extends StatelessWidget {
                     builder:
                         (_, AsyncSnapshot<List<ProductPresentation>> snapshot) {
                       if (snapshot.hasData) {
-                        print('objerct');
                         final presentation = snapshot.data;
                         return ListView.separated(
                           padding: EdgeInsets.symmetric(vertical: hp(5)),
@@ -104,11 +103,10 @@ class ProductContainer extends StatelessWidget {
         children: [
           Expanded(
             flex: 3,
-            child: FadeInImage.assetNetwork(
+            child: FadeInImage(
               fit: BoxFit.contain,
-              placeholder:
-                  'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shopify.co.id%2Fpartners%2Fblog%2Fplaceholder-images&psig=AOvVaw3bXzQ9iM_wOm6J7NOqRVbT&ust=1609137004378000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPDQ2s_E7e0CFQAAAAAdAAAAABAD',
-              image: '${productPresentation.imageUrl}',
+              placeholder: AssetImage(AmadisAssets.emptyBox),
+              image: NetworkImage(productPresentation.imageUrl),
             ),
           ),
           Expanded(
@@ -153,8 +151,8 @@ class ProductContainer extends StatelessWidget {
                     child: IconButton(
                       icon: Icon(Icons.remove),
                       padding: EdgeInsets.zero,
-                      onPressed: () =>
-                          _viewModel.handleRemoveQuantity(productPresentation),
+                      onPressed: () => _viewModel
+                          .handleRemoveDetailQuantity(productPresentation),
                     ),
                   ),
                   Expanded(
@@ -180,8 +178,9 @@ class ProductContainer extends StatelessWidget {
                         textAlignVertical: TextAlignVertical.center,
                         keyboardType: TextInputType.number,
                         style: Theme.of(context).textTheme.subtitle1,
-                        onChanged: (value) => _viewModel.handleEditQuantity(
-                            productPresentation, value),
+                        onChanged: (value) =>
+                            _viewModel.handleEditDetailQuantity(
+                                productPresentation, value),
                         decoration: InputDecoration(
                           isDense: true,
                           counterText: '',

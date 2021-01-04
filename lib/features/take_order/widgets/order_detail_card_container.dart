@@ -3,7 +3,6 @@ import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
 import 'package:amadis_delivery/features/take_order/take_order_view_model.dart';
 import 'package:amadis_delivery/models/models.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,18 +26,15 @@ class OrderDetailCardContainer extends StatelessWidget {
                       .subtitle1
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
-                ElasticIn(
-                  delay: Duration(milliseconds: 400),
-                  child: FloatingActionButton(
-                    mini: true,
-                    elevation: 0,
-                    backgroundColor: AmadisColors.primaryColor,
-                    child: Icon(
-                      Icons.add_shopping_cart_outlined,
-                      color: Colors.white,
-                    ),
-                    onPressed: _viewModel.goToShoppingBag,
+                FloatingActionButton(
+                  mini: true,
+                  elevation: 0,
+                  backgroundColor: AmadisColors.primaryColor,
+                  child: Icon(
+                    Icons.add_shopping_cart_outlined,
+                    color: Colors.white,
                   ),
+                  onPressed: _viewModel.goToShoppingBag,
                 ),
               ],
             ),
@@ -80,40 +76,6 @@ class OrderDetailCardContainer extends StatelessWidget {
                 );
               },
             ),
-            // AnimatedSwitcher(
-            //   duration: const Duration(milliseconds: 200),
-            //   child: _viewModel.orderDetail != null
-            //       // _viewModel.orderDetail.isNotEmpty
-            //       ? Column(
-            //           children: [
-            //             Ink(
-            //               decoration: BoxDecoration(
-            //                 borderRadius:
-            //                     BorderRadius.all(Radius.circular(20.0)),
-            //                 color: Colors.indigo[50],
-            //               ),
-            //               child: Row(
-            //                 children: [
-            //                   TableHeaderItem(text: 'Producto'),
-            //                   TableHeaderItem(text: 'Cantidad\n(cajas)'),
-            //                   TableHeaderItem(text: 'Precio Unit.'),
-            //                   TableHeaderItem(text: 'Subtotal'),
-            //                 ],
-            //               ),
-            //             ),
-            //             SizedBox(height: hp(1.0)),
-            //             // ..._viewModel.orderDetail
-            //             //     .map((detail) => TableBody(detail: detail))
-            //             //     .toList(),
-            //           ],
-            //         )
-            //       : ConstrainedBox(
-            //           constraints: BoxConstraints(minHeight: hp(9.2)),
-            //           child: Center(
-            //             child: Text('No hay productos seleccionados'),
-            //           ),
-            //         ),
-            // ),
           ],
         ),
       ),
