@@ -105,7 +105,7 @@ class ProductContainer extends StatelessWidget {
             flex: 3,
             child: FadeInImage(
               fit: BoxFit.contain,
-              placeholder: AssetImage(AmadisAssets.emptyBox),
+              placeholder: AssetImage(AmadisAssets.placeholder),
               image: NetworkImage(productPresentation.imageUrl),
             ),
           ),
