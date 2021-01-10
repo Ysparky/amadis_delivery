@@ -10,3 +10,5 @@ export 'product.dart';
 export 'product_presentation.dart';
 export 'role.dart';
 export 'user.dart';
+
+export 'responses/error_response.dart';

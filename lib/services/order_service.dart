@@ -1,3 +1,4 @@
+import 'package:amadis_delivery/networking/api_base_helper.dart';
 import 'package:dio/dio.dart';
 
 import 'package:amadis_delivery/core/utils/constants.dart';
@@ -80,5 +81,10 @@ class OrderService {
       print(e);
       return null;
     }
+  }
+
+  final _helper = ApiBaseHelper();
+  Future getRoutes() async {
+    await _helper.get('/orders/routes/list?shippingDate=2021-01-09');
   }
 }
