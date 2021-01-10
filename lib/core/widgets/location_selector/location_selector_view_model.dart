@@ -1,9 +1,9 @@
-import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/core/utils/service_injector.dart';
-import 'package:amadis_delivery/models/location.dart';
-import 'package:amadis_delivery/services/location_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/models/location.dart';
+import 'package:amadis_delivery/services/location_service.dart';
 
 class LocationSelectorViewModel extends AmadisViewModel {
   CameraPosition get cameraPosition => CameraPosition(

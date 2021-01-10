@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:amadis_delivery/core/config/colors.dart';
-import 'package:amadis_delivery/core/utils/responsive.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({

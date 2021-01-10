@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:amadis_delivery/core/config/config.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
+import 'package:amadis_delivery/features/order_detail/order_detail_view_model.dart';
 import 'package:amadis_delivery/features/order_detail/widgets/widgets.dart';
 import 'package:amadis_delivery/models/models.dart';
-import 'package:amadis_delivery/features/order_detail/order_detail_view_model.dart';
 
 class OrderDetailPage extends StatelessWidget {
   const OrderDetailPage({

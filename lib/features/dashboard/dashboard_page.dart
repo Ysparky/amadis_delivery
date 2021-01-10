@@ -2,7 +2,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:amadis_delivery/core/config/colors.dart';
+import 'package:amadis_delivery/core/utils/colors.dart';
 import 'package:amadis_delivery/features/home/home_page.dart';
 import 'package:amadis_delivery/features/list_orders/list_orders_page.dart';
 import 'package:amadis_delivery/features/profile/profile_page.dart';

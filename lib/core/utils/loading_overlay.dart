@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
-import 'package:amadis_delivery/core/config/colors.dart';
-import 'package:amadis_delivery/core/config/view_model.dart';
-import 'package:amadis_delivery/core/utils/responsive.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
 
 class LoadingOverlay<T extends AmadisViewModel> extends StatelessWidget {
   const LoadingOverlay({

@@ -1,7 +1,8 @@
-import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/models/models.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/models/models.dart';
 
 class ConsignmentOrderViewModel extends AmadisViewModel {
   ConsignmentOrderViewModel({this.orignalOrder}) {

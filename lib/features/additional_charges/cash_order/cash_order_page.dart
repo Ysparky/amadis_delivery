@@ -1,13 +1,11 @@
-import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/core/utils/utils.dart';
-import 'package:amadis_delivery/core/widgets/custom_appbar.dart';
-import 'package:amadis_delivery/core/widgets/table_header_item.dart';
-import 'package:amadis_delivery/core/widgets/widgets.dart';
-import 'package:amadis_delivery/features/additional_charges/cash_order/cash_order_view_model.dart';
-import 'package:amadis_delivery/features/additional_charges/widgets/widgets.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/core/widgets/widgets.dart';
+import 'package:amadis_delivery/features/additional_charges/cash_order/cash_order_view_model.dart';
+import 'package:amadis_delivery/features/additional_charges/widgets/widgets.dart';
 
 class CashOrderPage extends StatelessWidget {
   const CashOrderPage({Key key, this.order}) : super(key: key);

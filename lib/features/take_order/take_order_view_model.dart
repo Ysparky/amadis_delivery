@@ -1,13 +1,13 @@
-import 'package:amadis_delivery/core/config/config.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/services/customer_service.dart';
 import 'package:amadis_delivery/services/location_service.dart';
 import 'package:amadis_delivery/services/order_service.dart';
 import 'package:amadis_delivery/services/product_service.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TakeOrderViewModel extends AmadisViewModel {
   TakeOrderViewModel();

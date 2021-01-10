@@ -1,10 +1,8 @@
-import 'package:amadis_delivery/features/list_orders/list_orders_view_model.dart';
 import 'package:flutter/material.dart';
-
-import 'package:amadis_delivery/core/config/assets.dart';
-import 'package:amadis_delivery/core/config/colors.dart';
-import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:provider/provider.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/features/list_orders/list_orders_view_model.dart';
 
 class EmptyOrdersList extends StatelessWidget {
   const EmptyOrdersList({

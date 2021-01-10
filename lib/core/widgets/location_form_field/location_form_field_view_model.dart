@@ -1,7 +1,8 @@
-import 'package:amadis_delivery/core/config/config.dart';
+import 'package:flutter/material.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/location_selector/location_selector.dart';
 import 'package:amadis_delivery/models/location.dart';
-import 'package:flutter/material.dart';
 
 class LocationFormFieldViewModel extends AmadisViewModel {
   LocationFormFieldViewModel({

@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:map_launcher/map_launcher.dart';
 
-import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/services/order_service.dart';
-import 'package:map_launcher/map_launcher.dart';
 
 class OrderDetailViewModel extends AmadisViewModel {
   OrderDetailViewModel({this.order}) {

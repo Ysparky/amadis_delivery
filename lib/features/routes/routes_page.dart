@@ -1,7 +1,8 @@
-import 'package:amadis_delivery/core/config/loading_overlay.dart';
-import 'package:amadis_delivery/features/routes/routes_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:amadis_delivery/core/utils/loading_overlay.dart';
+import 'package:amadis_delivery/features/routes/routes_view_model.dart';
 
 class RoutesPage extends StatelessWidget {
   @override

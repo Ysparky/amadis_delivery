@@ -1,7 +1,8 @@
-import 'package:amadis_delivery/features/additional_charges/consignment_order/consignment_order_view_model.dart';
-import 'package:amadis_delivery/features/additional_charges/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:amadis_delivery/features/additional_charges/consignment_order/consignment_order_view_model.dart';
+import 'package:amadis_delivery/features/additional_charges/widgets/widgets.dart';
 
 class ProductItemRow extends StatelessWidget {
   const ProductItemRow({Key key, this.index}) : super(key: key);

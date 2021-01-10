@@ -1,11 +1,11 @@
-import 'package:amadis_delivery/core/config/config.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
 import 'package:amadis_delivery/features/take_order/take_order_view_model.dart';
 import 'package:amadis_delivery/features/take_order/widgets/widgets.dart';
 import 'package:amadis_delivery/models/customer.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TakeOrderPage extends StatelessWidget {
   @override

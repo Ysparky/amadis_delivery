@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 
-import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/services/auth_service.dart';
 

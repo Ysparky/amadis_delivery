@@ -1,13 +1,11 @@
-import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/core/utils/utils.dart';
-import 'package:amadis_delivery/core/widgets/custom_appbar.dart';
-import 'package:amadis_delivery/core/widgets/widgets.dart';
-import 'package:amadis_delivery/features/additional_charges/widgets/widgets.dart';
-import 'package:amadis_delivery/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'consignment_order_view_model.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/core/widgets/widgets.dart';
+import 'package:amadis_delivery/features/additional_charges/consignment_order/consignment_order_view_model.dart';
+import 'package:amadis_delivery/features/additional_charges/widgets/widgets.dart';
+import 'package:amadis_delivery/models/models.dart';
 
 class ConsignmentOrderPage extends StatelessWidget {
   const ConsignmentOrderPage({Key key, this.order}) : super(key: key);
