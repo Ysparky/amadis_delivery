@@ -16,6 +16,7 @@ import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';
 import '../../features/order_detail/order_detail_page.dart';
 import '../../features/quote_order/quote_order_page.dart';
+import '../../features/routes/routes_page.dart';
 import '../../features/take_order/select_customer/select_customer_page.dart';
 import '../../features/take_order/shopping_bag/shopping_bag_page.dart';
 import '../../features/take_order/take_order_page.dart';
@@ -34,6 +35,7 @@ class Routes {
   static const String quoteOrderPage = '/quote-order-page';
   static const String selectCustomerPage = '/select-customer-page';
   static const String shoppingBagPage = '/shopping-bag-page';
+  static const String routesPage = '/routes-page';
   static const all = <String>{
     welcomePage,
     loginPage,
@@ -46,6 +48,7 @@ class Routes {
     quoteOrderPage,
     selectCustomerPage,
     shoppingBagPage,
+    routesPage,
   };
 }
 
@@ -64,6 +67,7 @@ class CustomRouter extends RouterBase {
     RouteDef(Routes.quoteOrderPage, page: QuoteOrderPage),
     RouteDef(Routes.selectCustomerPage, page: SelectCustomerPage),
     RouteDef(Routes.shoppingBagPage, page: ShoppingBagPage),
+    RouteDef(Routes.routesPage, page: RoutesPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -165,6 +169,12 @@ class CustomRouter extends RouterBase {
     ShoppingBagPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => ShoppingBagPage(),
+        settings: data,
+      );
+    },
+    RoutesPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => RoutesPage(),
         settings: data,
       );
     },
