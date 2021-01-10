@@ -155,7 +155,9 @@ class QuoteOrderPageBase extends StatelessWidget {
                         general.PricesRow(
                           text: 'Precio Total',
                           value: 'S/. ' +
-                              _viewModel.subtotalPrice.toStringAsFixed(2),
+                              _viewModel
+                                  .calculateTotalPrice()
+                                  .toStringAsFixed(2),
                         ),
                         SizedBox(height: hp(5)),
                         general.CustomButton(

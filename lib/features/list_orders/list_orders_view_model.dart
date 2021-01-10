@@ -7,6 +7,7 @@ import 'package:amadis_delivery/services/order_service.dart';
 class ListOrdersViewModel extends AmadisViewModel {
   ListOrdersViewModel() {
     _statesList = [
+      orderStates[0],
       orderStates[1],
       orderStates[4],
       orderStates[7],

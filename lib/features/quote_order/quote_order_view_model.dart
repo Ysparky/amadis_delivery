@@ -54,4 +54,9 @@ class QuoteOrderViewModel extends AmadisViewModel {
           .popUntil(ModalRoute.withName(Routes.dashboardPage));
     }
   }
+
+  double calculateTotalPrice() {
+    var _totalPrice = subtotalPrice + boxCharges + bottleCharges;
+    return _totalPrice;
+  }
 }
