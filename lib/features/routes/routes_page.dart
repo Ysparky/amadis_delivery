@@ -1,5 +1,7 @@
 import 'package:amadis_delivery/core/utils/utils.dart';
-import 'package:amadis_delivery/core/widgets/custom_appbar.dart';
+import 'package:amadis_delivery/core/widgets/widgets.dart';
+import 'package:amadis_delivery/models/models.dart';
+import 'package:amadis_delivery/networking/api_response.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,11 +32,42 @@ class RoutesPageBase extends StatelessWidget {
       appBar: CustomAppBar(headerTitle: 'Mis Rutas'),
       body: Container(
         color: AmadisColors.backgroundColor,
-        child: ListView.builder(
-          padding: EdgeInsets.symmetric(vertical: hp(2)),
-          physics: BouncingScrollPhysics(),
-          itemCount: 4,
-          itemBuilder: (_, index) => RouteItem(),
+        child: RefreshIndicator(
+          onRefresh: _viewModel.orderService.getRoutes,
+          color: AmadisColors.secondaryColor,
+          child: StreamBuilder<ApiResponse<List<List<Order>>>>(
+            stream: _viewModel.orderService.routes,
+            builder: (_, snapshot) {
+              if (snapshot.hasData) {
+                switch (snapshot.data.status) {
+                  case Status.LOADING:
+                    return Center(child: CircularProgressIndicator());
+                    break;
+                  case Status.COMPLETED:
+                    return ListView.builder(
+                      padding: EdgeInsets.symmetric(vertical: hp(2)),
+                      physics: BouncingScrollPhysics(),
+                      itemCount: snapshot.data.data.length,
+                      itemBuilder: (_, index) => RouteItem(
+                        orderList: snapshot.data.data[index],
+                        index: index,
+                      ),
+                    );
+                    break;
+                  case Status.ERROR:
+                    return Error(
+                      errorMessage: snapshot.data.message,
+                      onRetryPressed: _viewModel.orderService.getRoutes,
+                    );
+                    break;
+                  default:
+                    return Center(child: CircularProgressIndicator());
+                }
+              } else {
+                return Container();
+              }
+            },
+          ),
         ),
       ),
     );
@@ -44,8 +77,12 @@ class RoutesPageBase extends StatelessWidget {
 class RouteItem extends StatelessWidget {
   const RouteItem({
     Key key,
+    @required this.orderList,
+    this.index,
   }) : super(key: key);
 
+  final int index;
+  final List<Order> orderList;
   @override
   Widget build(BuildContext context) {
     final _viewModel = Provider.of<RoutesViewModel>(context);
@@ -61,7 +98,7 @@ class RouteItem extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         child: MaterialButton(
-          onPressed: _viewModel.goToDetail,
+          onPressed: () => _viewModel.goToDetail(orderList),
           padding: EdgeInsets.zero,
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -75,14 +112,15 @@ class RouteItem extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      'Ruta 1',
+                      'Ruta ${index + 1}',
                       style: Theme.of(context)
                           .textTheme
                           .headline6
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
+                    SizedBox(height: hp(1)),
                     Text(
-                      '01/01/2000',
+                      '${orderList.first.shippingDate}',
                       style: Theme.of(context)
                           .textTheme
                           .subtitle1
@@ -100,8 +138,9 @@ class RouteItem extends StatelessWidget {
                           .bodyText1
                           .copyWith(color: Colors.grey[600]),
                     ),
+                    SizedBox(height: hp(1)),
                     Text(
-                      '8',
+                      '${orderList.length}',
                       style: Theme.of(context)
                           .textTheme
                           .headline6

@@ -1,15 +1,23 @@
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/custom_appbar.dart';
 import 'package:amadis_delivery/features/route_detail/route_detail_view_model.dart';
+import 'package:amadis_delivery/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RouteDetailPage extends StatelessWidget {
+  const RouteDetailPage({
+    Key key,
+    this.orderList,
+  }) : super(key: key);
+
+  final List<Order> orderList;
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => RouteDetailViewModel()),
+        ChangeNotifierProvider(create: (_) => RouteDetailViewModel(orderList)),
       ],
       child: LoadingOverlay<RouteDetailViewModel>(
         child: RouteDetailPageBase(),
@@ -35,52 +43,9 @@ class RouteDetailPageBase extends StatelessWidget {
           onStepContinue: () => print('asdadasdasd'),
           physics: BouncingScrollPhysics(),
           controlsBuilder: (_, {onStepCancel, onStepContinue}) => Container(),
-          steps: [
-            Step(
-              content: Container(),
-              title: OrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-            Step(
-              content: Container(),
-              title: InactiveOrderItem(),
-            ),
-          ],
+          steps: _viewModel.stepsList,
+          currentStep: _viewModel.currentStep,
+          onStepTapped: _viewModel.onStepTapped,
         ),
       ),
     );
@@ -90,7 +55,10 @@ class RouteDetailPageBase extends StatelessWidget {
 class InactiveOrderItem extends StatelessWidget {
   const InactiveOrderItem({
     Key key,
+    @required this.order,
   }) : super(key: key);
+
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +75,7 @@ class InactiveOrderItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Mi Casita Lt. 4 Los Huertos de Pro Comitas',
+                    order.location.address,
                     style: Theme.of(context)
                         .textTheme
                         .headline6
@@ -115,7 +83,7 @@ class InactiveOrderItem extends StatelessWidget {
                   ),
                   SizedBox(height: hp(0.5)),
                   Text(
-                    'Calidtas JHos',
+                    order.customer,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ],
@@ -125,7 +93,8 @@ class InactiveOrderItem extends StatelessWidget {
               width: wp(3),
               height: hp(2),
               decoration: BoxDecoration(
-                color: Colors.orange,
+                color:
+                    order.orderTypeId == 1 ? Colors.cyan : Colors.orange[400],
                 shape: BoxShape.circle,
               ),
             ),
@@ -139,10 +108,14 @@ class InactiveOrderItem extends StatelessWidget {
 class OrderItem extends StatelessWidget {
   const OrderItem({
     Key key,
+    @required this.order,
   }) : super(key: key);
+
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
+    final _viewModel = Provider.of<RouteDetailViewModel>(context);
     return Card(
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -156,7 +129,7 @@ class OrderItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Mi Casita Lt. 4 Los Huertos de Pro Comitas eie Jajaj xdxd asdsad',
+                    order.location.address,
                     style: Theme.of(context)
                         .textTheme
                         .headline6
@@ -166,21 +139,25 @@ class OrderItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Calidtas JHos',
-                        style: Theme.of(context).textTheme.subtitle1,
+                      Expanded(
+                        child: Text(
+                          order.customer,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
                       ),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
-                          color: Colors.orange[400],
+                          color: order.orderTypeId == 1
+                              ? Colors.cyan
+                              : Colors.orange[400],
                         ),
                         padding: EdgeInsets.symmetric(
                           vertical: hp(0.5),
                           horizontal: wp(2),
                         ),
                         child: Text(
-                          'Consignación',
+                          order.orderTypeId == 1 ? 'Contado' : 'Consignación',
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1
@@ -196,7 +173,7 @@ class OrderItem extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.visibility),
               padding: EdgeInsets.zero,
-              onPressed: () {},
+              onPressed: () => _viewModel.goToDetail(order),
             ),
           ],
         ),

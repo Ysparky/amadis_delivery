@@ -1,5 +1,14 @@
+import 'dart:convert';
+
 import 'package:amadis_delivery/models/models.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+List<List<Order>> routesFromJson(String str) => List<List<Order>>.from(json
+    .decode(str)
+    .map((x) => List<Order>.from(x.map((x) => Order.fromJson(x)))));
+
+String routesToJson(List<List<Order>> data) => json.encode(List<dynamic>.from(
+    data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
 
 class Order {
   Order({
@@ -7,6 +16,7 @@ class Order {
     this.orderStateId = 1,
     this.orderTypeId = 1,
     this.shippingDate,
+    this.isDelivery = true,
     this.customer,
     this.contactNumber,
     this.customerId,
@@ -20,6 +30,7 @@ class Order {
   final int orderStateId;
   final int orderTypeId;
   final String shippingDate;
+  final bool isDelivery;
   final String customer;
   final String contactNumber;
   final int customerId;

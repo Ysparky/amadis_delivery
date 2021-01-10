@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:amadis_delivery/networking/api_base_helper.dart';
+import 'package:amadis_delivery/networking/api_response.dart';
 import 'package:dio/dio.dart';
 
 import 'package:amadis_delivery/core/utils/constants.dart';
@@ -9,6 +12,7 @@ class OrderService {
   OrderService() {
     orders = BehaviorSubject<List<Order>>.seeded(null);
     orderDetail = BehaviorSubject<List<OrderDetail>>.seeded(null);
+    routes = BehaviorSubject<ApiResponse<List<List<Order>>>>.seeded(null);
   }
 
   BehaviorSubject<List<Order>> orders;
@@ -83,8 +87,19 @@ class OrderService {
     }
   }
 
+  BehaviorSubject<ApiResponse<List<List<Order>>>> routes;
+
   final _helper = ApiBaseHelper();
-  Future getRoutes() async {
-    await _helper.get('/orders/routes/list?shippingDate=2021-01-09');
+  Future<void> getRoutes() async {
+    routes.add(ApiResponse.loading('Fetching order detail'));
+    final response =
+        await _helper.get('/orders/routes/list?shippingDate=2021-01-09');
+    if (response != null) {
+      final str = json.encode(response.data);
+      final _routes = routesFromJson(str);
+      routes.add(ApiResponse.completed(_routes));
+    } else {
+      routes.add(ApiResponse.error(response.message, response.statusCode));
+    }
   }
 }

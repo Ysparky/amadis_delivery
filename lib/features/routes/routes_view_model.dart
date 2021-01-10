@@ -1,8 +1,17 @@
 import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/models/models.dart';
+import 'package:amadis_delivery/services/order_service.dart';
 import 'package:auto_route/auto_route.dart';
 
 class RoutesViewModel extends AmadisViewModel {
-  RoutesViewModel();
+  RoutesViewModel() {
+    orderService.getRoutes();
+  }
 
-  void goToDetail() => ExtendedNavigator.root.push(Routes.routeDetailPage);
+  final orderService = injector<OrderService>();
+
+  void goToDetail(List<Order> orderList) => ExtendedNavigator.root.push(
+        Routes.routeDetailPage,
+        arguments: RouteDetailPageArguments(orderList: orderList),
+      );
 }

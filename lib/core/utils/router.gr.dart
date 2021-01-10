@@ -183,8 +183,14 @@ class CustomRouter extends RouterBase {
       );
     },
     RouteDetailPage: (data) {
+      final args = data.getArgs<RouteDetailPageArguments>(
+        orElse: () => RouteDetailPageArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => RouteDetailPage(),
+        builder: (context) => RouteDetailPage(
+          key: args.key,
+          orderList: args.orderList,
+        ),
         settings: data,
       );
     },
@@ -238,4 +244,11 @@ class QuoteOrderPageArguments {
       this.subtotalPrice,
       this.boxCharges,
       this.bottleCharges});
+}
+
+/// RouteDetailPage arguments holder class
+class RouteDetailPageArguments {
+  final Key key;
+  final List<Order> orderList;
+  RouteDetailPageArguments({this.key, this.orderList});
 }
