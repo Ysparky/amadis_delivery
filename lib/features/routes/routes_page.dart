@@ -48,6 +48,7 @@ class RouteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _viewModel = Provider.of<RoutesViewModel>(context);
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: wp(5),
@@ -60,7 +61,7 @@ class RouteItem extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         child: MaterialButton(
-          onPressed: () {},
+          onPressed: _viewModel.goToDetail,
           padding: EdgeInsets.zero,
           child: Padding(
             padding: EdgeInsets.symmetric(

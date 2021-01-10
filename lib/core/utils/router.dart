@@ -8,6 +8,7 @@ import 'package:amadis_delivery/features/list_orders/list_orders_page.dart';
 import 'package:amadis_delivery/features/login/login_page.dart';
 import 'package:amadis_delivery/features/order_detail/order_detail_page.dart';
 import 'package:amadis_delivery/features/quote_order/quote_order_page.dart';
+import 'package:amadis_delivery/features/route_detail/route_detail_page.dart';
 import 'package:amadis_delivery/features/routes/routes_page.dart';
 import 'package:amadis_delivery/features/take_order/select_customer/select_customer_page.dart';
 import 'package:amadis_delivery/features/take_order/shopping_bag/shopping_bag_page.dart';
@@ -28,6 +29,7 @@ import 'package:amadis_delivery/features/welcome/welcome_page.dart';
     AdaptiveRoute(page: SelectCustomerPage),
     AdaptiveRoute(page: ShoppingBagPage),
     AdaptiveRoute(page: RoutesPage),
+    AdaptiveRoute(page: RouteDetailPage),
   ],
 )
 class $CustomRouter {}
