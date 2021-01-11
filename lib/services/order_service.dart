@@ -11,12 +11,14 @@ import 'package:rxdart/rxdart.dart';
 class OrderService {
   OrderService() {
     orders = BehaviorSubject<List<Order>>.seeded(null);
+    selectedOrder = BehaviorSubject<List<Order>>.seeded(null);
     orderDetail = BehaviorSubject<List<OrderDetail>>.seeded(null);
     routes = BehaviorSubject<ApiResponse<List<List<Order>>>>.seeded(null);
   }
 
   BehaviorSubject<List<Order>> orders;
   BehaviorSubject<List<OrderDetail>> orderDetail;
+  BehaviorSubject<List<Order>> selectedOrder;
 
   final _dio = Dio();
   final _endpoint = '$BASE_URL/orders/';

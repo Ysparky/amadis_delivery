@@ -40,20 +40,40 @@ class QuoteOrderViewModel extends AmadisViewModel {
   }
 
   Future<void> postAdditionalCharges() async {
+    // setLoading(true);
+    // final response = await _orderService.additionalCharges(order, consumedList);
+    // setLoading(false);
+    // if (response == null || !response) {
+    //   showErrorSnackBar('Ocurrió un error');
+    // } else {
+    showMessageSnackBar('El pedido ha sizo cotizado y está esperando el pago');
     setLoading(true);
-    final response = await _orderService.additionalCharges(order, consumedList);
+    await _orderService.getOrders();
     setLoading(false);
-    if (response == null || !response) {
-      showErrorSnackBar('Ocurrió un error');
+    var orderList = _orderService.selectedOrder.value;
+    var activeIndex = orderList.indexWhere((order) => order.isRouteActive);
+    orderList[activeIndex] =
+        orderList[activeIndex].copyWith(isRouteActive: false);
+    if ((activeIndex + 1) == orderList.length) {
+      //ended route
+      print('ended route');
     } else {
-      showMessageSnackBar(
-          'El pedido ha sizo cotizado y está esperando el pago');
-      setLoading(true);
-      await _orderService.getOrders();
-      setLoading(false);
-      ExtendedNavigator.root
-          .popUntil(ModalRoute.withName(Routes.dashboardPage));
+      print('road to next stop');
+      final nextIdx = activeIndex + 1;
+      orderList[nextIdx] = orderList[nextIdx].copyWith(isRouteActive: true);
     }
+    orderList.forEach((element) {
+      print(element.isRouteActive);
+    });
+    ExtendedNavigator.root.popUntil(ModalRoute.withName(Routes.routesPage));
+    await ExtendedNavigator.root.push(
+      Routes.routeDetailPage,
+      arguments: RouteDetailPageArguments(
+        orderList: orderList,
+      ),
+    );
+
+    // }
   }
 
   double calculateTotalPrice() {

@@ -45,7 +45,7 @@ class RouteDetailPageBase extends StatelessWidget {
           controlsBuilder: (_, {onStepCancel, onStepContinue}) => Container(),
           steps: _viewModel.stepsList,
           currentStep: _viewModel.currentStep,
-          onStepTapped: _viewModel.onStepTapped,
+          // onStepTapped: _viewModel.onStepTapped,
         ),
       ),
     );

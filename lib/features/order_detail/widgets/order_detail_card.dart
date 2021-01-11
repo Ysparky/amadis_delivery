@@ -44,17 +44,18 @@ class OrderDetailCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                ElasticIn(
-                  delay: Duration(milliseconds: 400),
-                  child: IconButton(
-                    onPressed: _viewModel.goToAdditionalCharges,
-                    icon: Icon(
-                      Icons.request_quote_rounded,
-                      color: AmadisColors.primaryColor,
-                      size: 30,
+                if (_viewModel.showActions)
+                  ElasticIn(
+                    delay: Duration(milliseconds: 400),
+                    child: IconButton(
+                      onPressed: _viewModel.goToAdditionalCharges,
+                      icon: Icon(
+                        Icons.request_quote_rounded,
+                        color: AmadisColors.primaryColor,
+                        size: 30,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
             SizedBox(height: hp(1.0)),

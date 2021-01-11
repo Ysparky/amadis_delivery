@@ -15,7 +15,12 @@ import 'package:amadis_delivery/services/order_service.dart';
 
 class OrderDetailViewModel extends AmadisViewModel {
   OrderDetailViewModel({this.order}) {
-    getOrderDetailById();
+    if (order.ordersDetail != null) {
+      _fullOrder = order;
+      _showActions = true;
+    } else {
+      getOrderDetailById();
+    }
   }
 
   final _orderService = injector<OrderService>();
@@ -24,6 +29,9 @@ class OrderDetailViewModel extends AmadisViewModel {
 
   Order _fullOrder;
   Order get fullOrder => _fullOrder;
+
+  bool _showActions = false;
+  bool get showActions => _showActions;
 
   void goBack() {
     ExtendedNavigator.root.pop();

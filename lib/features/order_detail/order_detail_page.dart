@@ -35,7 +35,7 @@ class OrderDetailPageBase extends StatelessWidget {
     return Scaffold(
       key: _viewModel.scaffoldKey,
       extendBodyBehindAppBar: true,
-      backgroundColor: Color(0xffF6F6F6),
+      backgroundColor: AmadisColors.backgroundColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -46,10 +46,11 @@ class OrderDetailPageBase extends StatelessWidget {
               icon: Icon(Icons.arrow_back_ios_rounded),
               onPressed: _viewModel.goBack,
             ),
-            CustomFloatingButton(
-              icon: Icon(Icons.near_me_rounded),
-              onPressed: () => _viewModel.goToMap(context),
-            ),
+            if (_viewModel.showActions)
+              CustomFloatingButton(
+                icon: Icon(Icons.near_me_rounded),
+                onPressed: () => _viewModel.goToMap(context),
+              ),
           ],
         ),
       ),
