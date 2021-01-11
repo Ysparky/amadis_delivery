@@ -32,7 +32,7 @@ class SharedPrefs {
   }
 
   int get activeRouteIndex {
-    return _preferences.getInt('activeRouteIndex') ?? 500;
+    return _preferences.getInt('activeRouteIndex') ?? -1;
   }
 
   set activeRouteIndex(int activeRouteIndex) {

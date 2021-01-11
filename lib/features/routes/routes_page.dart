@@ -30,43 +30,46 @@ class RoutesPageBase extends StatelessWidget {
       key: _viewModel.scaffoldKey,
       backgroundColor: AmadisColors.primaryColor,
       appBar: CustomAppBar(headerTitle: 'Mis Rutas'),
-      body: Container(
-        color: AmadisColors.backgroundColor,
-        child: RefreshIndicator(
-          onRefresh: _viewModel.orderService.getRoutes,
-          color: AmadisColors.secondaryColor,
-          child: StreamBuilder<ApiResponse<List<List<Order>>>>(
-            stream: _viewModel.orderService.routes,
-            builder: (_, snapshot) {
-              if (snapshot.hasData) {
-                switch (snapshot.data.status) {
-                  case Status.LOADING:
-                    return Center(child: CircularProgressIndicator());
-                    break;
-                  case Status.COMPLETED:
-                    return ListView.builder(
-                      padding: EdgeInsets.symmetric(vertical: hp(2)),
-                      physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data.data.length,
-                      itemBuilder: (_, index) => RouteItem(
-                        orderList: snapshot.data.data[index],
-                        index: index,
-                      ),
-                    );
-                    break;
-                  case Status.ERROR:
-                    return Error(
-                      errorMessage: snapshot.data.message,
-                      onRetryPressed: _viewModel.orderService.getRoutes,
-                    );
-                    break;
-                  default:
-                    return Center(child: CircularProgressIndicator());
+      body: ClipRRect(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(50.0)),
+        child: Container(
+          color: AmadisColors.backgroundColor,
+          child: RefreshIndicator(
+            onRefresh: _viewModel.orderService.getRoutes,
+            color: AmadisColors.secondaryColor,
+            child: StreamBuilder<ApiResponse<List<List<Order>>>>(
+              stream: _viewModel.orderService.routes,
+              builder: (_, snapshot) {
+                if (snapshot.hasData) {
+                  switch (snapshot.data.status) {
+                    case Status.LOADING:
+                      return Center(child: CircularProgressIndicator());
+                      break;
+                    case Status.COMPLETED:
+                      return ListView.builder(
+                        padding: EdgeInsets.symmetric(vertical: hp(2)),
+                        physics: BouncingScrollPhysics(),
+                        itemCount: snapshot.data.data.length,
+                        itemBuilder: (_, index) => RouteItem(
+                          orderList: snapshot.data.data[index],
+                          index: index,
+                        ),
+                      );
+                      break;
+                    case Status.ERROR:
+                      return Error(
+                        errorMessage: snapshot.data.message,
+                        onRetryPressed: _viewModel.orderService.getRoutes,
+                      );
+                      break;
+                    default:
+                      return Center(child: CircularProgressIndicator());
+                  }
+                } else {
+                  return Container();
                 }
-              } else {
-                return Container();
-              }
-            },
+              },
+            ),
           ),
         ),
       ),

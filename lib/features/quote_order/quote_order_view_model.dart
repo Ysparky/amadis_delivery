@@ -72,8 +72,7 @@ class QuoteOrderViewModel extends AmadisViewModel {
       orderList.forEach((element) {
         print(element.isRouteActive);
       });
-
-      ExtendedNavigator.root.popUntil(ModalRoute.withName(Routes.routesPage));
+      ExtendedNavigator.root.popUntilRoot();
       await ExtendedNavigator.root.push(
         Routes.routeDetailPage,
         arguments: RouteDetailPageArguments(
@@ -140,6 +139,7 @@ class QuoteOrderViewModel extends AmadisViewModel {
               SizedBox(height: hp(2.0)),
               Text(
                 '¡Se han completado todos los pedidos de la ruta!',
+                textAlign: TextAlign.center,
                 style: Theme.of(scaffoldKey.currentContext)
                     .textTheme
                     .subtitle1
@@ -150,8 +150,7 @@ class QuoteOrderViewModel extends AmadisViewModel {
                 width: wp(35),
                 child: CustomButton(
                   onPressed: () {
-                    ExtendedNavigator.root
-                        .popUntil(ModalRoute.withName(Routes.routesPage));
+                    ExtendedNavigator.root.popUntilRoot();
                   },
                   text: 'ACEPTAR',
                 ),

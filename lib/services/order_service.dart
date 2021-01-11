@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 
 import 'package:amadis_delivery/core/utils/constants.dart';
 import 'package:amadis_delivery/models/models.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
 class OrderService {
@@ -96,14 +97,15 @@ class OrderService {
   final _helper = ApiBaseHelper();
   Future<void> getRoutes() async {
     routes.add(ApiResponse.loading('Fetching order detail'));
+    final formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    print(formattedDate);
     final response =
-        await _helper.get('/orders/routes/list?shippingDate=2021-01-09');
+        await _helper.get('/orders/routes/list?shippingDate=$formattedDate');
     if (response != null) {
       final str = json.encode(response.data);
       final _routes = routesFromJson(str);
       final idx = _prefs.activeRouteIndex;
       if (idx != -1 && selectedOrder.value != null) {
-        print('entered here');
         _routes[idx] = selectedOrder.value;
       }
       print(_routes.length);

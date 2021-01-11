@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:amadis_delivery/core/utils/utils.dart';
@@ -16,13 +15,9 @@ class HomePage extends StatelessWidget {
           height: hp(100),
           width: wp(100),
           color: AmadisColors.backgroundColor,
-          child: IconButton(
-            onPressed: () => ExtendedNavigator.root.push(Routes.routesPage),
-            icon: Icon(Icons.refresh),
+          child: Center(
+            child: Image.asset(AmadisAssets.logo),
           ),
-          // child: Center(
-          //   child: Image.asset(AmadisAssets.logo),
-          // ),
         ),
       ),
     );
