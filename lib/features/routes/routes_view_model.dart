@@ -18,4 +18,6 @@ class RoutesViewModel extends AmadisViewModel {
           routeIndex: index,
         ),
       );
+
+  void goToOrders() => ExtendedNavigator.root.push(Routes.listOrdersPage);
 }

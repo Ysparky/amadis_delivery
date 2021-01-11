@@ -29,7 +29,15 @@ class RoutesPageBase extends StatelessWidget {
     return Scaffold(
       key: _viewModel.scaffoldKey,
       backgroundColor: AmadisColors.primaryColor,
-      appBar: CustomAppBar(headerTitle: 'Mis Rutas'),
+      appBar: CustomAppBar(
+        headerTitle: 'MIS RUTAS',
+        headerActions: [
+          IconButton(
+            icon: Icon(Icons.list_alt),
+            onPressed: _viewModel.goToOrders,
+          )
+        ],
+      ),
       body: ClipRRect(
         borderRadius: BorderRadius.vertical(top: Radius.circular(50.0)),
         child: Container(

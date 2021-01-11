@@ -77,7 +77,7 @@ class _DashboardScreenState extends State<DashboardPage> {
             inactiveColor: AmadisColors.secondaryColor.withOpacity(0.8),
           ),
           BottomNavyBarItem(
-            title: Text('Viajes'),
+            title: Text('Rutas'),
             icon: Icon(Icons.location_on),
             textAlign: TextAlign.center,
             activeColor: AmadisColors.primaryColor,
