@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:amadis_delivery/core/utils/shared_prefs.dart';
 import 'package:amadis_delivery/networking/api_base_helper.dart';
 import 'package:amadis_delivery/networking/api_response.dart';
 import 'package:dio/dio.dart';
@@ -22,6 +23,7 @@ class OrderService {
 
   final _dio = Dio();
   final _endpoint = '$BASE_URL/orders/';
+  final _prefs = SharedPrefs();
 
   Future<void> getOrders({int stateId = 1}) async {
     try {
@@ -99,6 +101,12 @@ class OrderService {
     if (response != null) {
       final str = json.encode(response.data);
       final _routes = routesFromJson(str);
+      final idx = _prefs.activeRouteIndex;
+      if (idx != -1 && selectedOrder.value != null) {
+        print('entered here');
+        _routes[idx] = selectedOrder.value;
+      }
+      print(_routes.length);
       routes.add(ApiResponse.completed(_routes));
     } else {
       routes.add(ApiResponse.error(response.message, response.statusCode));

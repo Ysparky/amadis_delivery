@@ -2,6 +2,7 @@ export 'custom_appbar.dart';
 export 'custom_button.dart';
 export 'custom_floating_button.dart';
 export 'custom_form_field.dart';
+export 'custom_modal.dart';
 export 'custom_table_body.dart';
 export 'error_widget.dart';
 export 'prices_row.dart';

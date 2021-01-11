@@ -9,15 +9,19 @@ class RouteDetailPage extends StatelessWidget {
   const RouteDetailPage({
     Key key,
     this.orderList,
+    this.routeIndex,
   }) : super(key: key);
 
   final List<Order> orderList;
+  final int routeIndex;
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => RouteDetailViewModel(orderList)),
+        ChangeNotifierProvider(
+          create: (_) => RouteDetailViewModel(orderList, routeIndex),
+        ),
       ],
       child: LoadingOverlay<RouteDetailViewModel>(
         child: RouteDetailPageBase(),
@@ -46,6 +50,56 @@ class RouteDetailPageBase extends StatelessWidget {
           steps: _viewModel.stepsList,
           currentStep: _viewModel.currentStep,
           // onStepTapped: _viewModel.onStepTapped,
+        ),
+      ),
+    );
+  }
+}
+
+class LocalStep extends StatelessWidget {
+  const LocalStep({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final _viewModel = Provider.of<RouteDetailViewModel>(context);
+    return Card(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: hp(1.5),
+          horizontal: wp(4),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Punto de Partida (Local):',
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            SizedBox(height: hp(0.5)),
+            Text(
+              'Av Jose Carlos Mariategui 2235, Villa María del Triunfo 15812',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+            if (_viewModel.currentStep == 0 &&
+                _viewModel.activeRouteIndex == -1)
+              Align(
+                alignment: Alignment.bottomRight,
+                child: MaterialButton(
+                  onPressed: _viewModel.startRoute,
+                  padding: EdgeInsets.symmetric(vertical: hp(1)),
+                  color: AmadisColors.primaryColor,
+                  child: Icon(
+                    Icons.near_me,
+                    color: AmadisColors.backgroundColor,
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );

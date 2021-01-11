@@ -98,7 +98,7 @@ class RouteItem extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         child: MaterialButton(
-          onPressed: () => _viewModel.goToDetail(orderList),
+          onPressed: () => _viewModel.goToDetail(orderList, index),
           padding: EdgeInsets.zero,
           child: Padding(
             padding: EdgeInsets.symmetric(

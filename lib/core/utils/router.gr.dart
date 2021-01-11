@@ -190,6 +190,7 @@ class CustomRouter extends RouterBase {
         builder: (context) => RouteDetailPage(
           key: args.key,
           orderList: args.orderList,
+          routeIndex: args.routeIndex,
         ),
         settings: data,
       );
@@ -250,5 +251,6 @@ class QuoteOrderPageArguments {
 class RouteDetailPageArguments {
   final Key key;
   final List<Order> orderList;
-  RouteDetailPageArguments({this.key, this.orderList});
+  final int routeIndex;
+  RouteDetailPageArguments({this.key, this.orderList, this.routeIndex});
 }

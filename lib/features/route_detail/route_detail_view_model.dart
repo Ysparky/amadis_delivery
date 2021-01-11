@@ -6,27 +6,62 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class RouteDetailViewModel extends AmadisViewModel {
-  RouteDetailViewModel(this.orderList) {
-    var index = orderList.indexWhere((order) => order.isRouteActive);
-    if (index == -1) {
-      orderList[0] = orderList[0].copyWith(isRouteActive: true);
+  RouteDetailViewModel(this.orderList, this.routeIndex) {
+    print(activeRouteIndex);
+    print(routeActiveIdx);
+    if (activeRouteIndex == -1) {
+      _initRoute();
+    } else {
+      final index = routeActiveIdx;
+      currentStep = index + 1;
+      _updateRouteStep(index);
     }
-    _updateStepsList();
     _orderService.selectedOrder.add(orderList);
+    // print(currentStep);
   }
 
-  final _orderService = injector<OrderService>();
-
   final List<Order> orderList;
+  final int routeIndex;
+
+  final _orderService = injector<OrderService>();
+  final _prefs = SharedPrefs();
 
   List<Step> stepsList = [];
 
+  int get routeActiveIdx =>
+      orderList.indexWhere((order) => order.isRouteActive);
+
+  int get stepActiveIdx => stepsList.indexWhere((step) => step.isActive);
+
   int currentStep = 0;
 
-  void _updateStepsList() {
-    var index = orderList.indexWhere((order) => order.isRouteActive);
-    if (index != -1) {
-      stepsList = orderList.asMap().entries.map((e) {
+  int get activeRouteIndex => _prefs.activeRouteIndex;
+
+  void _initRoute() {
+    currentStep = 0;
+    stepsList = [
+      Step(
+        title: LocalStep(),
+        content: Container(),
+        isActive: true,
+      ),
+      ...orderList
+          .map((order) => Step(
+                title: InactiveOrderItem(order: order),
+                content: Container(),
+              ))
+          .toList(),
+    ];
+  }
+
+  void _updateRouteStep(int index) {
+    stepsList = [
+      Step(
+        title: LocalStep(),
+        content: Container(),
+        isActive: false,
+      ),
+      ...orderList.asMap().entries.map((e) {
         var idx = e.key;
         var order = e.value;
         return Step(
@@ -36,16 +71,10 @@ class RouteDetailViewModel extends AmadisViewModel {
           content: Container(),
           isActive: idx == index ? true : false,
         );
-      }).toList();
-    } else {
-      // route not initialized
-      stepsList = orderList
-          .map((order) => Step(
-                title: InactiveOrderItem(order: order),
-                content: Container(),
-              ))
-          .toList();
-    }
+      }).toList()
+    ];
+
+    notifyListeners();
   }
 
   void goToDetail(Order order) => ExtendedNavigator.root.push(
@@ -53,9 +82,13 @@ class RouteDetailViewModel extends AmadisViewModel {
         arguments: OrderDetailPageArguments(order: order),
       );
 
-  @override
-  void dispose() {
-    // _orderService.selectedOrder.add(null);
-    super.dispose();
+  void startRoute() {
+    print('xddd');
+    // save the index from the list of routes
+    _prefs.activeRouteIndex = routeIndex;
+
+    orderList.first = orderList.first.copyWith(isRouteActive: true);
+    currentStep = 1;
+    _updateRouteStep(0);
   }
 }

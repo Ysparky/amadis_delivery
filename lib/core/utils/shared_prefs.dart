@@ -31,6 +31,14 @@ class SharedPrefs {
     _preferences.setBool('isLoggedIn', isLogged);
   }
 
+  int get activeRouteIndex {
+    return _preferences.getInt('activeRouteIndex') ?? 500;
+  }
+
+  set activeRouteIndex(int activeRouteIndex) {
+    _preferences.setInt('activeRouteIndex', activeRouteIndex);
+  }
+
   void removeAll() {
     _preferences.remove('userId');
     _preferences.remove('isLoggedIn');
