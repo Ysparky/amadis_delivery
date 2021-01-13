@@ -5,7 +5,6 @@ import 'package:flutter/rendering.dart';
 
 import 'package:amadis_delivery/core/utils/colors.dart';
 import 'package:amadis_delivery/features/home/home_page.dart';
-import 'package:amadis_delivery/features/profile/profile_page.dart';
 import 'package:amadis_delivery/features/take_order/take_order_page.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -45,10 +44,9 @@ class _DashboardScreenState extends State<DashboardPage> {
           },
           children: <Widget>[
             HomePage(),
-            // ListOrdersPage(),
             RoutesPage(),
             TakeOrderPage(),
-            ProfilePage(),
+            // ProfilePage(),
           ],
         ),
       ),
@@ -90,13 +88,13 @@ class _DashboardScreenState extends State<DashboardPage> {
             activeColor: AmadisColors.primaryColor,
             inactiveColor: AmadisColors.secondaryColor.withOpacity(0.8),
           ),
-          BottomNavyBarItem(
-            title: Text('Perfil'),
-            icon: Icon(Icons.person_outline),
-            textAlign: TextAlign.center,
-            activeColor: AmadisColors.primaryColor,
-            inactiveColor: AmadisColors.secondaryColor.withOpacity(0.8),
-          ),
+          // BottomNavyBarItem(
+          //   title: Text('Perfil'),
+          //   icon: Icon(Icons.person_outline),
+          //   textAlign: TextAlign.center,
+          //   activeColor: AmadisColors.primaryColor,
+          //   inactiveColor: AmadisColors.secondaryColor.withOpacity(0.8),
+          // ),
         ],
       ),
     );
