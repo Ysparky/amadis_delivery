@@ -1,14 +1,12 @@
-import 'dart:convert';
-
 import 'package:amadis_delivery/models/models.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-List<List<Order>> routesFromJson(String str) => List<List<Order>>.from(json
-    .decode(str)
-    .map((x) => List<Order>.from(x.map((x) => Order.fromJson(x)))));
+// List<List<Order>> routesFromJson(String str) => List<List<Order>>.from(json
+//     .decode(str)
+//     .map((x) => List<Order>.from(x.map((x) => Order.fromJson(x)))));
 
-String routesToJson(List<List<Order>> data) => json.encode(List<dynamic>.from(
-    data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
+// String routesToJson(List<List<Order>> data) => json.encode(List<dynamic>.from(
+//     data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
 
 class Order {
   Order({
@@ -24,7 +22,7 @@ class Order {
     this.ordersDetail,
     this.missingBottlesQuantity = 0,
     this.missingBoxQuantity = 0,
-    this.isRouteActive = false,
+    this.isOrderActive = false,
   });
 
   final int id;
@@ -39,7 +37,7 @@ class Order {
   final List<OrderDetail> ordersDetail;
   final int missingBottlesQuantity;
   final int missingBoxQuantity;
-  final bool isRouteActive;
+  final bool isOrderActive;
 
   Order copyWith({
     int id,
@@ -53,7 +51,7 @@ class Order {
     List<OrderDetail> ordersDetail,
     int missingBottlesQuantity,
     int missingBoxQuantity,
-    bool isRouteActive,
+    bool isOrderActive,
   }) =>
       Order(
         id: id ?? this.id,
@@ -68,7 +66,7 @@ class Order {
         missingBottlesQuantity:
             missingBottlesQuantity ?? this.missingBottlesQuantity,
         missingBoxQuantity: missingBoxQuantity ?? this.missingBoxQuantity,
-        isRouteActive: isRouteActive ?? this.isRouteActive,
+        isOrderActive: isOrderActive ?? this.isOrderActive,
       );
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
@@ -90,7 +88,7 @@ class Order {
             ? null
             : List<OrderDetail>.from(
                 json['orderDetail'].map((x) => OrderDetail.fromJson(x))),
-        isRouteActive: false,
+        isOrderActive: false,
       );
 
   Map<String, dynamic> toJson() => {

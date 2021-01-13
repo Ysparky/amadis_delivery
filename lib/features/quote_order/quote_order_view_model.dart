@@ -1,4 +1,5 @@
 import 'package:amadis_delivery/core/widgets/widgets.dart';
+import 'package:amadis_delivery/networking/api_response.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -27,7 +28,7 @@ class QuoteOrderViewModel extends AmadisViewModel {
   final ScrollController scrollController = ScrollController();
 
   final _orderService = injector<OrderService>();
-  final _prefs = SharedPrefs();
+  // final _prefs = SharedPrefs();
 
   int getQtyByDetail(OrderDetail detail) {
     var index = consumedList.indexWhere((d) =>
@@ -45,40 +46,50 @@ class QuoteOrderViewModel extends AmadisViewModel {
 
   Future<void> postAdditionalCharges() async {
     setLoading(true);
-    final response = await _orderService.additionalCharges(order, consumedList);
+    // final response = await _orderService.additionalCharges(order, consumedList);
     await _orderService.getOrders();
     setLoading(false);
-    if (response == null || !response) {
-      showErrorSnackBar('Ocurrió un error');
-    } else {
-      _showSuccessQuote();
-    }
+    // if (response == null || !response) {
+    //   showErrorSnackBar('Ocurrió un error');
+    // } else {
+    _showSuccessQuote();
+    // }
   }
 
   void _handleRoutes() async {
-    var orderList = _orderService.selectedOrder.value;
-    var activeIndex = orderList.indexWhere((order) => order.isRouteActive);
-    orderList[activeIndex] =
-        orderList[activeIndex].copyWith(isRouteActive: false);
-    if ((activeIndex + 1) == orderList.length) {
-      print('ended route');
-      _prefs.activeRouteIndex = -1;
-      _orderService.selectedOrder.add(null);
-      await _showSuccessDelivery();
-    } else {
-      print('road to next stop');
-      final nextIdx = activeIndex + 1;
-      orderList[nextIdx] = orderList[nextIdx].copyWith(isRouteActive: true);
-      orderList.forEach((element) {
-        print(element.isRouteActive);
-      });
+    var selectedRoute = _orderService.selectedRoute.value;
+    //go to next step if not the last one
+    final ordersQty = selectedRoute.orders.length;
+
+    //get the active order idx from the route
+    final activeOrderIdx =
+        selectedRoute.orders.indexWhere((order) => order.isOrderActive);
+
+    selectedRoute.orders[activeOrderIdx] =
+        selectedRoute.orders[activeOrderIdx].copyWith(isOrderActive: false);
+    final nextIdx = activeOrderIdx + 1;
+    if (ordersQty != nextIdx) {
+      selectedRoute.orders[nextIdx] =
+          selectedRoute.orders[nextIdx].copyWith(isOrderActive: true);
       ExtendedNavigator.root.popUntilRoot();
       await ExtendedNavigator.root.push(
         Routes.routeDetailPage,
-        arguments: RouteDetailPageArguments(
-          orderList: orderList,
-        ),
+        arguments: RouteDetailPageArguments(selectedRoute: selectedRoute),
       );
+    } else {
+      selectedRoute = selectedRoute.copyWith(
+        isRouteActive: false,
+        isRouteFinished: true,
+      );
+
+      var myRoutes = _orderService.routes.value.data;
+      var index = _orderService.selectedRouteIndex.value;
+      myRoutes[index] = selectedRoute;
+
+      _orderService.routes.add(ApiResponse.completed(myRoutes));
+      _orderService.selectedRoute.add(null);
+      _orderService.selectedRouteIndex.add(null);
+      await _showSuccessDelivery();
     }
   }
 

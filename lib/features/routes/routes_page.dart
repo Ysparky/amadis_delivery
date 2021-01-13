@@ -45,7 +45,7 @@ class RoutesPageBase extends StatelessWidget {
           child: RefreshIndicator(
             onRefresh: _viewModel.orderService.getRoutes,
             color: AmadisColors.secondaryColor,
-            child: StreamBuilder<ApiResponse<List<List<Order>>>>(
+            child: StreamBuilder<ApiResponse<List<MyRoute>>>(
               stream: _viewModel.orderService.routes,
               builder: (_, snapshot) {
                 if (snapshot.hasData) {
@@ -56,10 +56,12 @@ class RoutesPageBase extends StatelessWidget {
                     case Status.COMPLETED:
                       return ListView.builder(
                         padding: EdgeInsets.symmetric(vertical: hp(2)),
-                        physics: BouncingScrollPhysics(),
+                        physics: AlwaysScrollableScrollPhysics(
+                          parent: BouncingScrollPhysics(),
+                        ),
                         itemCount: snapshot.data.data.length,
                         itemBuilder: (_, index) => RouteItem(
-                          orderList: snapshot.data.data[index],
+                          selectedOrder: snapshot.data.data[index],
                           index: index,
                         ),
                       );
@@ -88,12 +90,12 @@ class RoutesPageBase extends StatelessWidget {
 class RouteItem extends StatelessWidget {
   const RouteItem({
     Key key,
-    @required this.orderList,
+    @required this.selectedOrder,
     this.index,
   }) : super(key: key);
 
   final int index;
-  final List<Order> orderList;
+  final MyRoute selectedOrder;
   @override
   Widget build(BuildContext context) {
     final _viewModel = Provider.of<RoutesViewModel>(context);
@@ -109,7 +111,7 @@ class RouteItem extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         child: MaterialButton(
-          onPressed: () => _viewModel.goToDetail(orderList, index),
+          onPressed: () => _viewModel.goToDetail(selectedOrder, index),
           padding: EdgeInsets.zero,
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -131,7 +133,7 @@ class RouteItem extends StatelessWidget {
                     ),
                     SizedBox(height: hp(1)),
                     Text(
-                      '${orderList.first.shippingDate}',
+                      '${selectedOrder.orders.first.shippingDate}',
                       style: Theme.of(context)
                           .textTheme
                           .subtitle1
@@ -151,7 +153,7 @@ class RouteItem extends StatelessWidget {
                     ),
                     SizedBox(height: hp(1)),
                     Text(
-                      '${orderList.length}',
+                      '${selectedOrder.orders.length}',
                       style: Theme.of(context)
                           .textTheme
                           .headline6

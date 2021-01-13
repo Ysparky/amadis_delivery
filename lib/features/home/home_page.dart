@@ -58,108 +58,81 @@ class HomePageBase extends StatelessWidget {
                 ],
               ),
               Spacer(),
-              Material(
-                elevation: 4,
-                borderRadius: BorderRadius.circular(15),
-                clipBehavior: Clip.antiAlias,
-                color: Colors.white,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: wp(2),
-                    vertical: hp(3),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Color(0xffF5E3E2),
-                            radius: hp(3),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.delivery_dining,
-                                color: Color(0xffbd4341),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: wp(5)),
-                          Text(
-                            '2',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline2
-                                .copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'Rutas restantes por repartir',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            .copyWith(fontStyle: FontStyle.italic),
-                      ),
-                    ],
-                  ),
-                ),
+              CounterCard(
+                icon: Icons.delivery_dining,
+                qty: 0,
+                description: 'Rutas restantes por repartir',
               ),
               SizedBox(height: hp(3)),
-              Material(
-                elevation: 4,
-                borderRadius: BorderRadius.circular(15),
-                clipBehavior: Clip.antiAlias,
-                color: Colors.white,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: wp(2),
-                    vertical: hp(3),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Color(0xffF5E3E2),
-                            radius: hp(3),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.ac_unit,
-                                color: Color(0xffbd4341),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: wp(5)),
-                          Text(
-                            '8',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline2
-                                .copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: hp(1)),
-                      Text(
-                        'Pedidos entregados',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            .copyWith(fontStyle: FontStyle.italic),
-                      ),
-                    ],
-                  ),
-                ),
+              CounterCard(
+                icon: Icons.ac_unit,
+                qty: 2,
+                description: 'Pedidos entregados',
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CounterCard extends StatelessWidget {
+  const CounterCard({
+    Key key,
+    @required this.icon,
+    @required this.qty,
+    @required this.description,
+  }) : super(key: key);
+
+  final IconData icon;
+  final int qty;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 4,
+      borderRadius: BorderRadius.circular(15),
+      clipBehavior: Clip.antiAlias,
+      color: Colors.white,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: wp(2),
+          vertical: hp(3),
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Color(0xffF5E3E2),
+                  radius: hp(3),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      icon,
+                      color: Color(0xffbd4341),
+                    ),
+                  ),
+                ),
+                SizedBox(width: wp(5)),
+                Text(
+                  '$qty',
+                  style: Theme.of(context).textTheme.headline2.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Text(
+              description,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(fontStyle: FontStyle.italic),
+            ),
+          ],
         ),
       ),
     );

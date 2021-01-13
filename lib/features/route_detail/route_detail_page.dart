@@ -8,19 +8,17 @@ import 'package:provider/provider.dart';
 class RouteDetailPage extends StatelessWidget {
   const RouteDetailPage({
     Key key,
-    this.orderList,
-    this.routeIndex,
+    this.selectedRoute,
   }) : super(key: key);
 
-  final List<Order> orderList;
-  final int routeIndex;
+  final MyRoute selectedRoute;
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => RouteDetailViewModel(orderList, routeIndex),
+          create: (_) => RouteDetailViewModel(selectedRoute),
         ),
       ],
       child: LoadingOverlay<RouteDetailViewModel>(
@@ -59,7 +57,10 @@ class RouteDetailPageBase extends StatelessWidget {
 class LocalStep extends StatelessWidget {
   const LocalStep({
     Key key,
+    this.enabled = true,
   }) : super(key: key);
+
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +86,7 @@ class LocalStep extends StatelessWidget {
                   .headline6
                   .copyWith(fontWeight: FontWeight.bold),
             ),
-            if (_viewModel.currentStep == 0 &&
-                _viewModel.activeRouteIndex == -1)
+            if (enabled)
               Align(
                 alignment: Alignment.bottomRight,
                 child: MaterialButton(

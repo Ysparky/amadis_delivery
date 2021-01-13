@@ -189,8 +189,7 @@ class CustomRouter extends RouterBase {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => RouteDetailPage(
           key: args.key,
-          orderList: args.orderList,
-          routeIndex: args.routeIndex,
+          selectedRoute: args.selectedRoute,
         ),
         settings: data,
       );
@@ -250,7 +249,6 @@ class QuoteOrderPageArguments {
 /// RouteDetailPage arguments holder class
 class RouteDetailPageArguments {
   final Key key;
-  final List<Order> orderList;
-  final int routeIndex;
-  RouteDetailPageArguments({this.key, this.orderList, this.routeIndex});
+  final MyRoute selectedRoute;
+  RouteDetailPageArguments({this.key, this.selectedRoute});
 }

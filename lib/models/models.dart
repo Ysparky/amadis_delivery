@@ -9,6 +9,7 @@ export 'presentation.dart';
 export 'product.dart';
 export 'product_presentation.dart';
 export 'role.dart';
+export 'my_route.dart';
 export 'user.dart';
 
 export 'responses/error_response.dart';

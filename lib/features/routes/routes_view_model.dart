@@ -10,14 +10,13 @@ class RoutesViewModel extends AmadisViewModel {
 
   final orderService = injector<OrderService>();
 
-  void goToDetail(List<Order> orderList, int index) =>
-      ExtendedNavigator.root.push(
-        Routes.routeDetailPage,
-        arguments: RouteDetailPageArguments(
-          orderList: orderList,
-          routeIndex: index,
-        ),
-      );
+  void goToDetail(MyRoute selectedRoute, int index) {
+    orderService.selectedRouteIndex.add(index);
+    ExtendedNavigator.root.push(
+      Routes.routeDetailPage,
+      arguments: RouteDetailPageArguments(selectedRoute: selectedRoute),
+    );
+  }
 
   void goToOrders() => ExtendedNavigator.root.push(Routes.listOrdersPage);
 }

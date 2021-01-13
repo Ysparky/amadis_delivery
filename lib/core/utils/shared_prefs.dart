@@ -15,9 +15,7 @@ class SharedPrefs {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  int get userId {
-    return _preferences.getInt('userId') ?? 0;
-  }
+  int get userId => _preferences.getInt('userId') ?? 0;
 
   set userId(int userId) {
     _preferences.setInt('userId', userId);
@@ -31,13 +29,13 @@ class SharedPrefs {
     _preferences.setBool('isLoggedIn', isLogged);
   }
 
-  int get activeRouteIndex {
-    return _preferences.getInt('activeRouteIndex') ?? -1;
-  }
+  // int get activeRouteIndex {
+  //   return _preferences.getInt('activeRouteIndex') ?? -1;
+  // }
 
-  set activeRouteIndex(int activeRouteIndex) {
-    _preferences.setInt('activeRouteIndex', activeRouteIndex);
-  }
+  // set activeRouteIndex(int activeRouteIndex) {
+  //   _preferences.setInt('activeRouteIndex', activeRouteIndex);
+  // }
 
   void removeAll() {
     _preferences.remove('userId');

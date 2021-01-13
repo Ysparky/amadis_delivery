@@ -1,9 +1,11 @@
 import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/services/order_service.dart';
 import 'package:auto_route/auto_route.dart';
 
 class HomeViewModel extends AmadisViewModel {
   HomeViewModel() {
     _generateDates();
+    _orderService.getRoutes();
   }
 
   List<String> get daysOfWeek =>
@@ -11,9 +13,14 @@ class HomeViewModel extends AmadisViewModel {
 
   List<int> days = [];
 
+  // Stream<ApiResponse<List<MyRoute>>> get routes => _orderService.routes;
+  // Stream<int> get routesLength => _orderService.routes.value.data
+  //     .where((element) => element.isRouteFinished);
+
   int get today => DateTime.now().day;
 
   final _prefs = SharedPrefs();
+  final _orderService = injector<OrderService>();
 
   void _generateDates() {
     var monday = 0;

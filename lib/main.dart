@@ -8,7 +8,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final preferences = SharedPrefs();
   await preferences.initPrefs();
-  preferences.activeRouteIndex = -1;
   startServiceInjection();
   runApp(MyApp());
 }
