@@ -45,14 +45,14 @@ class QuoteOrderViewModel extends AmadisViewModel {
 
   Future<void> postAdditionalCharges() async {
     setLoading(true);
-    // final response = await _orderService.additionalCharges(order, consumedList);
+    final response = await _orderService.additionalCharges(order, consumedList);
     await _orderService.getOrders();
     setLoading(false);
-    // if (response == null || !response) {
-    // showErrorSnackBar('Ocurrió un error');
-    // } else {
-    _showSuccessQuote();
-    // }
+    if (response == null || !response) {
+      showErrorSnackBar('Ocurrió un error');
+    } else {
+      _showSuccessQuote();
+    }
   }
 
   void _handleRoutes() async {
