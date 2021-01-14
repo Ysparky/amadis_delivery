@@ -66,19 +66,17 @@ class OrderDetailViewModel extends AmadisViewModel {
   }
 
   void updateConsignmentOrder() async {
-    //TODO: Uncomment this block
-    print(_fullOrder.id);
     var orderId = _fullOrder.id;
-    // setLoading(true);
-    // var success = await _orderService.deliverConsignmentOrder(orderId);
-    // setLoading(false);
-    // if (success) {
-    await _showSuccessUpdate();
-    // } else {
-    //   showErrorSnackBar(
-    //     'No se pudo actualizar el estado, inténtelo más tarde.',
-    //   );
-    // }
+    setLoading(true);
+    var success = await _orderService.deliverConsignmentOrder(orderId);
+    setLoading(false);
+    if (success) {
+      await _showSuccessUpdate();
+    } else {
+      showErrorSnackBar(
+        'No se pudo actualizar el estado, inténtelo más tarde.',
+      );
+    }
   }
 
   void _handleRoutes() async {

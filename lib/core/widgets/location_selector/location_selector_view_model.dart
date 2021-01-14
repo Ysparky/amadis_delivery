@@ -18,11 +18,6 @@ class LocationSelectorViewModel extends AmadisViewModel {
   String _selectedAddress = '';
   String get selectedAddress => _selectedAddress;
 
-  // void goBack() {
-  //   _locationService.selectedLocation.add(null);
-  //   ExtendedNavigator.root.pop();
-  // }
-
   void saveLocation() {
     final location = Location(
       address: _selectedAddress,

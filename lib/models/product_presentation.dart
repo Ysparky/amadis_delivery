@@ -37,11 +37,4 @@ class ProductPresentation {
         product: Product.fromJson(json['product']),
         presentation: Presentation.fromJson(json['presentation']),
       );
-
-  // Map<String, dynamic> toJson() => {
-  //     "id": id,
-  //     "price": price,
-  //     "product": product.toJson(),
-  //     "presentation": presentation.toJson(),
-  // };
 }

@@ -28,7 +28,6 @@ class QuoteOrderViewModel extends AmadisViewModel {
   final ScrollController scrollController = ScrollController();
 
   final _orderService = injector<OrderService>();
-  // final _prefs = SharedPrefs();
 
   int getQtyByDetail(OrderDetail detail) {
     var index = consumedList.indexWhere((d) =>
@@ -46,15 +45,15 @@ class QuoteOrderViewModel extends AmadisViewModel {
 
   Future<void> postAdditionalCharges() async {
     setLoading(true);
-    // TODO: Uncomment this line
-    // final response = await _orderService.additionalCharges(order, consumedList);
+
+    final response = await _orderService.additionalCharges(order, consumedList);
     await _orderService.getOrders();
     setLoading(false);
-    // if (response == null || !response) {
-    //   showErrorSnackBar('Ocurrió un error');
-    // } else {
-    _showSuccessQuote();
-    // }
+    if (response == null || !response) {
+      showErrorSnackBar('Ocurrió un error');
+    } else {
+      _showSuccessQuote();
+    }
   }
 
   void _handleRoutes() async {

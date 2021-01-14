@@ -11,9 +11,8 @@ class ListOrdersViewModel extends AmadisViewModel {
       orderStates[4],
       orderStates[7],
     ];
-    // _statesList = orderStates.toList();
     _activeState = _statesList.first;
-    // final index = _statesList.indexWhere((state) => state.id == initialStateId);
+
     _statesList[0] = _statesList[0].copyWith(selected: true);
     orderService.getOrders(stateId: _activeState.id);
   }

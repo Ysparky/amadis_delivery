@@ -36,7 +36,6 @@ class RouteDetailViewModel extends AmadisViewModel {
   MyRoute selectedRoute;
 
   final _orderService = injector<OrderService>();
-  // final _prefs = SharedPrefs();
 
   List<Step> stepsList = [];
 
@@ -102,7 +101,6 @@ class RouteDetailViewModel extends AmadisViewModel {
         );
       }).toList(),
     ];
-    //TODO update local storage
     var myRoutes = _orderService.routes.value.data;
     var routeIdx = _orderService.selectedRouteIndex.value;
     print(

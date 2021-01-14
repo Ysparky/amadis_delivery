@@ -59,7 +59,6 @@ class RouteDetailPageBase extends StatelessWidget {
                   Container(),
               steps: _viewModel.stepsList,
               currentStep: _viewModel.currentStep,
-              // onStepTapped: _viewModel.onStepTapped,
             ),
           ],
         ),
@@ -78,10 +77,7 @@ class Legend extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: wp(5)),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          // horizontal: wp(8),
-          vertical: hp(2),
-        ),
+        padding: EdgeInsets.symmetric(vertical: hp(2)),
         child: Column(
           children: [
             Text(

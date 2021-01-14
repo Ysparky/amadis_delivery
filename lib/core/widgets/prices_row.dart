@@ -24,15 +24,13 @@ class PricesRow extends StatelessWidget {
             style: Theme.of(context).textTheme.subtitle1,
           ),
         ),
-        Expanded(
-          child: Text(
-            value,
-            textAlign: TextAlign.right,
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
-                  color: AmadisColors.primaryColor,
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
+        Text(
+          value,
+          textAlign: TextAlign.right,
+          style: Theme.of(context).textTheme.subtitle1.copyWith(
+                color: AmadisColors.primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ],
     );

@@ -5,9 +5,6 @@ import 'package:amadis_delivery/models/models.dart';
 List<MyRoute> routesFromJson(String str) =>
     List<MyRoute>.from(json.decode(str).map((x) => MyRoute.fromJson(x)));
 
-// String routesToJson(List<List<Order>> data) => json.encode(List<dynamic>.from(
-//     data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
-
 class MyRoute {
   MyRoute({
     this.isRouteActive = false,
