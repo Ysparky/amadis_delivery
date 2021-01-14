@@ -1,5 +1,5 @@
 import 'package:amadis_delivery/core/utils/utils.dart';
-import 'package:amadis_delivery/features/route_detail/route_detail_page.dart';
+import 'package:amadis_delivery/features/route_detail/widgets/widgets.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/networking/api_response.dart';
 import 'package:amadis_delivery/services/order_service.dart';
