@@ -1,5 +1,6 @@
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
+import 'package:amadis_delivery/features/routes/widgets/empty_routes.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/networking/api_response.dart';
 import 'package:flutter/material.dart';
@@ -54,17 +55,19 @@ class RoutesPageBase extends StatelessWidget {
                       return Center(child: CircularProgressIndicator());
                       break;
                     case Status.COMPLETED:
-                      return ListView.builder(
-                        padding: EdgeInsets.symmetric(vertical: hp(2)),
-                        physics: AlwaysScrollableScrollPhysics(
-                          parent: BouncingScrollPhysics(),
-                        ),
-                        itemCount: snapshot.data.data.length,
-                        itemBuilder: (_, index) => RouteItem(
-                          selectedOrder: snapshot.data.data[index],
-                          index: index,
-                        ),
-                      );
+                      return snapshot.data.data.isEmpty
+                          ? EmptyRoutes()
+                          : ListView.builder(
+                              padding: EdgeInsets.symmetric(vertical: hp(2)),
+                              physics: AlwaysScrollableScrollPhysics(
+                                parent: BouncingScrollPhysics(),
+                              ),
+                              itemCount: snapshot.data.data.length,
+                              itemBuilder: (_, index) => RouteItem(
+                                selectedOrder: snapshot.data.data[index],
+                                index: index,
+                              ),
+                            );
                       break;
                     case Status.ERROR:
                       return Error(

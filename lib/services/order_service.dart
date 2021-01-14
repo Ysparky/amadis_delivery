@@ -97,6 +97,7 @@ class OrderService {
 
   final _helper = ApiBaseHelper();
   Future<void> getRoutes() async {
+    print('getting routes');
     if (routes.value == null) {
       routes.add(ApiResponse.loading('Fetching order detail'));
       final formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());

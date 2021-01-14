@@ -14,4 +14,6 @@ class AmadisAssets {
 
   static const svg_check_mark = 'assets/icon/check.svg';
   static const svg_check_mark_2 = 'assets/icon/check_mark.svg';
+  static const on_the_way = 'assets/img/on_the_way.svg';
+  static const empty_box = 'assets/img/empty_box.svg';
 }

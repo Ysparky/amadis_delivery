@@ -66,13 +66,16 @@ class ListOrdersPageBase extends StatelessWidget {
                           duration: const Duration(milliseconds: 500),
                           child: snapshot.data.isEmpty
                               ? EmptyOrdersList()
-                              : ListView.builder(
-                                  padding: EdgeInsets.only(bottom: hp(5)),
-                                  physics: AlwaysScrollableScrollPhysics(
-                                      parent: BouncingScrollPhysics()),
-                                  itemCount: orders.length,
-                                  itemBuilder: (_, index) =>
-                                      OrderCardItem(order: orders[index]),
+                              : Padding(
+                                  padding: EdgeInsets.only(top: hp(1)),
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.only(bottom: hp(5)),
+                                    physics: AlwaysScrollableScrollPhysics(
+                                        parent: BouncingScrollPhysics()),
+                                    itemCount: orders.length,
+                                    itemBuilder: (_, index) =>
+                                        OrderCardItem(order: orders[index]),
+                                  ),
                                 ),
                         );
                       } else {

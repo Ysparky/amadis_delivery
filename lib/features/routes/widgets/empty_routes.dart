@@ -1,18 +1,15 @@
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/features/routes/routes_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import 'package:amadis_delivery/core/utils/utils.dart';
-import 'package:amadis_delivery/features/list_orders/list_orders_view_model.dart';
-
-class EmptyOrdersList extends StatelessWidget {
-  const EmptyOrdersList({
-    Key key,
-  }) : super(key: key);
+class EmptyRoutes extends StatelessWidget {
+  const EmptyRoutes({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _viewModel = Provider.of<ListOrdersViewModel>(context);
+    final _viewModel = Provider.of<RoutesViewModel>(context);
     return CustomScrollView(
       physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       slivers: [
@@ -22,22 +19,26 @@ class EmptyOrdersList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                AmadisAssets.empty_box,
+                AmadisAssets.on_the_way,
                 fit: BoxFit.cover,
-                height: hp(30),
+                height: hp(20),
               ),
-              SizedBox(height: hp(2)),
+              SizedBox(height: hp(5)),
               Text(
-                'LISTA VACÍA',
+                'SIN RUTAS',
                 style: Theme.of(context)
                     .textTheme
                     .headline4
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: hp(3)),
-              Text(
-                'No hay pedidos ${_viewModel.activeState.name.toLowerCase()}',
-                style: Theme.of(context).textTheme.subtitle1,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: wp(10)),
+                child: Text(
+                  'No hemos encontrado rutas para el día de hoy.',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
               ),
               SizedBox(height: hp(3)),
               MaterialButton(
@@ -46,8 +47,7 @@ class EmptyOrdersList extends StatelessWidget {
                   child: const Text('Refrescar'),
                 ),
                 color: AmadisColors.secondaryColor,
-                onPressed: () => _viewModel.orderService
-                    .getOrders(stateId: _viewModel.activeState.id),
+                onPressed: _viewModel.orderService.getRoutes,
                 shape: StadiumBorder(),
                 textColor: Colors.white,
               ),
