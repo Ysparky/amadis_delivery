@@ -6,6 +6,7 @@ import 'package:amadis_delivery/features/additional_charges/consignment_order/co
 import 'package:amadis_delivery/features/dashboard/dashboard_page.dart';
 import 'package:amadis_delivery/features/list_orders/list_orders_page.dart';
 import 'package:amadis_delivery/features/login/login_page.dart';
+import 'package:amadis_delivery/features/map_route/map_route_page.dart';
 import 'package:amadis_delivery/features/order_detail/order_detail_page.dart';
 import 'package:amadis_delivery/features/quote_order/quote_order_page.dart';
 import 'package:amadis_delivery/features/route_detail/route_detail_page.dart';
@@ -30,6 +31,7 @@ import 'package:amadis_delivery/features/welcome/welcome_page.dart';
     AdaptiveRoute(page: ShoppingBagPage),
     AdaptiveRoute(page: RoutesPage),
     AdaptiveRoute(page: RouteDetailPage),
+    AdaptiveRoute(page: MapRoutePage),
   ],
 )
 class $CustomRouter {}

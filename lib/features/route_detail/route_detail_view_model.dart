@@ -50,6 +50,11 @@ class RouteDetailViewModel extends AmadisViewModel {
         arguments: OrderDetailPageArguments(order: order),
       );
 
+  void goToMapRoute() => ExtendedNavigator.root.push(
+        Routes.mapRoutePage,
+        arguments: MapRoutePageArguments(myRoute: selectedRoute),
+      );
+
   void _initRoute() {
     stepsList = [
       Step(

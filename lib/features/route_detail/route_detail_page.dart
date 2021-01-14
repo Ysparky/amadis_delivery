@@ -35,7 +35,15 @@ class RouteDetailPageBase extends StatelessWidget {
     return Scaffold(
       key: _viewModel.scaffoldKey,
       backgroundColor: AmadisColors.primaryColor,
-      appBar: CustomAppBar(headerTitle: 'Lista de Pedidos'),
+      appBar: CustomAppBar(
+        headerTitle: 'Lista de Pedidos',
+        headerActions: [
+          IconButton(
+            icon: Icon(Icons.map),
+            onPressed: _viewModel.goToMapRoute,
+          ),
+        ],
+      ),
       body: Ink(
         color: AmadisColors.backgroundColor,
         height: hp(100),
@@ -48,7 +56,10 @@ class RouteDetailPageBase extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: IconButton(
                   onPressed: _viewModel.showLegend,
-                  icon: Icon(Icons.info),
+                  icon: Icon(
+                    Icons.info,
+                    color: AmadisColors.primaryColor,
+                  ),
                 ),
               ),
             ),

@@ -31,6 +31,7 @@
 .pub/
 /build/
 pubspec.lock
+lib/core/utils/key.dart
 
 # Web related
 lib/generated_plugin_registrant.dart

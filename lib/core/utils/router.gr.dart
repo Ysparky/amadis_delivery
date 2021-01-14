@@ -14,6 +14,7 @@ import '../../features/additional_charges/consignment_order/consignment_order_pa
 import '../../features/dashboard/dashboard_page.dart';
 import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';
+import '../../features/map_route/map_route_page.dart';
 import '../../features/order_detail/order_detail_page.dart';
 import '../../features/quote_order/quote_order_page.dart';
 import '../../features/route_detail/route_detail_page.dart';
@@ -38,6 +39,7 @@ class Routes {
   static const String shoppingBagPage = '/shopping-bag-page';
   static const String routesPage = '/routes-page';
   static const String routeDetailPage = '/route-detail-page';
+  static const String mapRoutePage = '/map-route-page';
   static const all = <String>{
     welcomePage,
     loginPage,
@@ -52,6 +54,7 @@ class Routes {
     shoppingBagPage,
     routesPage,
     routeDetailPage,
+    mapRoutePage,
   };
 }
 
@@ -72,6 +75,7 @@ class CustomRouter extends RouterBase {
     RouteDef(Routes.shoppingBagPage, page: ShoppingBagPage),
     RouteDef(Routes.routesPage, page: RoutesPage),
     RouteDef(Routes.routeDetailPage, page: RouteDetailPage),
+    RouteDef(Routes.mapRoutePage, page: MapRoutePage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -194,6 +198,18 @@ class CustomRouter extends RouterBase {
         settings: data,
       );
     },
+    MapRoutePage: (data) {
+      final args = data.getArgs<MapRoutePageArguments>(
+        orElse: () => MapRoutePageArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => MapRoutePage(
+          key: args.key,
+          myRoute: args.myRoute,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -251,4 +267,11 @@ class RouteDetailPageArguments {
   final Key key;
   final MyRoute selectedRoute;
   RouteDetailPageArguments({this.key, this.selectedRoute});
+}
+
+/// MapRoutePage arguments holder class
+class MapRoutePageArguments {
+  final Key key;
+  final MyRoute myRoute;
+  MapRoutePageArguments({this.key, this.myRoute});
 }

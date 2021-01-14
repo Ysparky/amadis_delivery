@@ -115,16 +115,16 @@ class OrderService {
       routes.add(ApiResponse.loading('Fetching order detail'));
       final formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
       print(formattedDate);
-      // final response =
-      //     await _helper.get('/orders/routes/list?shippingDate=$formattedDate');
       final response =
-          await _helper.get('/orders/routes/list?shippingDate=2021-01-23');
+          await _helper.get('/orders/routes/list?shippingDate=$formattedDate');
+      // final response =
+      //     await _helper.get('/orders/routes/list?shippingDate=2021-01-23');
       if (response != null) {
         final str = json.encode(response.data);
         final _routes = routesFromJson(str);
-        if (_routes.isNotEmpty) {
-          routes.add(ApiResponse.completed(_routes));
-        }
+        // if (_routes.isNotEmpty) {
+        routes.add(ApiResponse.completed(_routes));
+        // }
       } else {
         routes.add(ApiResponse.error(response.message, response.statusCode));
       }
