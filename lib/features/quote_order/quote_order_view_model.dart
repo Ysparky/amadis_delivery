@@ -46,6 +46,7 @@ class QuoteOrderViewModel extends AmadisViewModel {
 
   Future<void> postAdditionalCharges() async {
     setLoading(true);
+    // TODO: Uncomment this line
     // final response = await _orderService.additionalCharges(order, consumedList);
     await _orderService.getOrders();
     setLoading(false);

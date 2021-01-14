@@ -47,14 +47,26 @@ class OrderDetailCard extends StatelessWidget {
                 if (_viewModel.showActions)
                   ElasticIn(
                     delay: Duration(milliseconds: 400),
-                    child: IconButton(
-                      onPressed: _viewModel.goToAdditionalCharges,
-                      icon: Icon(
-                        Icons.request_quote_rounded,
-                        color: AmadisColors.primaryColor,
-                        size: 30,
-                      ),
-                    ),
+                    child: (_viewModel.fullOrder.orderTypeId == 1 &&
+                                _viewModel.fullOrder.isDelivery) ||
+                            (_viewModel.fullOrder.orderTypeId == 2 &&
+                                !_viewModel.fullOrder.isDelivery)
+                        ? IconButton(
+                            onPressed: _viewModel.goToAdditionalCharges,
+                            icon: Icon(
+                              Icons.request_quote_rounded,
+                              color: AmadisColors.primaryColor,
+                              size: 30,
+                            ),
+                          )
+                        : IconButton(
+                            onPressed: _viewModel.updateConsignmentOrder,
+                            icon: Icon(
+                              Icons.check_circle,
+                              color: AmadisColors.primaryColor,
+                              size: 30,
+                            ),
+                          ),
                   ),
               ],
             ),

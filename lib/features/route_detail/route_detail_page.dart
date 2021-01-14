@@ -36,19 +36,132 @@ class RouteDetailPageBase extends StatelessWidget {
       key: _viewModel.scaffoldKey,
       backgroundColor: AmadisColors.primaryColor,
       appBar: CustomAppBar(headerTitle: 'Lista de Pedidos'),
-      body: Container(
+      body: Ink(
         color: AmadisColors.backgroundColor,
         height: hp(100),
         width: wp(100),
-        padding: EdgeInsets.only(top: hp(2)),
-        child: Stepper(
-          onStepContinue: () => print('asdadasdasd'),
-          physics: BouncingScrollPhysics(),
-          controlsBuilder: (_, {onStepCancel, onStepContinue}) => Container(),
-          steps: _viewModel.stepsList,
-          currentStep: _viewModel.currentStep,
-          // onStepTapped: _viewModel.onStepTapped,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: wp(2)),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  onPressed: _viewModel.showLegend,
+                  icon: Icon(Icons.info),
+                ),
+              ),
+            ),
+            Stepper(
+              onStepContinue: () => print('asdadasdasd'),
+              physics: BouncingScrollPhysics(),
+              controlsBuilder: (_, {onStepCancel, onStepContinue}) =>
+                  Container(),
+              steps: _viewModel.stepsList,
+              currentStep: _viewModel.currentStep,
+              // onStepTapped: _viewModel.onStepTapped,
+            ),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class Legend extends StatelessWidget {
+  const Legend({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: wp(5)),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          // horizontal: wp(8),
+          vertical: hp(2),
+        ),
+        child: Column(
+          children: [
+            Text(
+              'Leyenda',
+              style: Theme.of(context)
+                  .textTheme
+                  .subtitle1
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: hp(2)),
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Contado',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    Text(
+                      'Consignación',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ],
+                ),
+                SizedBox(width: wp(5)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleDot(color: Colors.cyan),
+                    CircleDot(color: Colors.orange[400]),
+                  ],
+                ),
+                Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Entrega',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    Text(
+                      'Recojo',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ],
+                ),
+                SizedBox(width: wp(5)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleDot(color: Colors.red),
+                    CircleDot(color: Colors.teal),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CircleDot extends StatelessWidget {
+  const CircleDot({
+    Key key,
+    @required this.color,
+  }) : super(key: key);
+
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: hp(3),
+      width: wp(4),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
       ),
     );
   }

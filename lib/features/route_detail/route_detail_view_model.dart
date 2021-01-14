@@ -1,4 +1,5 @@
 import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/features/route_detail/route_detail_page.dart';
 import 'package:amadis_delivery/features/route_detail/widgets/widgets.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/networking/api_response.dart';
@@ -85,6 +86,7 @@ class RouteDetailViewModel extends AmadisViewModel {
         title: LocalStep(enabled: false),
         content: Container(),
         isActive: false,
+        state: StepState.complete,
       ),
       ...selectedRoute.orders.asMap().entries.map((e) {
         final idx = e.key;
@@ -95,6 +97,8 @@ class RouteDetailViewModel extends AmadisViewModel {
               : InactiveOrderItem(order: value),
           content: Container(),
           isActive: idx == index,
+          state:
+              value.isOrderDelivered ? StepState.complete : StepState.indexed,
         );
       }).toList(),
     ];
@@ -109,5 +113,23 @@ class RouteDetailViewModel extends AmadisViewModel {
     _orderService.routes.add(ApiResponse.completed(myRoutes));
     _orderService.selectedRoute.add(selectedRoute);
     notifyListeners();
+  }
+
+  void showLegend() async {
+    await showModalBottomSheet(
+      context: scaffoldKey.currentContext,
+      builder: (context) {
+        return SafeArea(
+            child: SingleChildScrollView(
+          child: Container(
+            child: Wrap(
+              children: [
+                Legend(),
+              ],
+            ),
+          ),
+        ));
+      },
+    );
   }
 }

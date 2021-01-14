@@ -91,10 +91,23 @@ class OrderService {
     }
   }
 
+  Future<bool> deliverConsignmentOrder(int orderId) async {
+    try {
+      print(orderId);
+      final endpoint = '$BASE_URL/notification/$orderId';
+      final response = await _dio.put(endpoint, options: dioOptions);
+      return (response.statusCode == 200) ? true : false;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   BehaviorSubject<ApiResponse<List<MyRoute>>> routes;
   BehaviorSubject<int> selectedRouteIndex;
 
   final _helper = ApiBaseHelper();
+
   Future<void> getRoutes() async {
     print('calling get');
     if (routes.value == null) {
@@ -102,6 +115,7 @@ class OrderService {
       routes.add(ApiResponse.loading('Fetching order detail'));
       final formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
       print(formattedDate);
+      // TODO: Uncomment this line
       // final response =
       //     await _helper.get('/orders/routes/list?shippingDate=$formattedDate');
       final response =
