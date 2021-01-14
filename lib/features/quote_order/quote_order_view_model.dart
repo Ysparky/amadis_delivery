@@ -66,7 +66,10 @@ class QuoteOrderViewModel extends AmadisViewModel {
         selectedRoute.orders.indexWhere((order) => order.isOrderActive);
 
     selectedRoute.orders[activeOrderIdx] =
-        selectedRoute.orders[activeOrderIdx].copyWith(isOrderActive: false);
+        selectedRoute.orders[activeOrderIdx].copyWith(
+      isOrderActive: false,
+      isOrderDelivered: true,
+    );
     final nextIdx = activeOrderIdx + 1;
     if (ordersQty != nextIdx) {
       selectedRoute.orders[nextIdx] =

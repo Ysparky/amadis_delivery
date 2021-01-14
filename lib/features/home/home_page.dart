@@ -1,5 +1,7 @@
 import 'package:amadis_delivery/features/home/home_view_model.dart';
 import 'package:amadis_delivery/features/home/widgets/widgets.dart';
+import 'package:amadis_delivery/models/models.dart';
+import 'package:amadis_delivery/networking/api_response.dart';
 import 'package:flutter/material.dart';
 
 import 'package:amadis_delivery/core/utils/utils.dart';
@@ -59,17 +61,41 @@ class HomePageBase extends StatelessWidget {
                 ],
               ),
               Spacer(),
-              CounterCard(
-                icon: Icons.delivery_dining,
-                qty: 0,
-                description: 'Rutas restantes por repartir',
+              StreamBuilder<ApiResponse<List<MyRoute>>>(
+                stream: _viewModel.myRoutes,
+                initialData: ApiResponse.completed([]),
+                builder: (_, snapshot) {
+                  if (snapshot.hasData) {
+                    print(snapshot.data?.data?.length);
+                    return CounterCard(
+                      icon: Icons.delivery_dining,
+                      qty: _viewModel.routesLeft(snapshot.data.data),
+                      description:
+                          _viewModel.routesLeft(snapshot.data.data) != 1
+                              ? 'Rutas restantes por repartir'
+                              : 'Ruta restante por repartir',
+                    );
+                  } else {
+                    return Center(
+                      child: LinearProgressIndicator(),
+                    );
+                  }
+                },
               ),
               SizedBox(height: hp(3)),
-              CounterCard(
-                icon: Icons.ac_unit,
-                qty: 2,
-                description: 'Pedidos entregados',
-              ),
+              StreamBuilder<ApiResponse<List<MyRoute>>>(
+                  stream: _viewModel.myRoutes,
+                  initialData: ApiResponse.completed([]),
+                  builder: (_, snapshot) {
+                    return CounterCard(
+                      icon: Icons.ac_unit,
+                      qty: _viewModel.ordersDeliveredQty(snapshot.data.data),
+                      description:
+                          _viewModel.ordersDeliveredQty(snapshot.data.data) != 1
+                              ? 'Pedidos entregados'
+                              : 'Pedido entregado',
+                    );
+                  }),
             ],
           ),
         ),

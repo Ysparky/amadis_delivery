@@ -24,7 +24,6 @@ class OrderService {
 
   final _dio = Dio();
   final _endpoint = '$BASE_URL/orders/';
-  // final _prefs = SharedPrefs();
 
   Future<void> getOrders({int stateId = 1}) async {
     try {
@@ -97,8 +96,9 @@ class OrderService {
 
   final _helper = ApiBaseHelper();
   Future<void> getRoutes() async {
-    print('getting routes');
+    print('calling get');
     if (routes.value == null) {
+      print('getting routes');
       routes.add(ApiResponse.loading('Fetching order detail'));
       final formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
       print(formattedDate);
@@ -109,7 +109,9 @@ class OrderService {
       if (response != null) {
         final str = json.encode(response.data);
         final _routes = routesFromJson(str);
+        // if (_routes.isNotEmpty) {
         routes.add(ApiResponse.completed(_routes));
+        // }
       } else {
         routes.add(ApiResponse.error(response.message, response.statusCode));
       }

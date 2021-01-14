@@ -23,6 +23,7 @@ class Order {
     this.missingBottlesQuantity = 0,
     this.missingBoxQuantity = 0,
     this.isOrderActive = false,
+    this.isOrderDelivered = false,
   });
 
   final int id;
@@ -38,6 +39,7 @@ class Order {
   final int missingBottlesQuantity;
   final int missingBoxQuantity;
   final bool isOrderActive;
+  final bool isOrderDelivered;
 
   Order copyWith({
     int id,
@@ -52,6 +54,7 @@ class Order {
     int missingBottlesQuantity,
     int missingBoxQuantity,
     bool isOrderActive,
+    bool isOrderDelivered,
   }) =>
       Order(
         id: id ?? this.id,
@@ -67,6 +70,7 @@ class Order {
             missingBottlesQuantity ?? this.missingBottlesQuantity,
         missingBoxQuantity: missingBoxQuantity ?? this.missingBoxQuantity,
         isOrderActive: isOrderActive ?? this.isOrderActive,
+        isOrderDelivered: isOrderDelivered ?? this.isOrderDelivered,
       );
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
