@@ -40,3 +40,6 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# Flutter Version Manager
+.fvm/flutter_sdk
