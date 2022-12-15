@@ -1,11 +1,10 @@
-import 'package:amadis_delivery/core/config/colors.dart';
-import 'package:amadis_delivery/core/config/loading_overlay.dart';
-import 'package:amadis_delivery/core/utils/responsive.dart';
-import 'package:amadis_delivery/core/widgets/custom_button.dart';
-import 'package:amadis_delivery/core/widgets/location_selector/location_selector_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/core/widgets/custom_button.dart';
+import 'package:amadis_delivery/core/widgets/location_selector/location_selector_view_model.dart';
 
 class LocationSelector extends StatelessWidget {
   @override

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
 import 'package:amadis_delivery/features/list_orders/list_orders_view_model.dart';
-import 'package:amadis_delivery/features/list_orders/widgets/empty_orders_list.dart';
-import 'package:amadis_delivery/features/list_orders/widgets/order_card_item.dart';
+import 'package:amadis_delivery/features/list_orders/widgets/widgets.dart';
 import 'package:amadis_delivery/models/models.dart';
 
 class ListOrdersPage extends StatelessWidget {
@@ -68,13 +66,16 @@ class ListOrdersPageBase extends StatelessWidget {
                           duration: const Duration(milliseconds: 500),
                           child: snapshot.data.isEmpty
                               ? EmptyOrdersList()
-                              : ListView.builder(
-                                  padding: EdgeInsets.only(bottom: hp(5)),
-                                  physics: AlwaysScrollableScrollPhysics(
-                                      parent: BouncingScrollPhysics()),
-                                  itemCount: orders.length,
-                                  itemBuilder: (_, index) =>
-                                      OrderCardItem(order: orders[index]),
+                              : Padding(
+                                  padding: EdgeInsets.only(top: hp(1)),
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.only(bottom: hp(5)),
+                                    physics: AlwaysScrollableScrollPhysics(
+                                        parent: BouncingScrollPhysics()),
+                                    itemCount: orders.length,
+                                    itemBuilder: (_, index) =>
+                                        OrderCardItem(order: orders[index]),
+                                  ),
                                 ),
                         );
                       } else {

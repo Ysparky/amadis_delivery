@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:provider/provider.dart';
 
-import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
 import 'package:amadis_delivery/features/order_detail/order_detail_view_model.dart';
@@ -45,17 +44,30 @@ class OrderDetailCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                ElasticIn(
-                  delay: Duration(milliseconds: 400),
-                  child: IconButton(
-                    onPressed: _viewModel.goToAdditionalCharges,
-                    icon: Icon(
-                      Icons.request_quote_rounded,
-                      color: AmadisColors.primaryColor,
-                      size: 30,
-                    ),
+                if (_viewModel.showActions)
+                  ElasticIn(
+                    delay: Duration(milliseconds: 400),
+                    child: (_viewModel.fullOrder.orderTypeId == 1 &&
+                                _viewModel.fullOrder.isDelivery) ||
+                            (_viewModel.fullOrder.orderTypeId == 2 &&
+                                !_viewModel.fullOrder.isDelivery)
+                        ? IconButton(
+                            onPressed: _viewModel.goToAdditionalCharges,
+                            icon: Icon(
+                              Icons.request_quote_rounded,
+                              color: AmadisColors.primaryColor,
+                              size: 30,
+                            ),
+                          )
+                        : IconButton(
+                            onPressed: _viewModel.updateConsignmentOrder,
+                            icon: Icon(
+                              Icons.check_circle,
+                              color: AmadisColors.primaryColor,
+                              size: 30,
+                            ),
+                          ),
                   ),
-                ),
               ],
             ),
             SizedBox(height: hp(1.0)),

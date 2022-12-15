@@ -1,11 +1,11 @@
-import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/core/utils/responsive.dart';
-import 'package:amadis_delivery/core/widgets/widgets.dart';
-import 'package:amadis_delivery/features/take_order/shopping_bag/shopping_bag_view_model.dart';
-import 'package:amadis_delivery/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/core/widgets/widgets.dart';
+import 'package:amadis_delivery/features/take_order/shopping_bag/shopping_bag_view_model.dart';
+import 'package:amadis_delivery/models/models.dart';
 
 class ShoppingBagPage extends StatelessWidget {
   @override

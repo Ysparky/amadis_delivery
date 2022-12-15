@@ -14,8 +14,11 @@ import '../../features/additional_charges/consignment_order/consignment_order_pa
 import '../../features/dashboard/dashboard_page.dart';
 import '../../features/list_orders/list_orders_page.dart';
 import '../../features/login/login_page.dart';
+import '../../features/map_route/map_route_page.dart';
 import '../../features/order_detail/order_detail_page.dart';
 import '../../features/quote_order/quote_order_page.dart';
+import '../../features/route_detail/route_detail_page.dart';
+import '../../features/routes/routes_page.dart';
 import '../../features/take_order/select_customer/select_customer_page.dart';
 import '../../features/take_order/shopping_bag/shopping_bag_page.dart';
 import '../../features/take_order/take_order_page.dart';
@@ -34,6 +37,9 @@ class Routes {
   static const String quoteOrderPage = '/quote-order-page';
   static const String selectCustomerPage = '/select-customer-page';
   static const String shoppingBagPage = '/shopping-bag-page';
+  static const String routesPage = '/routes-page';
+  static const String routeDetailPage = '/route-detail-page';
+  static const String mapRoutePage = '/map-route-page';
   static const all = <String>{
     welcomePage,
     loginPage,
@@ -46,6 +52,9 @@ class Routes {
     quoteOrderPage,
     selectCustomerPage,
     shoppingBagPage,
+    routesPage,
+    routeDetailPage,
+    mapRoutePage,
   };
 }
 
@@ -64,6 +73,9 @@ class CustomRouter extends RouterBase {
     RouteDef(Routes.quoteOrderPage, page: QuoteOrderPage),
     RouteDef(Routes.selectCustomerPage, page: SelectCustomerPage),
     RouteDef(Routes.shoppingBagPage, page: ShoppingBagPage),
+    RouteDef(Routes.routesPage, page: RoutesPage),
+    RouteDef(Routes.routeDetailPage, page: RouteDetailPage),
+    RouteDef(Routes.mapRoutePage, page: MapRoutePage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -168,6 +180,36 @@ class CustomRouter extends RouterBase {
         settings: data,
       );
     },
+    RoutesPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => RoutesPage(),
+        settings: data,
+      );
+    },
+    RouteDetailPage: (data) {
+      final args = data.getArgs<RouteDetailPageArguments>(
+        orElse: () => RouteDetailPageArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => RouteDetailPage(
+          key: args.key,
+          selectedRoute: args.selectedRoute,
+        ),
+        settings: data,
+      );
+    },
+    MapRoutePage: (data) {
+      final args = data.getArgs<MapRoutePageArguments>(
+        orElse: () => MapRoutePageArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => MapRoutePage(
+          key: args.key,
+          myRoute: args.myRoute,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -218,4 +260,18 @@ class QuoteOrderPageArguments {
       this.subtotalPrice,
       this.boxCharges,
       this.bottleCharges});
+}
+
+/// RouteDetailPage arguments holder class
+class RouteDetailPageArguments {
+  final Key key;
+  final MyRoute selectedRoute;
+  RouteDetailPageArguments({this.key, this.selectedRoute});
+}
+
+/// MapRoutePage arguments holder class
+class MapRoutePageArguments {
+  final Key key;
+  final MyRoute myRoute;
+  MapRoutePageArguments({this.key, this.myRoute});
 }

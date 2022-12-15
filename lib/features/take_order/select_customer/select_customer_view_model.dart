@@ -1,8 +1,8 @@
-import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/core/utils/service_injector.dart';
+import 'package:auto_route/auto_route.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/models/models.dart';
 import 'package:amadis_delivery/services/customer_service.dart';
-import 'package:auto_route/auto_route.dart';
 
 class SelectCustomerViewModel extends AmadisViewModel {
   SelectCustomerViewModel() {

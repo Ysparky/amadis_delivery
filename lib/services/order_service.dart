@@ -1,17 +1,26 @@
+import 'dart:convert';
+
+import 'package:amadis_delivery/networking/api_base_helper.dart';
+import 'package:amadis_delivery/networking/api_response.dart';
 import 'package:dio/dio.dart';
 
 import 'package:amadis_delivery/core/utils/constants.dart';
 import 'package:amadis_delivery/models/models.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
 class OrderService {
   OrderService() {
     orders = BehaviorSubject<List<Order>>.seeded(null);
+    selectedRoute = BehaviorSubject<MyRoute>.seeded(null);
     orderDetail = BehaviorSubject<List<OrderDetail>>.seeded(null);
+    routes = BehaviorSubject<ApiResponse<List<MyRoute>>>.seeded(null);
+    selectedRouteIndex = BehaviorSubject<int>.seeded(null);
   }
 
   BehaviorSubject<List<Order>> orders;
   BehaviorSubject<List<OrderDetail>> orderDetail;
+  BehaviorSubject<MyRoute> selectedRoute;
 
   final _dio = Dio();
   final _endpoint = '$BASE_URL/orders/';
@@ -68,7 +77,7 @@ class OrderService {
         'missingBoxQuantity': order.missingBoxQuantity,
         'missingBottlesPrice': '1.00',
         'missingBoxesPrice': '4.00',
-        'ordersRemaining': consumedList == null
+        'orderRemaining': consumedList == null
             ? null
             : List<dynamic>.from(consumedList.map((e) => e.toReamingJson())),
       };
@@ -79,6 +88,46 @@ class OrderService {
     } catch (e) {
       print(e);
       return null;
+    }
+  }
+
+  Future<bool> deliverConsignmentOrder(int orderId) async {
+    try {
+      print(orderId);
+      final endpoint = '$BASE_URL/notification/$orderId';
+      final response = await _dio.put(endpoint, options: dioOptions);
+      return (response.statusCode == 200) ? true : false;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  BehaviorSubject<ApiResponse<List<MyRoute>>> routes;
+  BehaviorSubject<int> selectedRouteIndex;
+
+  final _helper = ApiBaseHelper();
+
+  Future<void> getRoutes() async {
+    print('calling get');
+    if (routes.value == null) {
+      print('getting routes');
+      routes.add(ApiResponse.loading('Fetching order detail'));
+      final formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+      print(formattedDate);
+      final response =
+          await _helper.get('/orders/routes/list?shippingDate=$formattedDate');
+      // final response =
+      //     await _helper.get('/orders/routes/list?shippingDate=2021-01-23');
+      if (response != null) {
+        final str = json.encode(response.data);
+        final _routes = routesFromJson(str);
+        // if (_routes.isNotEmpty) {
+        routes.add(ApiResponse.completed(_routes));
+        // }
+      } else {
+        routes.add(ApiResponse.error(response.message, response.statusCode));
+      }
     }
   }
 }

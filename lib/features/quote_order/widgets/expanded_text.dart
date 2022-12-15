@@ -1,5 +1,6 @@
-import 'package:amadis_delivery/core/config/colors.dart';
 import 'package:flutter/material.dart';
+
+import 'package:amadis_delivery/core/utils/colors.dart';
 
 class ExpandedText extends StatelessWidget {
   const ExpandedText({

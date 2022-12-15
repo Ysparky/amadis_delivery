@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:amadis_delivery/features/additional_charges/widgets/widgets.dart';
-import 'package:flutter/material.dart';
 
 class QuantityRow extends StatelessWidget {
   const QuantityRow({

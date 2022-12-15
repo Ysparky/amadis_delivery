@@ -1,7 +1,8 @@
-import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/core/widgets/location_form_field/location_form_field_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:amadis_delivery/core/utils/utils.dart';
+import 'package:amadis_delivery/core/widgets/location_form_field/location_form_field_view_model.dart';
 
 class LocationFormField extends StatelessWidget {
   const LocationFormField({Key key, this.controller}) : super(key: key);

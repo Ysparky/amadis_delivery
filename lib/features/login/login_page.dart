@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/widgets.dart';
 import 'package:amadis_delivery/features/login/login_view_model.dart';

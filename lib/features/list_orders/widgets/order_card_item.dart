@@ -1,8 +1,8 @@
-import 'package:amadis_delivery/core/config/config.dart';
-import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/models/order.dart';
 import 'package:auto_route/auto_route.dart';
+
 import 'package:flutter/material.dart';
+import 'package:amadis_delivery/core/utils/utils.dart';
 
 class OrderCardItem extends StatelessWidget {
   const OrderCardItem({Key key, this.order}) : super(key: key);
@@ -12,7 +12,7 @@ class OrderCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: wp(5), vertical: hp(0.8)),
+      margin: EdgeInsets.symmetric(horizontal: wp(5), vertical: hp(1)),
       elevation: 2.0,
       child: MaterialButton(
         onPressed: () => ExtendedNavigator.root.push(
@@ -20,27 +20,17 @@ class OrderCardItem extends StatelessWidget {
           arguments: OrderDetailPageArguments(order: order),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: hp(1)),
+          padding: EdgeInsets.symmetric(
+            vertical: hp(1),
+            horizontal: wp(2),
+          ),
           child: Row(
             children: [
               Expanded(
-                child: Text(
-                  '22\nkm',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 18.0,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(width: wp(2)),
-              Expanded(
-                flex: 8,
                 child: _TextColumn(order: order),
               ),
-              Expanded(child: Icon(Icons.navigate_next)),
+              SizedBox(width: wp(1)),
+              Icon(Icons.navigate_next),
             ],
           ),
         ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:amadis_delivery/core/config/config.dart';
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/features/order_detail/order_detail_view_model.dart';
 import 'package:amadis_delivery/features/order_detail/widgets/widgets.dart';

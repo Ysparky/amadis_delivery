@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:amadis_delivery/core/utils/utils.dart';
 import 'package:amadis_delivery/core/widgets/location_form_field/location_form_field.dart';
-import 'package:flutter/material.dart';
 
 class LocationCardFormField extends StatelessWidget {
   const LocationCardFormField({

@@ -7,6 +7,7 @@ class Order {
     this.orderStateId = 1,
     this.orderTypeId = 1,
     this.shippingDate,
+    this.isDelivery = true,
     this.customer,
     this.contactNumber,
     this.customerId,
@@ -14,12 +15,15 @@ class Order {
     this.ordersDetail,
     this.missingBottlesQuantity = 0,
     this.missingBoxQuantity = 0,
+    this.isOrderActive = false,
+    this.isOrderDelivered = false,
   });
 
   final int id;
   final int orderStateId;
   final int orderTypeId;
   final String shippingDate;
+  final bool isDelivery;
   final String customer;
   final String contactNumber;
   final int customerId;
@@ -27,6 +31,8 @@ class Order {
   final List<OrderDetail> ordersDetail;
   final int missingBottlesQuantity;
   final int missingBoxQuantity;
+  final bool isOrderActive;
+  final bool isOrderDelivered;
 
   Order copyWith({
     int id,
@@ -40,6 +46,8 @@ class Order {
     List<OrderDetail> ordersDetail,
     int missingBottlesQuantity,
     int missingBoxQuantity,
+    bool isOrderActive,
+    bool isOrderDelivered,
   }) =>
       Order(
         id: id ?? this.id,
@@ -54,6 +62,8 @@ class Order {
         missingBottlesQuantity:
             missingBottlesQuantity ?? this.missingBottlesQuantity,
         missingBoxQuantity: missingBoxQuantity ?? this.missingBoxQuantity,
+        isOrderActive: isOrderActive ?? this.isOrderActive,
+        isOrderDelivered: isOrderDelivered ?? this.isOrderDelivered,
       );
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
@@ -75,6 +85,7 @@ class Order {
             ? null
             : List<OrderDetail>.from(
                 json['orderDetail'].map((x) => OrderDetail.fromJson(x))),
+        isOrderActive: false,
       );
 
   Map<String, dynamic> toJson() => {

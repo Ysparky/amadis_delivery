@@ -1,6 +1,7 @@
-import 'package:amadis_delivery/core/config/colors.dart';
-import 'package:amadis_delivery/core/utils/responsive.dart';
 import 'package:flutter/material.dart';
+
+import 'package:amadis_delivery/core/utils/colors.dart';
+import 'package:amadis_delivery/core/utils/responsive.dart';
 
 class QuantityButton extends StatelessWidget {
   const QuantityButton({
